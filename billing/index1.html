@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bill Form</title>
+    <!-- Add Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Add Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
+    <style>
+        .service {
+            position: relative;
+            margin-bottom: 20px; /* Add margin to separate services */
+        }
+
+        .service-buttons {
+            position: absolute;
+            top: 0;
+            right: 0;
+            margin-top: 8px;
+        }
+
+        .menu-bar {
+            background-color: #f8f9fa;
+            padding: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .menu-bar button {
+            margin-right: 10px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container mt-3">
+        <div class="menu-bar">
+            <div>
+                <button class="btn btn-primary" onclick="listButtonClick()">List</button>
+                <button class="btn btn-primary" onclick="searchButtonClick()">Search</button>
+            </div>
+            <div>
+                <button class="btn btn-primary" onclick="signOffButtonClick()">Sign Off</button>
+                <button class="btn btn-danger" onclick="signOutButtonClick()">Sign Out</button>
+            </div>
+        </div>
+
+        <form action="#" method="post" onsubmit="return logFormData()">
+            <!-- Bill Type -->
+            <div class="form-group">
+                <label for="billType">Bill Type:</label>
+                <select class="form-control" id="billType" name="billType" required>
+                    <option value="credit">Credit</option>
+                    <option value="debit">Debit</option>
+                </select>
+            </div>
+
+            <!-- Created By -->
+            <div class="form-group">
+                <label for="createdBy">Created By:</label>
+                <input type="text" class="form-control" id="createdBy" name="createdBy" required>
+            </div>
+
+            <!-- Service -->
+            <fieldset>
+                <legend>Service</legend>
+                <div class="row" id="serviceContainer">
+                    <div class="col-md-12">
+                        <button type="button" class="btn btn-primary btn-sm mb-2" onclick="addService()">Add Service</button>
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>Service ID</th>
+                                    <th>Service Name</th>
+                                    <th>Service Price</th>
+                                    <th>Quantity</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <!-- Service 1 -->
+                                <tr class="service">
+                                    <td><input type="text" class="form-control" name="serviceId[]" required></td>
+                                    <td><input type="text" class="form-control" name="serviceName[]" required></td>
+                                    <td><input type="number" class="form-control" name="servicePrice[]" required min="0"></td>
+                                    <td><input type="number" class="form-control" name="serviceQty[]" required min="0"></td>
+                                    <td>
+                                        <button type="button" class="btn btn-danger btn-sm" onclick="removeService(this)">
+                                            <i class="fas fa-trash-alt"></i> Delete
+                                        </button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </fieldset>
+
+            <!-- Totals -->
+            <div class="form-group">
+                <label for="totals">Totals:</label>
+                <input type="number" class="form-control" id="totals" name="totals" required>
+            </div>
+
+            <!-- Tax -->
+            <div class="form-group">
+                <label for="tax">Tax:</label>
+                <input type="number" class="form-control" id="tax" name="tax" required>
+            </div>
+
+            <!-- Submit Button -->
+            <button type="submit" class="btn btn-success">Submit</button>
+        
+        </form>
+    </div>
+
+    <!-- Add Bootstrap JS and Popper.js -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <!-- Add Font Awesome JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/js/all.min.js"></script>
+
+    <script>
+        function addService() {
+            // ... (unchanged)
+        }
+
+        function removeService(button) {
+            // ... (unchanged)
+        }
+
+        function logFormData() {
+            // ... (unchanged)
+        }
+
+        function listButtonClick() {
+            // Add your functionality for the List button
+            console.log('List button clicked');
+        }
+
+        function searchButtonClick() {
+            // Add your functionality for the Search button
+            console.log('Search button clicked');
+        }
+
+        function signOffButtonClick() {
+            // Add your functionality for the Sign Off button
+            console.log('Sign Off button clicked');
+        }
+
+        function signOutButtonClick() {
+            // Add your functionality for the Sign Out button
+            console.log('Sign Out button clicked');
+        }
+    </script>
+
+</body>
+</html>

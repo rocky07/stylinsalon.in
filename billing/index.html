@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bill Form</title>
+    <!-- Add Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Add Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
+    <style>
+        .service {
+            position: relative;
+            margin-bottom: 20px; /* Add margin to separate services */
+        }
+
+        .service-buttons {
+            position: absolute;
+            top: 0;
+            right: 0;
+            margin-top: 8px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container mt-5">
+        
+        <form action="#" method="post" onsubmit="return logFormData()">
+            <!-- Bill Type -->
+            <div class="form-group">
+                <label for="billType">Bill Type:</label>
+                <select class="form-control" id="billType" name="billType" required>
+                    <option value="credit">Credit</option>
+                    <option value="debit">Debit</option>
+                </select>
+            </div>
+
+            <!-- Created By -->
+            <div class="form-group">
+                <label for="createdBy">Created By:</label>
+                <input type="text" class="form-control" id="createdBy" name="createdBy" required>
+            </div>
+
+            <!-- Service -->
+            <fieldset>
+                <legend>Service</legend>
+                <div class="row" id="serviceContainer">
+                    <div class="col-md-12">
+                        <button type="button" class="btn btn-primary btn-sm mb-2" onclick="addService()">Add Service</button>
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>Service ID</th>
+                                    <th>Service Name</th>
+                                    <th>Service Price</th>
+                                    <th>Quantity</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <!-- Service 1 -->
+                                <tr class="service">
+                                    <td><input type="text" class="form-control" name="serviceId[]" required></td>
+                                    <td><input type="text" class="form-control" name="serviceName[]" required></td>
+                                    <td><input type="number" class="form-control" name="servicePrice[]" required min="0"></td>
+                                    <td><input type="number" class="form-control" name="serviceQty[]" required min="0"></td>
+                                    <td>
+                                        <button type="button" class="btn btn-danger btn-sm" onclick="removeService(this)">
+                                            <i class="fas fa-trash-alt"></i> Delete
+                                        </button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </fieldset>
+
+            <!-- Totals -->
+            <div class="form-group">
+                <label for="totals">Totals:</label>
+                <input type="number" class="form-control" id="totals" name="totals" required>
+            </div>
+
+            <!-- Tax -->
+            <div class="form-group">
+                <label for="tax">Tax:</label>
+                <input type="number" class="form-control" id="tax" name="tax" required>
+            </div>
+
+            <!-- Submit Button -->
+            <button type="submit" class="btn btn-success">Submit</button>
+        </form>
+    </div>
+
+    <!-- Add Bootstrap JS and Popper.js -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <!-- Add Font Awesome JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/js/all.min.js"></script>
+
+    <script>
+        function addService() {
+            const serviceContainer = document.getElementById('serviceContainer').getElementsByTagName('tbody')[0];
+            const newRow = serviceContainer.insertRow();
+            newRow.className = 'service';
+            const cell1 = newRow.insertCell(0);
+            const cell2 = newRow.insertCell(1);
+            const cell3 = newRow.insertCell(2);
+            const cell4 = newRow.insertCell(3);
+            const cell5 = newRow.insertCell(4);
+
+            cell1.innerHTML = '<input type="text" class="form-control" name="serviceId[]" required>';
+            cell2.innerHTML = '<input type="text" class="form-control" name="serviceName[]" required>';
+            cell3.innerHTML = '<input type="number" class="form-control" name="servicePrice[]" required min="0">';
+            cell4.innerHTML = '<input type="number" class="form-control" name="serviceQty[]" required min="0">';
+            cell5.innerHTML = '<button type="button" class="btn btn-danger btn-sm" onclick="removeService(this)"><i class="fas fa-trash-alt"></i> Delete</button>';
+        }
+
+        function removeService(button) {
+            const row = button.closest('tr');
+            row.parentNode.removeChild(row);
+        }
+
+        function logFormData() {
+            const form = document.forms[0];
+            const formData = new FormData(form);
+            const data = {};
+
+            formData.forEach((value, key) => {
+                data[key] = value;
+            });
+
+            console.log(JSON.stringify(data, null, 2));
+
+            return false; // Prevent form submission for demonstration purposes
+        }
+    </script>
+
+</body>
+</html>
