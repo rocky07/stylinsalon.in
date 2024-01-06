@@ -331,7 +331,8 @@
 
 
              // API endpoint
-            var apiUrl = "https://jpmqwdh7j3.execute-api.us-east-2.amazonaws.com/default/billing";
+             var apiUrl = "https://cors-anywhere.herokuapp.com/https://jpmqwdh7j3.execute-api.us-east-2.amazonaws.com/default/billing";
+
 
             $.post(apiUrl, JSON.stringify(data), function(response) {
                 // Handle the response from the server
