@@ -222,7 +222,9 @@
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.2/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 -->
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+   <!-- <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>-->
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
 
@@ -331,19 +333,13 @@
              // API endpoint
             var apiUrl = "https://jpmqwdh7j3.execute-api.us-east-2.amazonaws.com/default/billing";
 
-            $.ajax({
-                url: apiUrl,
-                type: "POST",
-                contentType: "application/json",
-                data: JSON.stringify(data),
-                success: function(response) {
-                    // Handle the response from the server
-                    console.log("Response:", response);
-                },
-                error: function(error) {
-                    // Handle any errors
-                    console.error("Error:", error);
-                }
+            $.post(apiUrl, JSON.stringify(data), function(response) {
+                // Handle the response from the server
+                console.log("Response:", response);
+            })
+            .fail(function(error) {
+                // Handle any errors
+                console.error("Error:", error);
             });
 
             printFormatter(data.services);
