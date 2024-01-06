@@ -325,6 +325,22 @@
             }));
 
             console.log(JSON.stringify(data, null, 2));
+            //https://jpmqwdh7j3.execute-api.us-east-2.amazonaws.com/default/billing
+
+
+             // API endpoint
+            var apiUrl = "https://jpmqwdh7j3.execute-api.us-east-2.amazonaws.com/default/billing";
+
+            // Make a POST request
+            $.post(apiUrl, JSON.stringify(data), function(response) {
+                // Handle the response from the server
+                console.log("Response:", response);
+            })
+            .fail(function(error) {
+                // Handle any errors
+                console.error("Error:", error);
+            });
+
             printFormatter(data.services);
             return false; // Prevent form submission for demonstration purposes
         }
