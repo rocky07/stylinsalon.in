@@ -316,7 +316,8 @@
                     data[key] = value;
                 }
             });
-
+            data.date=new Date();
+            data.billNumber=generateRandomBillNumber();
             console.log(data.services);
             // Convert arrays to objects
             data.services = data.services.map(service => ({
@@ -325,16 +326,27 @@
                 price: service.servicePrice,
                 quantity: service.serviceQty
             }));
+            sendRequest(data); // makes the ajax post request!
+            printFormatter(data.services);
+            return false; // Prevent form submission for demonstration purposes
+        }
 
+
+        function sendRequest(data){
             console.log(JSON.stringify(data, null, 2));
             //https://jpmqwdh7j3.execute-api.us-east-2.amazonaws.com/default/billing
+            //format data
 
+            const postData={
+                TableName:'billing',
+                Item:data
+            };
 
              // API endpoint
              var apiUrl = "https://jpmqwdh7j3.execute-api.us-east-2.amazonaws.com/default/billing";
 
 
-            $.post(apiUrl, JSON.stringify(data), function(response) {
+            $.post(apiUrl, JSON.stringify(postData), function(response) {
                 // Handle the response from the server
                 console.log("Response:", response);
             })
@@ -342,11 +354,7 @@
                 // Handle any errors
                 console.error("Error:", error);
             });
-
-            printFormatter(data.services);
-            return false; // Prevent form submission for demonstration purposes
         }
-
         //format data for printing 
 
         function printFormatter(services){
@@ -395,6 +403,23 @@
             section.append(content);
             $(".modal-body-wrapper").append(modalBody);
         });
+
+        function generateRandomBillNumber() {
+            // Prefix for the bill number
+            const prefix = '';
+
+            // Generate a random number (you can adjust the range as needed)
+            const randomNumber = Math.floor(Math.random() * 10000);
+
+            // Suffix for the bill number
+            const suffix = '2024'; // You can use the current year or any other identifier
+
+            // Combine the parts to create the final bill number
+            const billNumber = `${randomNumber}${suffix}`;
+
+            return billNumber;
+            }
+
 
 
         // Enable popover
