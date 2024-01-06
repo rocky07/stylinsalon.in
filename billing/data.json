@@ -1,0 +1,19 @@
+[
+    {
+      "billNumber": 123,
+      "date": "2023-01-01",
+      "totalAmount": 50.00
+    },
+    {
+      "billNumber": 124,
+      "date": "2023-01-02",
+      "totalAmount": 75.00
+    },
+    {
+      "billNumber": 125,
+      "date": "2023-01-03",
+      "totalAmount": 100.00
+    }
+   
+  ]
+  

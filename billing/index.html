@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -11,7 +12,8 @@
     <style>
         .service {
             position: relative;
-            margin-bottom: 20px; /* Add margin to separate services */
+            margin-bottom: 20px;
+            /* Add margin to separate services */
         }
 
         .service-buttons {
@@ -20,89 +22,233 @@
             right: 0;
             margin-top: 8px;
         }
+
+        .modal-body-wrapper {
+            overflow-y: scroll;
+            height: 60vh;
+        }
+
+
+        .popover {
+            max-width: 100%;
+            /* Max Width of the popover (depending on the container!) */
+        }
     </style>
 </head>
+
 <body>
+    <section>
+        <div class="content">
+            <nav class="navbar fixed-top navbar-expand-lg navbar-light bg-light page-content">
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo03"
+                    aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <a class="navbar-brand" href="index.html">Stylin Salon</a>
 
-    <div class="container mt-5">
-        
-        <form action="#" method="post" onsubmit="return logFormData()">
-            <!-- Bill Type -->
-            <div class="form-group">
-                <label for="billType">Bill Type:</label>
-                <select class="form-control" id="billType" name="billType" required>
-                    <option value="credit">Credit</option>
-                    <option value="debit">Debit</option>
-                </select>
-            </div>
+                <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
+                    <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+                        <li class="nav-item active">
+                            <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="list.html">Link</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
+                        </li>
+                    </ul>
 
-            <!-- Created By -->
-            <div class="form-group">
-                <label for="createdBy">Created By:</label>
-                <input type="text" class="form-control" id="createdBy" name="createdBy" required>
-            </div>
+                </div>
+            </nav>
+            <div><br /></div>
+            <div class="container mt-5">
 
-            <!-- Service -->
-            <fieldset>
-                <legend>Service</legend>
-                <div class="row" id="serviceContainer">
-                    <div class="col-md-12">
-                        <button type="button" class="btn btn-primary btn-sm mb-2" onclick="addService()">Add Service</button>
-                        <table class="table">
-                            <thead>
-                                <tr>
-                                    <th>Service ID</th>
-                                    <th>Service Name</th>
-                                    <th>Service Price</th>
-                                    <th>Quantity</th>
-                                    <th>Action</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <!-- Service 1 -->
-                                <tr class="service">
+                <form action="#" method="post" onsubmit="return logFormData()">
+                    <!-- Bill Type -->
+                    <div class="form-group">
+                        <label for="billType">Bill Type:</label>
+                        <select class="form-control" id="billType" name="billType" required>
+                            <option value="credit">Credit</option>
+                            <option value="debit">Debit</option>
+                        </select>
+                    </div>
+
+                    <!-- Created By -->
+                    <div class="form-group">
+                        <label for="createdBy">Created By:</label>
+
+                        <select class="form-control" id="createdBy" name="createdBy" required>
+                            <option value="user a">User A</option>
+                            <option value="user b">User B</option>
+                        </select>
+                    </div>
+
+                    <!-- Service -->
+                    <fieldset>
+                        <legend>Service</legend>
+                        <div class="row" id="serviceContainer">
+                            <div class="col-md-12">
+                                <!--<button type="button" class="btn btn-primary btn-sm mb-2" id="addservicebtn"
+                            onclick="addService()">Add Service</button>-->
+
+                                <!-- popper contents here-->
+
+
+                                <!-- Button trigger popover -->
+                                <button type="button" class="btn btn-primary btn-sm mb-2" data-toggle="popover"
+                                    data-placement="bottom" title="Services" id="popoverButton">
+                                    Add Service
+                                </button>
+
+                                <!-- Popover content -->
+                                <div id="popoverContent" style="display: none;">
+                                    <button type="button" class="btn btn-success" onclick="addService(1)">Service
+                                        1</button>
+                                    <button type="button" class="btn btn-info" onclick="addService(2)">Service
+                                        2</button>
+                                    <button type="button" class="btn btn-success" onclick="addService(1)">Service
+                                        1</button>
+                                    <button type="button" class="btn btn-info" onclick="addService(2)">Service
+                                        2</button>
+                                </div>
+
+                                <table class="table">
+                                    <thead>
+                                        <tr>
+                                            <th>Service ID</th>
+                                            <th>Service Name</th>
+                                            <th>Service Price</th>
+                                            <th>Quantity</th>
+                                            <th>Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <!-- Service 1 -->
+                                        <!--  <tr class="service">
                                     <td><input type="text" class="form-control" name="serviceId[]" required></td>
                                     <td><input type="text" class="form-control" name="serviceName[]" required></td>
-                                    <td><input type="number" class="form-control" name="servicePrice[]" required min="0"></td>
-                                    <td><input type="number" class="form-control" name="serviceQty[]" required min="0"></td>
+                                    <td><input type="number" class="form-control" name="servicePrice[]" required
+                                            min="0"></td>
+                                    <td><input type="number" class="form-control" name="serviceQty[]" required min="0">
+                                    </td>
                                     <td>
-                                        <button type="button" class="btn btn-danger btn-sm" onclick="removeService(this)">
+                                        <button type="button" class="btn btn-danger btn-sm"
+                                            onclick="removeService(this)">
                                             <i class="fas fa-trash-alt"></i> Delete
                                         </button>
                                     </td>
-                                </tr>
-                            </tbody>
-                        </table>
+                                </tr>-->
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </fieldset>
+
+                    <!-- Totals -->
+                    <div class="form-group">
+                        <label for="totals">Totals:</label>
+                        <input type="number" class="form-control" id="totals" step="any" name="totals" min="0" required>
+                    </div>
+
+                    <!-- Tax -->
+                    <div class="form-group">
+                        <label for="tax">Tax:</label>
+                        <input type="number" class="form-control" id="tax" step="any" name="tax" min="0" required>
+                    </div>
+
+                    <!-- Submit Button -->
+                    <button type="submit" class="btn btn-success"  data-toggle="modal" data-target="#exampleModal" onclick="logFormData()" >Print</button>
+                </form>
+            </div>
+            <!--<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+                Launch demo modal
+            </button>-->
+        </div>
+        
+    </section>
+
+    
+    <!-- print modal -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="billModalLabel">Stylin Salon - Bill</h5>
+                    <!-- Add date and bill number dynamically -->
+                    <p>Date: January 1, 2023</p>
+                    <p>Bill Number: #123456</p>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body-wrapper">
+                    <div class="modal-body">
+                        <div class="modal-body" id="print-body">
+                            <!-- Table with bill details -->
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>Name</th>
+                                        <th>Price</th>
+                                        <th>Quantity</th>
+                                        <th>Total</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <!-- Example row, you can add more rows dynamically -->
+                                   
+                                    <!-- Add more rows as needed -->
+                                </tbody>
+                            </table>
+                               <!-- Subtotal, Tax, and Total -->
+                            <div class="bill-summary">
+                                <p>Subtotal: $20.00</p>
+                                <p>Tax (10%): $2.00</p>
+                                <p>Total: $22.00</p>
+                            </div>
                     </div>
                 </div>
-            </fieldset>
-
-            <!-- Totals -->
-            <div class="form-group">
-                <label for="totals">Totals:</label>
-                <input type="number" class="form-control" id="totals" name="totals" required>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary print">Print</button>
+                </div>
             </div>
-
-            <!-- Tax -->
-            <div class="form-group">
-                <label for="tax">Tax:</label>
-                <input type="number" class="form-control" id="tax" name="tax" required>
-            </div>
-
-            <!-- Submit Button -->
-            <button type="submit" class="btn btn-success">Submit</button>
-        </form>
+        </div>
     </div>
 
     <!-- Add Bootstrap JS and Popper.js -->
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <!--  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.2/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+-->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+
     <!-- Add Font Awesome JS -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/js/all.min.js"></script>
 
     <script>
-        function addService() {
+        var count = 0;
+        function addService(serviceIdToFind) {
+
+            const serviceList = [
+                { id: 1, name: 'hair', price: 1.99 },
+                { id: 2, name: 'nail', price: 1.99 },
+                { id: 3, name: 'skin', price: 1.99 }
+            ];
+
+            //const serviceIdToFind = 2;
+            const service2 = serviceList.find(service => service.id === serviceIdToFind);
+
+            if (service2) {
+                console.log('Service 2:', service2.name, 'Price:', service2.price);
+            } else {
+                console.log('Service 2 not found');
+            }
+
+
             const serviceContainer = document.getElementById('serviceContainer').getElementsByTagName('tbody')[0];
             const newRow = serviceContainer.insertRow();
             newRow.className = 'service';
@@ -112,32 +258,141 @@
             const cell4 = newRow.insertCell(3);
             const cell5 = newRow.insertCell(4);
 
-            cell1.innerHTML = '<input type="text" class="form-control" name="serviceId[]" required>';
-            cell2.innerHTML = '<input type="text" class="form-control" name="serviceName[]" required>';
-            cell3.innerHTML = '<input type="number" class="form-control" name="servicePrice[]" required min="0">';
-            cell4.innerHTML = '<input type="number" class="form-control" name="serviceQty[]" required min="0">';
+            cell1.innerHTML = '<input type="text" class="form-control" value=' + service2.id + ' name="serviceId[' + count + ']" required>';
+            cell2.innerHTML = '<input type="text" class="form-control" value=' + service2.name + ' name="serviceName[' + count + ']" required>';
+            cell3.innerHTML = '<input type="number" class="form-control" value=' + service2.price + ' name="servicePrice[' + count + ']" onchange="computeTaxandTotal()" step="any" required min="0">';
+            cell4.innerHTML = '<input type="number" class="form-control" name="serviceQty[' + count + ']" onchange="computeTaxandTotal()" required min="1" value="1">';
             cell5.innerHTML = '<button type="button" class="btn btn-danger btn-sm" onclick="removeService(this)"><i class="fas fa-trash-alt"></i> Delete</button>';
+            count = count + 1;
+            computeTaxandTotal();
         }
 
         function removeService(button) {
             const row = button.closest('tr');
             row.parentNode.removeChild(row);
+            computeTaxandTotal();
+        }
+
+        function computeTaxandTotal() {
+            let tax = 0;
+            let total = 0;
+
+            const form = document.forms[0];
+            const formData = new FormData(form);
+            const data = { services: [] };
+
+            formData.forEach((value, key) => {
+                if (key.startsWith('serviceName') || key.startsWith('servicePrice') || key.startsWith('serviceQty')) {
+                    const index = key.replace(/\D/g, ''); // Extract the numerical part from the key
+                    data.services[index] = data.services[index] || {}; // Initialize the object if not present
+                    data.services[index][key.replace(/[\[\]0-9]/g, '')] = value;
+                }
+            });
+
+            data.services.forEach(service => {
+                const subtotal = service.servicePrice * service.serviceQty;
+                total += subtotal;
+                // Assuming tax is 10% of subtotal
+                tax += 0.1 * subtotal;
+            });
+            console.log(total + ":" + tax);
+            $('#totals').val(total);
+            $('#tax').val(tax);
         }
 
         function logFormData() {
             const form = document.forms[0];
             const formData = new FormData(form);
-            const data = {};
+            const data = { services: [] };
 
             formData.forEach((value, key) => {
-                data[key] = value;
+                if (key.startsWith('serviceId') || key.startsWith('serviceName') || key.startsWith('servicePrice') || key.startsWith('serviceQty')) {
+                    const index = key.replace(/\D/g, ''); // Extract the numerical part from the key
+                    data.services[index] = data.services[index] || {}; // Initialize the object if not present
+                    data.services[index][key.replace(/[\[\]0-9]/g, '')] = value;
+                } else {
+                    data[key] = value;
+                }
             });
 
-            console.log(JSON.stringify(data, null, 2));
+            console.log(data.services);
+            // Convert arrays to objects
+            data.services = data.services.map(service => ({
+                id: service.serviceId,
+                name: service.serviceName,
+                price: service.servicePrice,
+                quantity: service.serviceQty
+            }));
 
+            console.log(JSON.stringify(data, null, 2));
+            printFormatter(data.services);
             return false; // Prevent form submission for demonstration purposes
         }
+
+        //format data for printing 
+
+        function printFormatter(services){
+            const serviceContainer = document.getElementById('print-body').getElementsByTagName('tbody')[0];
+            serviceContainer.innerHTML='';
+            let total=0;
+            let tax =0;
+            
+            services.forEach(service => {
+
+                const subtotal = service.price * service.quantity;
+                total += subtotal;
+                // Assuming tax is 10% of subtotal
+                tax += 0.1 * subtotal;
+
+                const newRow = serviceContainer.insertRow();
+                newRow.className = 'service';
+                const cell1 = newRow.insertCell(0);
+                const cell2 = newRow.insertCell(1);
+                const cell3 = newRow.insertCell(2);
+                const cell4 = newRow.insertCell(3);
+
+                cell1.innerHTML=service.name;
+                cell2.innerHTML=service.price;
+                cell3.innerHTML=service.quantity;
+                cell4.innerHTML=subtotal;
+
+                
+            });
+
+            $('.bill-summary').html("<p>Subtotal: "+total+"</p><p>Tax (10%): "+tax+"</p><p>Total: "+(total+tax)+"</p>");
+           
+
+        }
+
+        //print functions 
+
+        $(document).on("click", ".print", function () {
+            const section = $("section");
+            const modalBody = $(".modal-body").detach();
+
+            const content = $(".content").detach();
+            section.append(modalBody);
+            window.print();
+            section.empty();
+            section.append(content);
+            $(".modal-body-wrapper").append(modalBody);
+        });
+
+
+        // Enable popover
+        $(function () {
+            $('[data-toggle="popover"]').popover({
+                content: $('#popoverContent').html(),
+                html: true
+            });
+        });
+
+
+
     </script>
 
+
+
 </body>
-</html>
+
+</html> 

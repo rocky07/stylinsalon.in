@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Transaction List</title>
+    <!-- Add Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Add Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
+    <link rel="import" href="index.html">
+    
+
+   <style>
+        .menu-bar {
+            background-color: #f8f9fa;
+            padding: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .menu-bar button {
+            margin-right: 10px;
+        }
+
+        .table-container {
+            margin-top: 20px;
+        }
+
+        .total-amount {
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <template is="import" content-selector=".page-content"></template>
+        <nav class="navbar fixed-top navbar-expand-lg navbar-light bg-light page-content">
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo03" aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+            </button>
+            <a class="navbar-brand" href="#">Navbar</a>
+          
+            <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
+              <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+                <li class="nav-item active">
+                  <a class="nav-link" href="index.html">Home <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="#">Link</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
+                </li>
+              </ul>
+              
+            </div>
+          </nav>
+          <div><br/><br/></div>
+        <div class="table-container">
+            <div class="form-group">
+                <label for="search">Search:</label>
+                <input type="text" class="form-control" id="search" oninput="filterTable()" placeholder="Enter keyword">
+            </div>
+
+            <table class="table" id="transactionTable">
+                <thead>
+                    <tr>
+                        <th>Bill Number</th>
+                        <th>Date</th>
+                        <th>Total Amount</th>
+                        <th>Print</th>
+                        <th>Issue Refund</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Dynamic rows will be inserted here -->
+                </tbody>
+            </table>
+
+            <div class="total-amount">
+                Total Amount: <span id="totalAmount">$0.00</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Add Bootstrap JS and Popper.js -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <!-- Add Font Awesome JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/js/all.min.js"></script>
+
+    <script>
+        // Fetch data from JSON file
+        fetch('data.json')
+            .then(response => response.json())
+            .then(data => {
+                const tableBody = document.getElementById('transactionTable').getElementsByTagName('tbody')[0];
+
+                // Clear existing rows
+                tableBody.innerHTML = '';
+
+                // Update table with dynamic data
+                data.forEach(transaction => {
+                    const newRow = tableBody.insertRow();
+                    newRow.innerHTML = `
+                        <td>${transaction.billNumber}</td>
+                        <td>${transaction.date}</td>
+                        <td>${transaction.totalAmount}</td>
+                        <td>
+                            <button class="btn btn-primary" onclick="printBill(${transaction.billNumber})">Print</button>
+                        </td>
+                        <td>
+                            <button class="btn btn-danger" onclick="issueRefund(${transaction.billNumber})">Issue Refund</button>
+                        </td>
+                    `;
+                });
+
+                // Update total amount
+                const totalAmount = data.reduce((sum, transaction) => sum + transaction.totalAmount, 0);
+                document.getElementById('totalAmount').textContent = `$${totalAmount.toFixed(2)}`;
+            })
+            .catch(error => console.error('Error fetching data:', error));
+
+        function printBill(billNumber) {
+            console.log('Print bill:', billNumber);
+            // Add your logic for printing the bill
+        }
+
+        function issueRefund(billNumber) {
+            console.log('Issue refund for bill:', billNumber);
+            // Add your logic for issuing a refund
+        }
+
+        function filterTable() {
+            const input = document.getElementById('search').value.toLowerCase();
+            const rows = document.querySelectorAll('#transactionTable tbody tr');
+
+            rows.forEach(row => {
+                const billNumber = row.cells[0].textContent.toLowerCase();
+                const date = row.cells[1].textContent.toLowerCase();
+
+                if (billNumber.includes(input) || date.includes(input)) {
+                    row.style.display = '';
+                } else {
+                    row.style.display = 'none';
+                }
+            });
+        }
+    </script>
+</body>
+</html>
