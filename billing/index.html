@@ -331,14 +331,19 @@
              // API endpoint
             var apiUrl = "https://jpmqwdh7j3.execute-api.us-east-2.amazonaws.com/default/billing";
 
-            // Make a POST request
-            $.post(apiUrl, JSON.stringify(data), function(response) {
-                // Handle the response from the server
-                console.log("Response:", response);
-            })
-            .fail(function(error) {
-                // Handle any errors
-                console.error("Error:", error);
+            $.ajax({
+                url: apiUrl,
+                type: "POST",
+                contentType: "application/json",
+                data: JSON.stringify(data),
+                success: function(response) {
+                    // Handle the response from the server
+                    console.log("Response:", response);
+                },
+                error: function(error) {
+                    // Handle any errors
+                    console.error("Error:", error);
+                }
             });
 
             printFormatter(data.services);
