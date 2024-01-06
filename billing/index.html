@@ -345,7 +345,7 @@
              // API endpoint
              var apiUrl = "https://jpmqwdh7j3.execute-api.us-east-2.amazonaws.com/default/billing";
 
-
+/*
             $.post(apiUrl, JSON.stringify(postData), function(response) {
                 // Handle the response from the server
                 console.log("Response:", response);
@@ -353,7 +353,23 @@
             .fail(function(error) {
                 // Handle any errors
                 console.error("Error:", error);
+            });*/
+            $.ajax({
+                type: 'POST',
+                url: apiUrl,
+                data: JSON.stringify(postData),
+                crossDomain: true,  // Enable cross-domain requests
+                contentType: 'application/json',  // Specify the content type
+                success: function(response) {
+                    // Handle the response from the server
+                    console.log("Response:", response);
+                },
+                error: function(error) {
+                    // Handle any errors
+                    console.error("Error:", error);
+                }
             });
+
         }
         //format data for printing 
 
