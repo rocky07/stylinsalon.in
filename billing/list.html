@@ -105,7 +105,7 @@
                 tableBody.innerHTML = '';
 
                 // Update table with dynamic data
-                data.forEach(transaction => {
+                data.Items.forEach(transaction => {
                     const newRow = tableBody.insertRow();
                     newRow.innerHTML = `
                         <td>${transaction.billingId}</td>
@@ -121,8 +121,9 @@
                 });
 
                 // Update total amount
-                const totalAmount = data.reduce((sum, transaction) => sum + transaction.totals, 0);
-                document.getElementById('totalAmount').textContent = `$${totalAmount.toFixed(2)}`;
+                const totalAmount = data.Items.reduce((sum, transaction) => sum + parseFloat(transaction.totals), 0);
+              //  let totalAmt=parseInt(totalAmount);
+                document.getElementById('totalAmount').textContent = totalAmount;
             })
             .catch(error => console.error('Error fetching data:', error));
 

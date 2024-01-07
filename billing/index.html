@@ -158,7 +158,7 @@
                     </div>
 
                     <!-- Submit Button -->
-                    <button type="submit" class="btn btn-success"  data-toggle="modal" data-target="#exampleModal" onclick="logFormData()" >Print</button>
+                    <button type="submit" class="btn btn-success"  data-toggle="modal" data-target="#exampleModal"  >Print</button>
                 </form>
             </div>
             <!--<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
@@ -318,7 +318,7 @@
             });
             data.date=new Date();
             data.billingId=generateRandomBillNumber();
-            console.log(data.services);
+         //   console.log(data.services);
             // Convert arrays to objects
             data.services = data.services.map(service => ({
                 id: service.serviceId,
@@ -342,18 +342,26 @@
                 Item:data
             };
 
+           // console.log(JSON.stringify(postData));
+
              // API endpoint
              var apiUrl = "https://iq196rtbra.execute-api.us-east-2.amazonaws.com/stage/billing";
 
 
-            $.post(apiUrl, JSON.stringify(postData), function(response) {
-                // Handle the response from the server
-                console.log("Response:", response);
-            })
-            .fail(function(error) {
-                // Handle any errors
-                console.error("Error:", error);
+             $.ajax({
+                type: "POST",
+                url: apiUrl,
+                crossDomain: true, 
+                contentType: "application/json",  // Set the content type to JSON
+                data: JSON.stringify(postData),
+                success: function(response) {
+                    console.log("Response:", response);
+                },
+                error: function(error) {
+                    console.error("Error:", error);
+                }
             });
+
         }
         //format data for printing 
 
@@ -417,7 +425,7 @@
             // Combine the parts to create the final bill number
             const billNumber = `${randomNumber}${suffix}`;
 
-            return billNumber;
+            return parseInt(billNumber);
             }
 
 
