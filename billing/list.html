@@ -96,7 +96,7 @@
 
     <script>
         // Fetch data from JSON file
-        fetch('data.json')
+        fetch('https://iq196rtbra.execute-api.us-east-2.amazonaws.com/stage/billing')
             .then(response => response.json())
             .then(data => {
                 const tableBody = document.getElementById('transactionTable').getElementsByTagName('tbody')[0];
@@ -108,20 +108,20 @@
                 data.forEach(transaction => {
                     const newRow = tableBody.insertRow();
                     newRow.innerHTML = `
-                        <td>${transaction.billNumber}</td>
+                        <td>${transaction.billingId}</td>
                         <td>${transaction.date}</td>
-                        <td>${transaction.totalAmount}</td>
+                        <td>${transaction.totals}</td>
                         <td>
-                            <button class="btn btn-primary" onclick="printBill(${transaction.billNumber})">Print</button>
+                            <button class="btn btn-primary" onclick="printBill(${transaction.billingId})">Print</button>
                         </td>
                         <td>
-                            <button class="btn btn-danger" onclick="issueRefund(${transaction.billNumber})">Issue Refund</button>
+                            <button class="btn btn-danger" onclick="issueRefund(${transaction.totals})">Issue Refund</button>
                         </td>
                     `;
                 });
 
                 // Update total amount
-                const totalAmount = data.reduce((sum, transaction) => sum + transaction.totalAmount, 0);
+                const totalAmount = data.reduce((sum, transaction) => sum + transaction.totals, 0);
                 document.getElementById('totalAmount').textContent = `$${totalAmount.toFixed(2)}`;
             })
             .catch(error => console.error('Error fetching data:', error));
