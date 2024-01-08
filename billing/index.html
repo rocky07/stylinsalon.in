@@ -345,14 +345,15 @@
            // console.log(JSON.stringify(postData));
 
              // API endpoint
-             var apiUrl = "https://iq196rtbra.execute-api.us-east-2.amazonaws.com/stage/billing";
+             var apiUrl = "https://u7krhtdqde.execute-api.us-east-2.amazonaws.com/default/billing1/88";
 
 
              $.ajax({
                 type: "POST",
                 url: apiUrl,
-                crossDomain: true, 
-                contentType: "application/json",  // Set the content type to JSON
+               // crossDomain: true, 
+             //   dataType:'jsonp',
+               contentType: "application/json",  // Set the content type to JSON
                 data: JSON.stringify(postData),
                 success: function(response) {
                     console.log("Response:", response);
