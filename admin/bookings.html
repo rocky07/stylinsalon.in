@@ -105,11 +105,11 @@
                     const newRow = tableBody.insertRow();
                     newRow.innerHTML = `
                         <td>${transaction.bookingId}</td>
-                        <td>${transaction.date}</td>
-                        <td>${transaction.time}</td>
+                        <td>${transaction.appDate}</td>
+                        <td>${transaction.apptime}</td>
                         <td>${transaction.phone}</td>
                         <td>
-                            <button class="btn btn-danger" onclick="issueRefund(${transaction.totals})">Issue Refund</button>
+                            <button class="btn btn-danger" onclick="issueRefund(${transaction.totals})">Update/Cancel</button>
                         </td>
                     `;
                 });
