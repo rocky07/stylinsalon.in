@@ -100,6 +100,11 @@
                                     data-placement="bottom" title="Services" id="popoverButton">
                                     Add Service
                                 </button>
+                                 <!-- Button trigger popover -->
+                                 <button type="button" class="btn btn-primary btn-sm mb-2" data-toggle="popover"
+                                 data-placement="bottom" title="Services" id="popoverButton">
+                                 Add Discount
+                             </button>
 
                                 <!-- Popover content -->
                                 <div id="popoverContent" style="display: none;">
@@ -111,6 +116,15 @@
                                         1</button>
                                     <button type="button" class="btn btn-info" onclick="addService(2)">Service
                                         2</button>
+                                </div>
+
+                                 <!-- Discount Popover content -->
+                                 <div id="popoverContent" style="display: none;">
+                                    <button type="button" class="btn btn-success" onclick="addService(1)">Discount 20%
+                                        1</button>
+                                    <button type="button" class="btn btn-info" onclick="addService(2)">Discount 50%
+                                        2</button>
+                                   
                                 </div>
 
                                 <table class="table">
@@ -317,8 +331,8 @@
                 }
             });
             data.date=new Date();
-            data.billingId=generateRandomBillNumber();
-         //   console.log(data.services);
+            data.billingId=1231;//generateRandomBillNumber();
+            console.log(data.services);
             // Convert arrays to objects
             data.services = data.services.map(service => ({
                 id: service.serviceId,
