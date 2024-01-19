@@ -94,12 +94,14 @@
           </button>
         </div>
         <div class="modal-body">
+          <div id="status">error message goes here ..</div>
           <!-- Add form fields for updating booking information -->
           <form id="bookingForm">
             <div class="form-group">
               <label for="updateDate">Date:</label>
               <input type="text" class="form-control datepicker" id="updateDate" name="updateDate">
               <input type="hidden" class="form-control" id="updateBookingId" name="updateBookingId">
+              
             </div>
             <div class="form-group">
               <label for="updateTime">Time:</label>
@@ -121,8 +123,8 @@
         </div>
         <div class="modal-footer">
           <!-- Add buttons to update and cancel booking -->
-          <button type="button" class="btn btn-primary" onclick="updateBooking()">Update</button>
-          <button type="button" class="btn btn-danger" onclick="cancelBooking()">Cancel Booking</button>
+          <button type="button" class="btn btn-primary" onclick="updateBooking('CONFIRMED')">Update</button>
+          <button type="button" class="btn btn-danger" onclick="updateBooking('CANCELLED')">Cancel Booking</button>
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
         </div>
       </div>
@@ -187,7 +189,7 @@
             });
         }
         function populateModalData(bookingId, date, time, phone, service, name) {
-            document.getElementById('updateBookingId').value = bookingId;
+          document.getElementById('updateBookingId').value = bookingId;
             document.getElementById('updateDate').value = date;
             document.getElementById('updateTime').value = time;
             document.getElementById('updatePhone').value = phone;
@@ -198,7 +200,7 @@
         $('#bookingModal').on('show.bs.modal', function (event) {
         // Extract data from the trigger button (assuming you have the data stored in data attributes)
         const button = $(event.relatedTarget);
-        const bookingId=button.data('bookingId');
+        const bookingId=button.data('bookingid');
         const date = button.data('date');
         const time = button.data('time');
         const phone = button.data('phone');
@@ -209,13 +211,16 @@
         populateModalData(bookingId,date, time, phone, service, name);
         });
 
-        function updateBooking(){
-          const bookingId=$('#updateBookingId').val();
+        
+
+        function updateBooking(status){
+          const bookingId=parseInt($('#updateBookingId').val());
           const updatedDate = $('#updateDate').val();
           const updatedTime = $('#updateTime').val();
           const updatedName = $('#updateName').val();
           const updatedPhone = $('#updatePhone').val();
           const updatedService = $('#updateService').val();
+         
 
           const updatedInfo = {
             bookingId:bookingId,
@@ -223,27 +228,30 @@
             appTime: updatedTime,
             name: updatedName,
             phone: updatedPhone,
-            service: updatedService
+            service: updatedService,
+            status:status
           };
+          callRPC(updatedInfo)
+        }
+
+        function callRPC(updatedInfo){
+                
           const postData={
                 TableName:'booking',
-                Items:updatedInfo
+                Item:updatedInfo
             };
-
-            console.log(postData);
-
-
-
           $.ajax({
-                type: "PUT",
+                type: "POST",
                 url: apiUrl,
                contentType: "application/json",  // Set the content type to JSON
                 data: JSON.stringify(postData),
                 success: function(response) {
                     console.log("Response:", response);
+                    $('#status').html('Updated Succesfully!');
                 },
                 error: function(error) {
                     console.error("Error:", error);
+                    $('#status').html(error);
                 }
             });
         }
@@ -259,6 +267,9 @@
         $('.timepicker').timepicker({
         showMeridian: false,
         defaultTime: false,
+        interval: 60, // Set interval to 60 minutes (1 hour)
+        minTime: '2:00am', // Minimum time allowed
+        maxTime: '5:00pm'  // Maximum time allowed
         });
       });
 
