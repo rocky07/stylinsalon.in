@@ -1,100 +1,418 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
 
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <title>Stylin</title>
-  <!-- Bootstrap CSS -->
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-  <style>
-    /* Add your custom styles here */
-  </style>
+    <!--Page Title-->
+    <title>Styl'in Salon - Ladies and Kids Salon</title>
+
+    <!--Meta Keywords and Description-->
+    <meta name="keywords" content="">
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no"/>
+
+    <!--Favicon-->
+    <link rel="shortcut icon" href="images/favicon.ico" title="Favicon"/>
+
+    <!-- Main CSS Files -->
+    <link rel="stylesheet" href="css/style.css">
+
+    <!-- Namari Color CSS -->
+    <link rel="stylesheet" href="css/namari-color.css">
+
+    <!--Icon Fonts - Font Awesome Icons-->
+    <link rel="stylesheet" href="css/font-awesome.min.css">
+
+    <!-- Animate CSS-->
+    <link href="css/animate.css" rel="stylesheet" type="text/css">
+
+    <!--Google Webfonts-->
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700,800' rel='stylesheet' type='text/css'>
 </head>
-
 <body>
 
-  <!-- Navigation Bar -->
-  <nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <a class="navbar-brand" href="#">StylinSalon</a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
-      aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarNav">
-      <ul class="navbar-nav ml-auto">
-        <li class="nav-item">
-          <a class="nav-link" href="#services">Services</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#booking">Book Now</a>
-        </li>
-        <!-- Add more navigation links as needed -->
-      </ul>
+<!-- Preloader -->
+<div id="preloader">
+    <div id="status" class="la-ball-triangle-path">
+        <div></div>
+        <div></div>
+        <div></div>
     </div>
-  </nav>
+</div>
+<!--End of Preloader-->
 
-  <!-- Hero Section -->
-  <section class="hero">
-    <div class="container text-center">
-      <h1>Welcome to company name</h1>
-      <p>Your bla bla bla</p>
-    </div>
-  </section>
+<div class="page-border" data-wow-duration="0.7s" data-wow-delay="0.2s">
+    <div class="top-border wow fadeInDown animated" style="visibility: visible; animation-name: fadeInDown;"></div>
+    <div class="right-border wow fadeInRight animated" style="visibility: visible; animation-name: fadeInRight;"></div>
+    <div class="bottom-border wow fadeInUp animated" style="visibility: visible; animation-name: fadeInUp;"></div>
+    <div class="left-border wow fadeInLeft animated" style="visibility: visible; animation-name: fadeInLeft;"></div>
+</div>
 
-  <!-- Services Section -->
-  <section id="services" class="services">
-    <div class="container">
-      <h2>Our Services</h2>
-      <div class="row">
-        <!-- Add service cards here -->
-        <div class="col-md-4">
-          <div class="card">
-            <div class="card-body">
-              <h5 class="card-title">Service1</h5>
-              <p class="card-text">Description of  services.</p>
+<div id="wrapper">
+
+    <header id="banner" class="scrollto clearfix" data-enllax-ratio=".5">
+        <div id="header" class="nav-collapse">
+            <div class="row clearfix">
+                <div class="col-1">
+
+                    <!--Logo-->
+                    <div id="logo">
+
+                        <!--Logo that is shown on the banner-->
+                        <img src="images/logo.png" id="banner-logo" alt="Landing Page"/>
+                        <!--End of Banner Logo-->
+
+                        <!--The Logo that is shown on the sticky Navigation Bar-->
+                        <img src="images/logo-2.png" id="navigation-logo" alt="Landing Page"/>
+                        <!--End of Navigation Logo-->
+
+                    </div>
+                    <!--End of Logo-->
+
+                    <aside>
+
+                        <!--Social Icons in Header-->
+                        <ul class="social-icons">
+                            <li>
+                                <a target="_blank" title="Facebook" href="https://www.facebook.com/username">
+                                    <i class="fa fa-facebook fa-1x"></i><span>Facebook</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a target="_blank" title="Google+" href="http://google.com/+username">
+                                    <i class="fa fa-google-plus fa-1x"></i><span>Google+</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a target="_blank" title="Twitter" href="http://www.twitter.com/username">
+                                    <i class="fa fa-twitter fa-1x"></i><span>Twitter</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a target="_blank" title="Instagram" href="http://www.instagram.com/username">
+                                    <i class="fa fa-instagram fa-1x"></i><span>Instagram</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a target="_blank" title="behance" href="http://www.behance.net">
+                                    <i class="fa fa-behance fa-1x"></i><span>Behance</span>
+                                </a>
+                            </li>
+                        </ul>
+                        <!--End of Social Icons in Header-->
+
+                    </aside>
+
+                    <!--Main Navigation-->
+                    <nav id="nav-main">
+                        <ul>
+                            <li>
+                                <a href="#banner">Home</a>
+                            </li>
+                            <li>
+                                <a href="#services">Service</a>
+                            </li>
+                            <li>
+                                <a href="#gallery">Gallery</a>
+                            </li>
+                            <li>
+                                <a href="#testimonials">Testimonials</a>
+                            </li>
+                            <li>
+                                <a href="#pricing">Pricing</a>
+                            </li>
+                        </ul>
+                    </nav>
+                    <!--End of Main Navigation-->
+
+                    <div id="nav-trigger"><span></span></div>
+                    <nav id="nav-mobile"></nav>
+
+                </div>
             </div>
-          </div>
-        </div>
-        <div class="col-md-4">
-          <div class="card">
-            <div class="card-body">
-              <h5 class="card-title">Service2</h5>
-              <p class="card-text">Description of  services.</p>
+        </div><!--End of Header-->
+
+        <!--Banner Content-->
+        <div id="banner-content" class="row clearfix">
+
+            <div class="col-38">
+
+                <div class="section-heading">
+                    <h1>Ladies & Babes Beauty Lounge</h1>
+                    <h2>Styling Salon: Where Elegance Meets Every Lock! Indulge in Signature Styles for Ladies & Kids. Your Tresses, Our Canvas - Let the Beauty Unfold!</h2>
+                </div>
+
+                <!--Call to Action-->
+                <a href="#" class="button">START CREATING TODAY</a>
+                <!--End Call to Action-->
+
             </div>
-          </div>
-        </div>
-        <div class="col-md-4">
-          <div class="card">
-            <div class="card-body">
-              <h5 class="card-title">Service3</h5>
-              <p class="card-text">Description of  services.</p>
-            </div>
-          </div>
-        </div>
+
+        </div><!--End of Row-->
+    </header>
+
+    <!--Main Content Area-->
+    <main id="content">
+
         
-        <!-- Repeat for other services -->
-      </div>
-    </div>
-  </section>
+        <!--Content Section-->
+        <div id="services" class="scrollto clearfix">
 
-  <!-- Booking Section -->
-  <section id="booking" class="booking">
-    <div class="container text-center">
-      <h2>Book an Appointment</h2>
-      <p>Book your appointment now through WhatsApp</p>
-      <p><a href="https://wa.me/1234567890" class="btn btn-primary">Book Now</a></p>
-    </div>
-  </section>
+            <div class="row no-padding-bottom clearfix">
 
-  <!-- Bootstrap JS and dependencies -->
-  <!--<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"></script>
-  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-  -->
-  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+
+                <!--Content Left Side-->
+                <div class="col-3">
+                    <!--User Testimonial-->
+                    <blockquote class="testimonial text-right bigtest">
+                        <q>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
+                            labore
+                            et dolore magna aliqua</q>
+                        <footer>— John Doe, Happy Customer</footer>
+                    </blockquote>
+                    <!-- End of Testimonial-->
+
+                </div>
+                <!--End Content Left Side-->
+
+                <!--Content of the Right Side-->
+                <div class="col-3">
+                    <div class="section-heading">
+                        <h3>BELIEVING</h3>
+                        <h2 class="section-title">Focusing On What Matters Most</h2>
+                        <p class="section-subtitle">Discover a world of indulgence at our Stylin Salon, where our comprehensive services
+                            cater to your every beauty need. From expertly crafted haircuts and styling for all ages to exquisite color
+                            treatments and specialized texture services, our skilled stylists bring your vision to life. </p>
+                    </div>
+                    <p>Pamper your nails with luxurious manicures, pedicures, and stunning enhancements, ensuring your hands and feet
+                        are adorned with elegance. Our skin services offer a rejuvenating experience, from refreshing facials to
+                        advanced treatments like chemical peels and waxing for a radiant complexion.
+                    </p>
+                    <p>
+                        Dive into our thoughtfully curated packages, designed for a complete transformation, and consult with our beauty
+                        experts for personalized skincare regimens. Elevate your salon experience with customizable add-ons and
+                        enhancements, ensuring every visit to Stylin Salon is a journey of beauty, relaxation, and personalized care.
+                    </p>
+                    <!-- Just replace the Video ID "UYJ5IjBRlW8" with the ID of your video on YouTube (Found within the URL) -->
+                    <a href="#" data-videoid="UYJ5IjBRlW8" data-videosite="youtube" class="button video link-lightbox">
+                        WATCH VIDEO <i class="fa fa-play" aria-hidden="true"></i>
+                    </a>
+                </div>
+                <!--End Content Right Side-->
+
+                <div class="col-3">
+                    <img src="images/dancer.jpg" alt="Dancer"/>
+                </div>
+
+            </div>
+
+
+        </div>
+        <!--End of Content Section-->
+
+        <!--Gallery-->
+        <aside id="gallery" class="row text-center scrollto clearfix" data-featherlight-gallery
+                 data-featherlight-filter="a">
+
+                <a href="images/gallery-images/gallery-image-1.jpg" data-featherlight="image" class="col-3 wow fadeIn"
+                   data-wow-delay="0.1s"><img src="images/gallery-images/gallery-image-1.jpg" alt="Landing Page"/></a>
+                <a href="images/gallery-images/gallery-image-2.jpg" data-featherlight="image" class="col-3 wow fadeIn"
+                   data-wow-delay="0.3s"><img src="images/gallery-images/gallery-image-2.jpg" alt="Landing Page"/></a>
+                <a href="images/gallery-images/gallery-image-3.jpg" data-featherlight="image" class="col-3 wow fadeIn"
+                   data-wow-delay="0.5s"><img src="images/gallery-images/gallery-image-3.jpg" alt="Landing Page"/></a>
+                <a href="images/gallery-images/gallery-image-4.jpg" data-featherlight="image" class="col-3 wow fadeIn"
+                   data-wow-delay="1.1s"><img src="images/gallery-images/gallery-image-4.jpg" alt="Landing Page"/></a>
+                <a href="images/gallery-images/gallery-image-5.jpg" data-featherlight="image" class="col-3 wow fadeIn"
+                   data-wow-delay="0.9s"><img src="images/gallery-images/gallery-image-5.jpg" alt="Landing Page"/></a>
+                <a href="images/gallery-images/gallery-image-6.jpg" data-featherlight="image" class="col-3 wow fadeIn"
+                   data-wow-delay="0.7s"><img src="images/gallery-images/gallery-image-6.jpg" alt="Landing Page"/></a>
+
+        </aside>
+        <!--End of Gallery-->
+
+
+
+        <!--Testimonials-->
+        <aside id="testimonials" class="scrollto text-center" data-enllax-ratio=".2">
+
+            <div class="row clearfix">
+
+                <div class="section-heading">
+                    <h3>FEEDBACK</h3>
+                    <h2 class="section-title">What our customers are saying</h2>
+                </div>
+
+                <!--User Testimonial-->
+                <blockquote class="col-3 testimonial classic">
+                    <img src="images/user-images/user-1.jpg" alt="User"/>
+                    <q>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
+                        labore
+                        et dolore magna aliqua</q>
+                    <footer>John Doe - Happy Customer</footer>
+                </blockquote>
+                <!-- End of Testimonial-->
+
+                <!--User Testimonial-->
+                <blockquote class="col-3 testimonial classic">
+                    <img src="images/user-images/user-2.jpg" alt="User"/>
+                    <q>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
+                        labore
+                        et dolore magna aliqua</q>
+                    <footer>Roslyn Doe - Happy Customer</footer>
+                </blockquote>
+                <!-- End of Testimonial-->
+
+                <!--User Testimonial-->
+                <blockquote class="col-3 testimonial classic">
+                    <img src="images/user-images/user-3.jpg" alt="User"/>
+                    <q>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
+                        labore
+                        et dolore magna aliqua</q>
+                    <footer>Thomas Doe - Happy Customer</footer>
+                </blockquote>
+                <!-- End of Testimonial-->
+
+            </div>
+
+        </aside>
+        <!--End of Testimonials-->
+
+
+        <!--Pricing Tables-->
+        <section id="pricing" class="secondary-color text-center scrollto clearfix ">
+            <div class="row clearfix">
+
+                <div class="section-heading">
+                    <h3>YOUR CHOICE</h3>
+                    <h2 class="section-title">We have the right package for you</h2>
+                </div>
+
+                <!--Pricing Block-->
+                <div class="pricing-block col-3 wow fadeInUp" data-wow-delay="0.4s">
+                    <div class="pricing-block-content">
+                        <h3>Nails</h3>
+                        <p class="pricing-sub">The standard version</p>
+                        <div class="pricing">
+                            <div class="price"><span>$</span>200</div>
+                            <p>Polish Perfection: Nailing Elegance, One Manicure at a Time!</p>
+                        </div>
+                        <ul>
+                            <li>Classic Manicure</li>
+                            <li>Gel Manicure</li>
+                            <li>Spa Pedicure</li>
+                            <li>Nail Art and Design</li>
+                           
+                        </ul>
+                        <a href="#" class="button">BUY TODAY</a>
+                    </div>
+                </div>
+                <!--End Pricing Block-->
+
+                <!--Pricing Block-->
+                <div class="pricing-block featured col-3 wow fadeInUp" data-wow-delay="0.6s">
+                    <div class="pricing-block-content">
+                        <h3>Skin</h3>
+                        <p class="pricing-sub">Most popular choice</p>
+                        <div class="pricing">
+                            <div class="price"><span>$</span>29</div>
+                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit</p>
+                        </div>
+                        <ul>
+                            <li>Classic Facial</li>
+                            <li>Deep Cleansing Facial</li>
+                            <li>Anti-Aging Facial</li>
+                            <li>Forum Support</li>
+                            <li>2 years free updates</li>
+                        </ul>
+                        <a href="#" class="button">BUY TODAY</a>
+                    </div>
+                </div>
+                <!--End Pricing Block-->
+
+                <!--Pricing Block-->
+                <div class="pricing-block col-3 wow fadeInUp" data-wow-delay="0.8s">
+                    <div class="pricing-block-content">
+                        <h3>Bridal</h3>
+                        <p class="pricing-sub">For the whole team</p>
+                        <div class="pricing">
+                            <div class="price"><span>$</span>49</div>
+                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit</p>
+                        </div>
+                        <ul>
+                            <li>Unlimited Downloads</li>
+                            <li>Unlimited Extensions</li>
+                            <li>HD Video Tutorials</li>
+                            <li>Chat Support</li>
+                            <li>Lifetime free updates</li>
+                        </ul>
+                        <a href="#" class="button">BUY TODAY</a>
+                    </div>
+                </div>
+                <!--End Pricing Block-->
+
+            </div>
+        </section>
+        <!--End of Pricing Tables-->
+
+    </main>
+    <!--End Main Content Area-->
+
+
+    <!--Footer-->
+    <footer id="landing-footer" class="clearfix">
+        <div class="row clearfix">
+
+            <p id="copyright" class="col-2">Made with love by <a href="https://www.shapingrain.com">ShapingRain</a></p>
+
+            <!--Social Icons in Footer-->
+            <ul class="col-2 social-icons">
+                <li>
+                    <a target="_blank" title="Facebook" href="https://www.facebook.com/username">
+                        <i class="fa fa-facebook fa-1x"></i><span>Facebook</span>
+                    </a>
+                </li>
+                <li>
+                    <a target="_blank" title="Google+" href="http://google.com/+username">
+                        <i class="fa fa-google-plus fa-1x"></i><span>Google+</span>
+                    </a>
+                </li>
+                <li>
+                    <a target="_blank" title="Twitter" href="http://www.twitter.com/username">
+                        <i class="fa fa-twitter fa-1x"></i><span>Twitter</span>
+                    </a>
+                </li>
+                <li>
+                    <a target="_blank" title="Instagram" href="http://www.instagram.com/username">
+                        <i class="fa fa-instagram fa-1x"></i><span>Instagram</span>
+                    </a>
+                </li>
+                <li>
+                    <a target="_blank" title="behance" href="http://www.behance.net">
+                        <i class="fa fa-behance fa-1x"></i><span>Behance</span>
+                    </a>
+                </li>
+            </ul>
+            <!--End of Social Icons in Footer-->
+        </div>
+    </footer>
+    <!--End of Footer-->
+
+</div>
+
+<!-- Include JavaScript resources -->
+<script src="js/jquery.1.8.3.min.js"></script>
+<script src="js/wow.min.js"></script>
+<script src="js/featherlight.min.js"></script>
+<script src="js/featherlight.gallery.min.js"></script>
+<script src="js/jquery.enllax.min.js"></script>
+<script src="js/jquery.scrollUp.min.js"></script>
+<script src="js/jquery.easing.min.js"></script>
+<script src="js/jquery.stickyNavbar.min.js"></script>
+<script src="js/jquery.waypoints.min.js"></script>
+<script src="js/images-loaded.min.js"></script>
+<script src="js/lightbox.min.js"></script>
+<script src="js/site.js"></script>
+
+
 </body>
-
 </html>
