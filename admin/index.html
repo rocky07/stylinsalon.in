@@ -100,11 +100,7 @@
                                     data-placement="bottom" title="Services" id="popoverButton">
                                     Add Service
                                 </button>
-                                 <!-- Button trigger popover -->
-                                 <button type="button" class="btn btn-primary btn-sm mb-2" data-toggle="popover"
-                                 data-placement="bottom" title="Services" id="popoverButton">
-                                 Add Discount
-                             </button>
+                                
 
                                 <!-- Popover content -->
                                 <div id="popoverContent" style="display: none;">
@@ -188,14 +184,16 @@
         aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="billModalLabel">Stylin Salon - Bill</h5>
-                    <!-- Add date and bill number dynamically -->
-                    <p>Date: January 1, 2023</p>
-                    <p>Bill Number: #123456</p>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
+                <div class="modal-header-wrapper">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="billModalLabel">Stylin Salon - Bill</h5>
+                        <!-- Add date and bill number dynamically -->
+                        <p>Date: January 1, 2023</p>
+                        <p>Bill Number: #123456</p>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
                 </div>
                 <div class="modal-body-wrapper">
                     <div class="modal-body">
@@ -418,12 +416,17 @@
         $(document).on("click", ".print", function () {
             const section = $("section");
             const modalBody = $(".modal-body").detach();
-
+            const modalHeader = $(".modal-header").detach();
+            //const modalFooter = $(".modal-footer").detach();
             const content = $(".content").detach();
+         //   $('#exampleModal').hide();
+            $('#exampleModal').modal('hide');
+            section.append(modalHeader);
             section.append(modalBody);
             window.print();
             section.empty();
             section.append(content);
+            $(".modal-header-wrapper").append(modalHeader);
             $(".modal-body-wrapper").append(modalBody);
         });
 

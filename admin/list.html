@@ -35,7 +35,8 @@
     </style>
 </head>
 <body>
-
+<section>
+    <div class="content">
     <div class="container">
         <template is="import" content-selector=".page-content"></template>
         <nav class="navbar fixed-top navbar-expand-lg navbar-light bg-light page-content">
@@ -72,7 +73,6 @@
                         <th>Bill Number</th>
                         <th>Date</th>
                         <th>Total Amount</th>
-                        <th>Print</th>
                         <th>Issue Refund</th>
                     </tr>
                 </thead>
@@ -86,9 +86,44 @@
             </div>
         </div>
     </div>
+    </div>
+    </section>
+  <!-- print modal -->
+   
 
+  
+  <!-- Refund Modal -->
+  <div class="modal fade" id="refundModal" tabindex="-1" role="dialog" aria-labelledby="refundModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="refundModalLabel">Issue Refund</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <!-- Refund Form -->
+          <form id="refundForm">
+            <div class="form-group">
+              <label for="refundReason">Reason:</label>
+              <input type="text" class="form-control" id="refundReason" required>
+              <input type="hidden" class="form-control" id="refundBillingId"/>
+              <input type="hidden" class="form-control" id="refundTotal"/>
+            </div>
+            <div class="form-group">
+              <label for="refundAmount">Amount:</label>
+              <input type="number" class="form-control" id="refundAmount" required>
+            </div>
+            <button type="button" onclick="issueRefund()" class="btn btn-primary">Submit Refund</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+  
     <!-- Add Bootstrap JS and Popper.js -->
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.2/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <!-- Add Font Awesome JS -->
@@ -112,10 +147,7 @@
                         <td>${transaction.date}</td>
                         <td>${transaction.totals}</td>
                         <td>
-                            <button class="btn btn-primary" onclick="printBill(${transaction.billingId})">Print</button>
-                        </td>
-                        <td>
-                            <button class="btn btn-danger" onclick="issueRefund(${transaction.totals})">Issue Refund</button>
+                            <button class="btn btn-danger" data-billingid="${transaction.billingId}" data-totals="${transaction.totals}" data-toggle="modal" data-target="#refundModal" >Issue Refund</button>
                         </td>
                     `;
                 });
@@ -127,16 +159,80 @@
             })
             .catch(error => console.error('Error fetching data:', error));
 
-        function printBill(billNumber) {
-            console.log('Print bill:', billNumber);
-            // Add your logic for printing the bill
+            function generateRandomBillNumber() {
+            // Prefix for the bill number
+            const prefix = '';
+
+            // Generate a random number (you can adjust the range as needed)
+            const randomNumber = Math.floor(Math.random() * 10000);
+
+            // Suffix for the bill number
+            const suffix = '2024'; // You can use the current year or any other identifier
+
+            // Combine the parts to create the final bill number
+            const billNumber = `${randomNumber}${suffix}`;
+
+            return parseInt(billNumber);
+            }
+        
+        function issueRefund() {
+            //get the values 
+            
+            const data = { services: [] };
+            data.date=new Date();
+            data.billingId=generateRandomBillNumber(); // create random billing id.
+            data.services={
+                id:$('#refundBillingId').val(),
+                name:$('#refundReason').val(),
+                price: $('#refundAmount').val(),
+                quantity: 1
+            }
+
+            const postData={
+                TableName:'billing',
+                Item:data
+            };
+
+            //make api calls to billing
+            var apiUrl = "https://u7krhtdqde.execute-api.us-east-2.amazonaws.com/default/billing1/88";
+            $.ajax({
+            type: "POST",
+            url: apiUrl,
+            // crossDomain: true, 
+            //   dataType:'jsonp',
+            contentType: "application/json",  // Set the content type to JSON
+            data: JSON.stringify(postData),
+            success: function(response) {
+                console.log("Response:", response);
+                printFunction();
+            },
+            error: function(error) {
+                console.error("Error:", error);
+            }
+            });
+            // print functions 
+          
+
+        }
+        function printFunction(data){
+            const section = $("section");
+            const content = $(".content").detach();
+            const printBody="Billing Is :some text";
+            section.append(printBody);
+            window.print();
+            section.empty();
+            section.append(content);
         }
 
-        function issueRefund(billNumber) {
-            console.log('Issue refund for bill:', billNumber);
-            // Add your logic for issuing a refund
-        }
+        $('#refundModal').on('show.bs.modal', function (event) {
+        // Extract data from the trigger button (assuming you have the data stored in data attributes)
+        const button = $(event.relatedTarget);
+        const billingId=button.data('billingid');
+        const total=button.data('total');
+        // copy the values to hidden elements in modal 
+        $('#refundBillingId').val(billingId);
 
+        });
         function filterTable() {
             const input = document.getElementById('search').value.toLowerCase();
             const rows = document.querySelectorAll('#transactionTable tbody tr');
