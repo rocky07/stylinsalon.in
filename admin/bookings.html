@@ -94,18 +94,24 @@
           </button>
         </div>
         <div class="modal-body">
-          <div id="status">error message goes here ..</div>
+          <!-- Success alert -->
+          <div class="alert alert-success alert-dismissible fade show" role="alert" style="display: none;">
+            Update successful!
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
           <!-- Add form fields for updating booking information -->
           <form id="bookingForm">
             <div class="form-group">
               <label for="updateDate">Date:</label>
-              <input type="text" class="form-control datepicker" id="updateDate" name="updateDate">
+              <input type="text" class="form-control datepicker" id="updateDate" name="updateDate" readonly>
               <input type="hidden" class="form-control" id="updateBookingId" name="updateBookingId">
               
             </div>
             <div class="form-group">
               <label for="updateTime">Time:</label>
-              <input type="text" class="form-control timepicker" id="updateTime" name="updateTime">
+              <input type="text" class="form-control timepicker" id="updateTime" name="updateTime" readonly>
             </div>
             <div class="form-group">
               <label for="updatePhone">Phone:</label>
@@ -162,7 +168,7 @@
                         <td>${transaction.appTime}</td>
                         <td>${transaction.phone}</td>
                         <td>
-                            <button type="button" data-bookingId="${transaction.bookingId}" data-date="${transaction.appDate}" data-time="${transaction.appTime}" data-phone="${transaction.phone}" data-userName="${transaction.userName}" class="btn btn-primary" data-toggle="modal" data-target="#bookingModal">
+                            <button type="button" data-bookingId="${transaction.bookingId}" data-service="${transaction.service}" data-date="${transaction.appDate}" data-time="${transaction.appTime}" data-phone="${transaction.phone}" data-name="${transaction.userName}" class="btn btn-primary" data-toggle="modal" data-target="#bookingModal">
                             Update/Cancel</button>
                         </td>
                     `;
@@ -247,31 +253,33 @@
                 data: JSON.stringify(postData),
                 success: function(response) {
                     console.log("Response:", response);
-                    $('#status').html('Updated Succesfully!');
+                    $('.alert-success').html('Updated Succesfully!');
+                    $(".alert-success").fadeIn().delay(2000).fadeOut(); 
                 },
                 error: function(error) {
                     console.error("Error:", error);
-                    $('#status').html(error);
+                    $('.alert-success').html('Failed to update');
+                    $(".alert-success").fadeIn().delay(2000).fadeOut(); 
                 }
             });
         }
-       
+  /*     
         $(document).ready(function(){
         // Date Picker
         // Initialize Datepicker and Timepicker
         $('.datepicker').datepicker({
-        format: 'MMM d',
-        autoclose: true,
+        format: 'M dd',
+        autoclose: false,
         });
 
         $('.timepicker').timepicker({
-        showMeridian: false,
-        defaultTime: false,
+        showMeridian: true,
+        defaultTime: true,
         interval: 60, // Set interval to 60 minutes (1 hour)
         minTime: '2:00am', // Minimum time allowed
         maxTime: '5:00pm'  // Maximum time allowed
         });
-      });
+      });*/
 
     </script>
 </body>
