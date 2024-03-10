@@ -367,6 +367,7 @@ section {
 }
 
 .nav-solid #logo #navigation-logo {
+    max-height: 45px;
     display: inline-block;
 }
 
