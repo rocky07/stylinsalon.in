@@ -109,11 +109,12 @@
               <label for="refundReason">Reason:</label>
               <input type="text" class="form-control" id="refundReason" required>
               <input type="hidden" class="form-control" id="refundBillingId"/>
-              <input type="hidden" class="form-control" id="refundTotal"/>
+              <label for="refundReason">Total Transaction Amount</label>
+              <input type="text" readonly class="form-control" id="refundTotal"/>
             </div>
             <div class="form-group">
               <label for="refundAmount">Amount:</label>
-              <input type="number" class="form-control" id="refundAmount" required>
+              <input type="number" class="form-control" max="1" id="refundAmount" required>
             </div>
             <button type="button" onclick="issueRefund()" class="btn btn-primary">Submit Refund</button>
           </form>
@@ -147,7 +148,7 @@
                         <td>${transaction.date}</td>
                         <td>${transaction.totals}</td>
                         <td>
-                            <button class="btn btn-danger" data-billingid="${transaction.billingId}" data-totals="${transaction.totals}" data-toggle="modal" data-target="#refundModal" >Issue Refund</button>
+                            <button class="btn btn-danger" data-totals="${transaction.totals}" data-billingid="${transaction.billingId}" data-totals="${transaction.totals}" data-toggle="modal" data-target="#refundModal" >Issue Refund</button>
                         </td>
                     `;
                 });
@@ -187,6 +188,12 @@
                 price: $('#refundAmount').val(),
                 quantity: 1
             }
+            data.tax=0.0;
+            data.billType='return';
+            data.totals= $('#refundAmount').val();
+            data.createdBy='user A';
+
+          
 
             const postData={
                 TableName:'billing',
@@ -215,13 +222,26 @@
 
         }
         function printFunction(data){
-            const section = $("section");
+            /*const section = $("section");
             const content = $(".content").detach();
             const printBody="Billing Is :some text";
             section.append(printBody);
             window.print();
             section.empty();
-            section.append(content);
+            section.append(content);*/
+
+          
+            var printWindow = window.open("", "_blank");
+            if(printWindow){
+              printWindow.document.write("Issue refund<br/>");
+              printWindow.document.write("BillingId # "+$('#refundBillingId').val()+"<br/>");
+              printWindow.document.write("Reason # "+$('#refundReason').val()+"<br/>");
+              printWindow.document.write("Amount # "+$('#refundAmount').val()+"<br/>");
+              
+              printWindow.document.close();
+              printWindow.print();
+              printWindow.close();
+            }
         }
 
         $('#refundModal').on('show.bs.modal', function (event) {
@@ -231,6 +251,8 @@
         const total=button.data('total');
         // copy the values to hidden elements in modal 
         $('#refundBillingId').val(billingId);
+        $('#refundAmount').max=button.data('totals');
+        $('#refundTotal').val(button.data('totals'));
 
         });
         function filterTable() {

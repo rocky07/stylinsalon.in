@@ -167,8 +167,9 @@
                         <td>${transaction.appDate}</td>
                         <td>${transaction.appTime}</td>
                         <td>${transaction.phone}</td>
+                        <td>${transaction.status}</td>
                         <td>
-                            <button type="button" data-bookingId="${transaction.bookingId}" data-service="${transaction.service}" data-date="${transaction.appDate}" data-time="${transaction.appTime}" data-phone="${transaction.phone}" data-name="${transaction.userName}" class="btn btn-primary" data-toggle="modal" data-target="#bookingModal">
+                            <button type="button" data-bookingId="${transaction.bookingId}" data-service="${transaction.service}" data-date="${transaction.appDate}" data-time="${transaction.appTime}" data-phone="${transaction.phone}" data-name="${transaction.name}" class="btn btn-primary" data-toggle="modal" data-target="#bookingModal">
                             Update/Cancel</button>
                         </td>
                     `;

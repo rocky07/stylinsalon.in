@@ -70,7 +70,7 @@
                         <label for="billType">Bill Type:</label>
                         <select class="form-control" id="billType" name="billType" required>
                             <option value="credit">Credit</option>
-                            <option value="debit">Debit</option>
+                            <option value="cash">Cash</option>
                         </select>
                     </div>
 
@@ -188,8 +188,8 @@
                     <div class="modal-header">
                         <h5 class="modal-title" id="billModalLabel">Stylin Salon - Bill</h5>
                         <!-- Add date and bill number dynamically -->
-                        <p>Date: January 1, 2023</p>
-                        <p>Bill Number: #123456</p>
+                        <p>Date: <span id="currentDate">Jan 1,2024 </span></p>
+                        <p>Bill Number: <span id="billNumber">123</span></p>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
@@ -405,7 +405,9 @@
 
                 
             });
-
+            var currentDate = new Date().toLocaleDateString();
+            $('#currentDate').text(currentDate);
+            $('#billNumber').text(generateRandomBillNumber);
             $('.bill-summary').html("<p>Subtotal: "+total+"</p><p>Tax (10%): "+tax+"</p><p>Total: "+(total+tax)+"</p>");
            
 
@@ -414,12 +416,11 @@
         //print functions 
 
         $(document).on("click", ".print", function () {
-            const section = $("section");
+           /* // old code commented below .. 
+           const section = $("section");
             const modalBody = $(".modal-body").detach();
             const modalHeader = $(".modal-header").detach();
-            //const modalFooter = $(".modal-footer").detach();
             const content = $(".content").detach();
-         //   $('#exampleModal').hide();
             $('#exampleModal').modal('hide');
             section.append(modalHeader);
             section.append(modalBody);
@@ -427,7 +428,20 @@
             section.empty();
             section.append(content);
             $(".modal-header-wrapper").append(modalHeader);
-            $(".modal-body-wrapper").append(modalBody);
+            $(".modal-body-wrapper").append(modalBody);*/
+
+            var printerName = "YOUR_PRINTER_NAME"; // Replace with the name of your thermal printer
+            var printContent = "Hello, world!"; // Replace with the content you want to print
+
+            var printWindow = window.open("", "_blank");
+            if(printWindow){
+              printWindow.document.write($(".modal-header").html());
+              printWindow.document.write($(".modal-body").html());
+             
+              printWindow.document.close();
+              printWindow.print();
+              printWindow.close();
+            }
         });
 
         function generateRandomBillNumber() {

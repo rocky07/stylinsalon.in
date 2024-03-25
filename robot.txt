@@ -1,0 +1,5 @@
+User-agent: *
+Disallow: /admin/
+
+Allow: /images/
+Sitemap: https://stylinsalon.in/sitemap.xml
