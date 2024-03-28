@@ -329,7 +329,7 @@
                 }
             });
             data.date=new Date();
-            data.billingId=1231;//generateRandomBillNumber();
+            data.billingId=generateRandomBillNumber();
             console.log(data.services);
             // Convert arrays to objects
             data.services = data.services.map(service => ({
