@@ -70,6 +70,29 @@ function isApiKeyValid() {
 if (!isApiKeyValid()) {
     showLoginModal();
     }
+
+
+    $('#loginModal').on('hidden.bs.modal', function () {
+        console.log("window focus !!");
+         // Check if the function is valid before proceeding
+         const apiKey = localStorage.getItem('apiKey');
+         const expirationTime = localStorage.getItem('expirationTime');
+     
+             // Check if API key and expiration time are set
+         if (apiKey && expirationTime) {
+             const expirationTimestamp = parseInt(expirationTime);
+             if (Date.now() < expirationTimestamp) {
+                     return true; // API key is still valid
+                 }
+             $("#loginModal").modal('show');
+             console.log('not validated !!');
+         } else {
+             // Alert or handle the case where the function is not valid
+             $("#loginModal").modal('show');
+             console.log('not validated !!');
+         }
+     });
+
 });
 // code should check if local store is set if not call login 
 
