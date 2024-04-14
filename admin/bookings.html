@@ -36,6 +36,36 @@
 </head>
 <body>
 
+
+    <!-- Modal -->
+<div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="loginModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="loginModalLabel">Login</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <!-- Form to input user code -->
+        <form id="loginForm">
+          <div class="form-group">
+            <label for="userCode">User Code:</label>
+            <input type="text" class="form-control" id="userCode" placeholder="Enter code">
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <!-- Login button -->
+        <button type="button" class="btn btn-primary" id="loginBtn">Login</button>
+        <!-- Cancel button -->
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+      </div>
+    </div>
+  </div>
+</div>
+
     <div class="container">
         <template is="import" content-selector=".page-content"></template>
         <nav class="navbar fixed-top navbar-expand-lg navbar-light bg-light page-content">
@@ -147,7 +177,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/js/all.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-timepicker/0.5.2/js/bootstrap-timepicker.min.js"></script>
-    
+    <script src="../js/login.js"></script>
     <script>
       const apiUrl="https://uz2br9vus4.execute-api.us-east-2.amazonaws.com/default/booking";
         // Fetch data from JSON file

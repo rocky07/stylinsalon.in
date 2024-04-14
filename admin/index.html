@@ -37,6 +37,37 @@
 </head>
 
 <body>
+
+    <!-- Modal -->
+<div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="loginModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="loginModalLabel">Login</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <!-- Form to input user code -->
+          <form id="loginForm">
+            <div class="form-group">
+              <label for="userCode">User Code:</label>
+              <input type="text" class="form-control" id="userCode" placeholder="Enter code">
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <!-- Login button -->
+          <button type="button" class="btn btn-primary" id="loginBtn">Login</button>
+          <!-- Cancel button -->
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
     <section>
         <div class="content">
             <nav class="navbar fixed-top navbar-expand-lg navbar-light bg-light page-content">
@@ -64,7 +95,7 @@
             <div><br /></div>
             <div class="container mt-5">
 
-                <form action="#" method="post" onsubmit="return logFormData()">
+                <form action="#" id="billForm" method="post" onsubmit="return logFormData()">
                     <!-- Bill Type -->
                     <div class="form-group">
                         <label for="billType">Bill Type:</label>
@@ -161,12 +192,6 @@
                         <input type="number" class="form-control" id="totals" step="any" name="totals" min="0" required>
                     </div>
 
-                    <!-- Tax -->
-                    <div class="form-group">
-                        <label for="tax">Tax:</label>
-                        <input type="number" class="form-control" id="tax" step="any" name="tax" min="0" required>
-                    </div>
-
                     <!-- Submit Button -->
                     <button type="submit" class="btn btn-success"  data-toggle="modal" data-target="#exampleModal"  >Print</button>
                 </form>
@@ -185,7 +210,7 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header-wrapper">
-                    <div class="modal-header">
+                    <div class="modal-header" id="modal-header-print-data">
                         <h5 class="modal-title" id="billModalLabel">Stylin Salon - Bill</h5>
                         <!-- Add date and bill number dynamically -->
                         <p>Date: <span id="currentDate">Jan 1,2024 </span></p>
@@ -196,7 +221,7 @@
                     </div>
                 </div>
                 <div class="modal-body-wrapper">
-                    <div class="modal-body">
+                    <div class="modal-body" id="modal-body-print-data">
                         <div class="modal-body" id="print-body">
                             <!-- Table with bill details -->
                             <table>
@@ -217,7 +242,7 @@
                                <!-- Subtotal, Tax, and Total -->
                             <div class="bill-summary">
                                 <p>Subtotal: $20.00</p>
-                                <p>Tax (10%): $2.00</p>
+                               
                                 <p>Total: $22.00</p>
                             </div>
                     </div>
@@ -242,7 +267,7 @@
 
     <!-- Add Font Awesome JS -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/js/all.min.js"></script>
-
+   
     <script>
         var count = 0;
         function addService(serviceIdToFind) {
@@ -288,10 +313,10 @@
         }
 
         function computeTaxandTotal() {
-            let tax = 0;
+            //let tax = 0;
             let total = 0;
 
-            const form = document.forms[0];
+            const form = document.forms['billForm'];
             const formData = new FormData(form);
             const data = { services: [] };
 
@@ -306,16 +331,14 @@
             data.services.forEach(service => {
                 const subtotal = service.servicePrice * service.serviceQty;
                 total += subtotal;
-                // Assuming tax is 10% of subtotal
-                tax += 0.1 * subtotal;
             });
-            console.log(total + ":" + tax);
+           // console.log(total + ":" + tax);
             $('#totals').val(total);
-            $('#tax').val(tax);
+        
         }
 
         function logFormData() {
-            const form = document.forms[0];
+            const form = document.forms['billForm'];
             const formData = new FormData(form);
             const data = { services: [] };
 
@@ -363,8 +386,10 @@
              $.ajax({
                 type: "POST",
                 url: apiUrl,
-               // crossDomain: true, 
-             //   dataType:'jsonp',
+                headers: {
+                    'Content-Type': 'application/json', // Example header
+                    'Authorization': 'Bearer '+localStorage.getItem('apiKey') // Example header
+                },
                contentType: "application/json",  // Set the content type to JSON
                 data: JSON.stringify(postData),
                 success: function(response) {
@@ -382,14 +407,12 @@
             const serviceContainer = document.getElementById('print-body').getElementsByTagName('tbody')[0];
             serviceContainer.innerHTML='';
             let total=0;
-            let tax =0;
             
             services.forEach(service => {
 
                 const subtotal = service.price * service.quantity;
                 total += subtotal;
-                // Assuming tax is 10% of subtotal
-                tax += 0.1 * subtotal;
+               
 
                 const newRow = serviceContainer.insertRow();
                 newRow.className = 'service';
@@ -408,7 +431,7 @@
             var currentDate = new Date().toLocaleDateString();
             $('#currentDate').text(currentDate);
             $('#billNumber').text(generateRandomBillNumber);
-            $('.bill-summary').html("<p>Subtotal: "+total+"</p><p>Tax (10%): "+tax+"</p><p>Total: "+(total+tax)+"</p>");
+            $('.bill-summary').html("<p>Subtotal: "+total+"</p><p>Total: "+(total)+"</p>");
            
 
         }
@@ -416,27 +439,14 @@
         //print functions 
 
         $(document).on("click", ".print", function () {
-           /* // old code commented below .. 
-           const section = $("section");
-            const modalBody = $(".modal-body").detach();
-            const modalHeader = $(".modal-header").detach();
-            const content = $(".content").detach();
-            $('#exampleModal').modal('hide');
-            section.append(modalHeader);
-            section.append(modalBody);
-            window.print();
-            section.empty();
-            section.append(content);
-            $(".modal-header-wrapper").append(modalHeader);
-            $(".modal-body-wrapper").append(modalBody);*/
 
             var printerName = "YOUR_PRINTER_NAME"; // Replace with the name of your thermal printer
             var printContent = "Hello, world!"; // Replace with the content you want to print
 
             var printWindow = window.open("", "_blank");
             if(printWindow){
-              printWindow.document.write($(".modal-header").html());
-              printWindow.document.write($(".modal-body").html());
+              printWindow.document.write($("#modal-header-print-data").html());
+              printWindow.document.write($("#modal-body-print-data").html());
              
               printWindow.document.close();
               printWindow.print();
@@ -468,13 +478,14 @@
                 content: $('#popoverContent').html(),
                 html: true
             });
+    
         });
-
+        // code should check if local store is set if not call login 
 
 
     </script>
 
-
+<script src="../js/login.js"></script>
 
 </body>
 

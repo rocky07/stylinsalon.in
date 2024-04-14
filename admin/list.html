@@ -35,6 +35,37 @@
     </style>
 </head>
 <body>
+
+
+    <!-- Modal -->
+<div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="loginModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="loginModalLabel">Login</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <!-- Form to input user code -->
+        <form id="loginForm">
+          <div class="form-group">
+            <label for="userCode">User Code:</label>
+            <input type="text" class="form-control" id="userCode" placeholder="Enter code">
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <!-- Login button -->
+        <button type="button" class="btn btn-primary" id="loginBtn">Login</button>
+        <!-- Cancel button -->
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+      </div>
+    </div>
+  </div>
+</div>
+
 <section>
     <div class="content">
     <div class="container">
@@ -129,7 +160,7 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <!-- Add Font Awesome JS -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/js/all.min.js"></script>
-
+    <script src="../js/login.js"></script>
     <script>
         // Fetch data from JSON file
         fetch('https://u7krhtdqde.execute-api.us-east-2.amazonaws.com/default/billing')
@@ -181,7 +212,7 @@
             
             const data = { services: [] };
             data.date=new Date();
-            data.billingId=$('#refundBillingId').val(); // create random billing id.
+            data.billingId=parseInt($('#refundBillingId').val()); // create random billing id.
             data.services={
                 id:$('#refundBillingId').val(),
                 name:$('#refundReason').val(),
@@ -270,6 +301,10 @@
                 }
             });
         }
+
+
+        
+        
     </script>
 </body>
 </html>
