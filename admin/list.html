@@ -52,7 +52,7 @@
         <form id="loginForm">
           <div class="form-group">
             <label for="userCode">User Code:</label>
-            <input type="text" class="form-control" id="userCode" placeholder="Enter code">
+            <input type="password" class="form-control" id="userCode" placeholder="Enter code">
           </div>
         </form>
       </div>
@@ -103,6 +103,7 @@
                     <tr>
                         <th>Bill Number</th>
                         <th>Date</th>
+                        <th>BillType</th>
                         <th>Total Amount</th>
                         <th>Issue Refund</th>
                     </tr>
@@ -113,7 +114,7 @@
             </table>
 
             <div class="total-amount">
-                Total Amount: <span id="totalAmount">$0.00</span>
+                Total Transaction: <span id="totalAmount">$0.00</span>
             </div>
         </div>
     </div>
@@ -177,11 +178,11 @@
                     newRow.innerHTML = `
                         <td>${transaction.billingId}</td>
                         <td>${transaction.date}</td>
-                        <td>${transaction.totals}</td>
+                        <td>${transaction.billType}</td>
+                        <td>${transaction.billType === 'return' ? -transaction.totals : transaction.totals}</td>
                         <td>
-                            <button class="btn btn-danger" data-totals="${transaction.totals}" data-billingid="${transaction.billingId}" date-billType="${transaction.billType}" data-totals="${transaction.totals}" data-toggle="modal" data-target="#refundModal" >Issue Refund</button>
-                        </td>
-                    `;
+                            <button class="btn btn-danger" ${transaction.billType==='return'?'disabled':''} data-totals="${transaction.totals}" data-billingid="${transaction.billingId}" date-billType="${transaction.billType}" data-totals="${transaction.totals}" data-toggle="modal" data-target="#refundModal"  >Issue Refund</button>
+                        </td>`;
                 });
 
                 // Update total amount
@@ -222,7 +223,7 @@
             data.tax=0.0;
             data.billType='return';
             data.totals= $('#refundAmount').val();
-            data.createdBy='user A';
+       data.createdBy='user A';
 
           
 
