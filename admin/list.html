@@ -213,6 +213,7 @@
             
             const data = { services: [] };
             data.date=new Date();
+            data.billDate=new Date().toISOString().split('T')[0];
             data.billingId=parseInt($('#refundBillingId').val()); // create random billing id.
             data.services={
                 id:$('#refundBillingId').val(),
