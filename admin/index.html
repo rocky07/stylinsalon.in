@@ -352,6 +352,7 @@
                 }
             });
             data.date=new Date();
+            data.billDate=new Date().toISOString().split('T')[0];
             data.billingId=generateRandomBillNumber();
             console.log(data.services);
             // Convert arrays to objects
