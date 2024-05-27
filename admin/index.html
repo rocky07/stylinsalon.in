@@ -127,31 +127,87 @@
 
 
                                 <!-- Button trigger popover -->
-                                <button type="button" class="btn btn-primary btn-sm mb-2" data-toggle="popover"
+                                <button type="button" class="btn btn-primary btn-sm mb-2" data-toggle="popoverSkin"
                                     data-placement="bottom" title="Services" id="popoverButton">
-                                    Add Service
+                                    Skin
                                 </button>
-                                
-
-                                <!-- Popover content -->
-                                <div id="popoverContent" style="display: none;">
-                                    <button type="button" class="btn btn-success" onclick="addService(1)">Service
-                                        1</button>
-                                    <button type="button" class="btn btn-info" onclick="addService(2)">Service
-                                        2</button>
-                                    <button type="button" class="btn btn-success" onclick="addService(1)">Service
-                                        1</button>
-                                    <button type="button" class="btn btn-info" onclick="addService(2)">Service
-                                        2</button>
+                                <button type="button" class="btn btn-primary btn-sm mb-2" data-toggle="popoverNail"
+                                    data-placement="bottom" title="Services" id="popoverButton">
+                                    Nails
+                                </button>
+                                <button type="button" class="btn btn-primary btn-sm mb-2" data-toggle="popoverHair"
+                                    data-placement="bottom" title="Services" id="popoverButton">
+                                    Hair
+                                </button>
+                                <button type="button" class="btn btn-primary btn-sm mb-2" data-toggle="popoverSpa"
+                                    data-placement="bottom" title="Services" id="popoverButton">
+                                    Spa
+                                </button>
+                                <button type="button" class="btn btn-primary btn-sm mb-2" data-toggle="popoverOther"
+                                    data-placement="bottom" title="Services" id="popoverButton">
+                                    Others
+                                </button>
+                                    <!-- Skin Popover content -->
+                                <div id="skinPopoverContent" style="display: none;">
+                                    <button type="button" class="btn btn-info" onclick="addService(29)">Goldenfacial</button>
+                                    <button type="button" class="btn btn-info" onclick="addService(30)">Aleoverra facial</button>
+                                    <button type="button" class="btn btn-info" onclick="addService(31)">Orange facial</button>
+                                    <button type="button" class="btn btn-info" onclick="addService(32)">Fruit facial</button>
+                                    <button type="button" class="btn btn-info" onclick="addService(33)">Natural facial</button>
+                                    <button type="button" class="btn btn-info" onclick="addService(34)">Pearl facial</button>
+                                    <button type="button" class="btn btn-info" onclick="addService(35)">White facial</button>
+                                    <button type="button" class="btn btn-info" onclick="addService(36)">Charcoal facial</button>
+                                    <button type="button" class="btn btn-info" onclick="addService(37)">Diamond facial</button>
+                                    <button type="button" class="btn btn-info" onclick="addService(38)">DeTan facial</button>
                                 </div>
 
-                                 <!-- Discount Popover content -->
-                                 <div id="popoverContent" style="display: none;">
-                                    <button type="button" class="btn btn-success" onclick="addService(1)">Discount 20%
-                                        1</button>
-                                    <button type="button" class="btn btn-info" onclick="addService(2)">Discount 50%
-                                        2</button>
-                                   
+                                <!-- Hair Popover content -->
+                                <div id="hairPopoverContent" style="display: none;">
+                                    <button type="button" class="btn btn-info" onclick="addService(1)">Hair wash</button>
+                                    <button type="button" class="btn btn-info" onclick="addService(2)">Straightening</button>
+                                    <button type="button" class="btn btn-info" onclick="addService(3)">Snoothing</button>
+                                    <button type="button" class="btn btn-info" onclick="addService(4)">Hair Spa</button>
+                                    <button type="button" class="btn btn-info" onclick="addService(5)">Oil Massage (Hairs)</button>
+                                    <button type="button" class="btn btn-info" onclick="addService(6)">Henna</button>
+                                    <button type="button" class="btn btn-info" onclick="addService(7)">Natural</button>
+                                    <button type="button" class="btn btn-info" onclick="addService(8)">Black Henna (dye)</button>
+                                    <button type="button" class="btn btn-info" onclick="addService(9)">Hairs Colouning</button>
+                                    <button type="button" class="btn btn-info" onclick="addService(10)">Hair cut</button>
+                                    <button type="button" class="btn btn-info" onclick="addService(11)">Dandruff treatment</button>
+                                </div>
+                                
+                                <div id="spaPopoverContent" style="display: none;">
+                                    <button type="button" class="btn btn-info" onclick="addService(12)">Body Spa</button>
+                                    <button type="button" class="btn btn-info" onclick="addService(13)">Body oil Massage</button>
+                                    <button type="button" class="btn btn-info" onclick="addService(14)">Body Bleaching</button>
+                                    <button type="button" class="btn btn-info" onclick="addService(15)">Bai Bleaching</button>
+                                    <button type="button" class="btn btn-info" onclick="addService(16)">Cleanup (Face)</button>
+                                    <button type="button" class="btn btn-info" onclick="addService(17)">Normal Cleanup</button>
+                                    <button type="button" class="btn btn-info" onclick="addService(18)">Saree Drapping</button>
+                                    <button type="button" class="btn btn-info" onclick="addService(19)">Normal Makeup</button>
+                                    <button type="button" class="btn btn-info" onclick="addService(20)">Temporary Hair Straightening</button>
+                                    <button type="button" class="btn btn-info" onclick="addService(21)">Bridal</button>
+                                </div>
+                                
+
+                                <!-- Nail Popover content -->
+                                <div id="nailPopoverContent" style="display: none;">
+                                    <button type="button" class="btn btn-info" onclick="addService(23)">Pedicure</button>
+                                    <button type="button" class="btn btn-info" onclick="addService(24)">Normal Pedicure</button>
+                                    <button type="button" class="btn btn-info" onclick="addService(25)">Spa Pedicure</button>
+                                    <button type="button" class="btn btn-info" onclick="addService(26)">Manicure</button>
+                                    <button type="button" class="btn btn-info" onclick="addService(27)">Normal Manicure</button>
+                                    <button type="button" class="btn btn-info" onclick="addService(28)">Spa Manicure</button>
+                                </div>
+
+                                <!-- Other Popover content -->
+                                <div id="otherPopoverContent" style="display: none;">
+                                    <button type="button" class="btn btn-success" onclick="addService(39)">Fullbody Wax</button>
+                                    <button type="button" class="btn btn-info" onclick="addService(40)">Hand Full</button>
+                                    <button type="button" class="btn btn-info" onclick="addService(41)">Hand Half</button>
+                                    <button type="button" class="btn btn-info" onclick="addService(42)">Leg Full</button>
+                                    <button type="button" class="btn btn-info" onclick="addService(43)">Leg Half</button>
+                                    <button type="button" class="btn btn-info" onclick="addService(44)">Under arms</button>
                                 </div>
 
                                 <table class="table">
@@ -273,9 +329,51 @@
         function addService(serviceIdToFind) {
 
             const serviceList = [
-                { id: 1, name: 'hair', price: 1.99 },
-                { id: 2, name: 'nail', price: 1.99 },
-                { id: 3, name: 'skin', price: 1.99 }
+                { id: 1, name: 'Hair wash', price: 150 },
+                { id: 2, name: 'Straightening', price: 150 },
+                { id: 3, name: 'Snoothing', price: 150 },
+                { id: 4, name: 'Hair Spa', price: 500 },
+                { id: 5, name: 'Oil Massage (Hairs)', price: 500 },
+                { id: 6, name: 'Henna', price: 500 },
+                { id: 7, name: 'Natural', price: 300 },
+                { id: 8, name: 'Black Henna (dye)', price: 500 },
+                { id: 9, name: 'Hairs Colouning', price: 200 },
+                { id: 10, name: 'Hair cut', price: 200 },
+                { id: 11, name: 'Dandruff treatment', price: 600 },
+                { id: 12, name: 'Body Spa', price: 5000 },
+                { id: 13, name: 'Body oil Massage', price: 3500 },
+                { id: 14, name: 'Body Bleaching', price: 5000 },
+                { id: 15, name: 'Bai Bleaching', price: 350 },
+                { id: 16, name: 'Cleanup (Face)', price: 50 },
+                { id: 17, name: 'Normal Cleanup', price: 350 },
+                { id: 18, name: 'Saree Drapping', price: 500 },
+                { id: 19, name: 'Normal Makeup', price: 1000 },
+                { id: 20, name: 'Temporary Hair Straightening', price: 500 },
+                { id: 21, name: 'Bridal', price: 20000 },
+                { id: 22, name: 'Threading', price: 50 },
+                { id: 23, name: 'Pedicure', price: 500 },
+                { id: 24, name: 'Normal Pedicure', price: 400 },
+                { id: 25, name: 'Spa Pedicure', price: 500 },
+                { id: 26, name: 'Maricare', price: 400 },
+                { id: 27, name: 'Normal Manicure', price: 500 },
+                { id: 28, name: 'Spa Manicure', price: 700 },
+                { id: 29, name: 'Golden facial', price: 1500 },
+                { id: 30, name: 'Alovera facial', price: 1000 },
+                { id: 31, name: 'Orange facial', price: 800 },
+                { id: 32, name: 'fruit facial', price: 800 },
+                { id: 33, name: 'Natural facial', price: 500 },
+                { id: 34, name: 'Pearl facial', price: 2000 },
+                { id: 35, name: 'White facial', price: 2500 },
+                { id: 36, name: 'Charcol facial', price: 800 },
+                { id: 37, name: 'Dismond facial', price: 2500 },
+                { id: 38, name: 'D. Tan facial', price: 600 },
+                { id: 39, name: 'Full body WaX', price: 3000 },
+                { id: 40, name: 'Full Hand', price: 600 },
+                { id: 41, name: 'Half Hand', price: 400 },
+                { id: 42, name: 'Full Leg', price: 1000 },
+                { id: 43, name: 'Half Leg', price: 500 },
+                { id: 44, name: 'Under arms', price: 250 }
+                
             ];
 
             //const serviceIdToFind = 2;
@@ -296,6 +394,7 @@
             const cell3 = newRow.insertCell(2);
             const cell4 = newRow.insertCell(3);
             const cell5 = newRow.insertCell(4);
+            
 
             cell1.innerHTML = '<input type="text" class="form-control" value=' + service2.id + ' name="serviceId[' + count + ']" required>';
             cell2.innerHTML = '<input type="text" class="form-control" value=' + service2.name + ' name="serviceName[' + count + ']" required>';
@@ -475,10 +574,27 @@
 
         // Enable popover
         $(function () {
-            $('[data-toggle="popover"]').popover({
-                content: $('#popoverContent').html(),
+            $('[data-toggle="popoverSkin"]').popover({
+                content: $('#skinPopoverContent').html(),
                 html: true
             });
+            $('[data-toggle="popoverNail"]').popover({
+                content: $('#nailPopoverContent').html(),
+                html: true
+            });
+            $('[data-toggle="popoverHair"]').popover({
+                content: $('#hairPopoverContent').html(),
+                html: true
+            });
+            $('[data-toggle="popoverOther"]').popover({
+                content: $('#otherPopoverContent').html(),
+                html: true
+            });
+            $('[data-toggle="popoverSpa"]').popover({
+                content: $('#spaPopoverContent').html(),
+                html: true
+            });
+            
     
         });
         // code should check if local store is set if not call login 
