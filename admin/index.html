@@ -180,7 +180,7 @@
                                     <button type="button" class="btn btn-info" onclick="addService(12)">Body Spa</button>
                                     <button type="button" class="btn btn-info" onclick="addService(13)">Body oil Massage</button>
                                     <button type="button" class="btn btn-info" onclick="addService(14)">Body Bleaching</button>
-                                    <button type="button" class="btn btn-info" onclick="addService(15)">Bai Bleaching</button>
+                                    <button type="button" class="btn btn-info" onclick="addService(15)">Face Bleaching</button>
                                     <button type="button" class="btn btn-info" onclick="addService(16)">Cleanup (Face)</button>
                                     <button type="button" class="btn btn-info" onclick="addService(17)">Normal Cleanup</button>
                                     <button type="button" class="btn btn-info" onclick="addService(18)">Saree Drapping</button>
@@ -329,50 +329,50 @@
         function addService(serviceIdToFind) {
 
             const serviceList = [
-                { id: 1, name: 'Hair wash', price: 150 },
+                { id: 1, name: 'Hair-wash', price: 150 },
                 { id: 2, name: 'Straightening', price: 150 },
                 { id: 3, name: 'Snoothing', price: 150 },
-                { id: 4, name: 'Hair Spa', price: 500 },
-                { id: 5, name: 'Oil Massage (Hairs)', price: 500 },
+                { id: 4, name: 'Hair-Spa', price: 500 },
+                { id: 5, name: 'Oil-Massage (Hairs)', price: 500 },
                 { id: 6, name: 'Henna', price: 500 },
                 { id: 7, name: 'Natural', price: 300 },
-                { id: 8, name: 'Black Henna (dye)', price: 500 },
-                { id: 9, name: 'Hairs Colouning', price: 200 },
-                { id: 10, name: 'Hair cut', price: 200 },
-                { id: 11, name: 'Dandruff treatment', price: 600 },
-                { id: 12, name: 'Body Spa', price: 5000 },
-                { id: 13, name: 'Body oil Massage', price: 3500 },
-                { id: 14, name: 'Body Bleaching', price: 5000 },
-                { id: 15, name: 'Bai Bleaching', price: 350 },
-                { id: 16, name: 'Cleanup (Face)', price: 50 },
-                { id: 17, name: 'Normal Cleanup', price: 350 },
-                { id: 18, name: 'Saree Drapping', price: 500 },
-                { id: 19, name: 'Normal Makeup', price: 1000 },
-                { id: 20, name: 'Temporary Hair Straightening', price: 500 },
+                { id: 8, name: 'Black-Henna-(dye)', price: 500 },
+                { id: 9, name: 'Hairs-Colouning', price: 200 },
+                { id: 10, name: 'Hair-cut', price: 200 },
+                { id: 11, name: 'Dandruff-treatment', price: 600 },
+                { id: 12, name: 'Body-Spa', price: 5000 },
+                { id: 13, name: 'Body-oil-Massage', price: 3500 },
+                { id: 14, name: 'Body-Bleaching', price: 5000 },
+                { id: 15, name: 'Face-Bleaching', price: 350 },
+                { id: 16, name: 'Cleanup-(Face)', price: 50 },
+                { id: 17, name: 'Normal-Cleanup', price: 350 },
+                { id: 18, name: 'Saree-Drapping', price: 500 },
+                { id: 19, name: 'Normal-Makeup', price: 1000 },
+                { id: 20, name: 'Temporary-Hair-Straightening', price: 500 },
                 { id: 21, name: 'Bridal', price: 20000 },
                 { id: 22, name: 'Threading', price: 50 },
                 { id: 23, name: 'Pedicure', price: 500 },
-                { id: 24, name: 'Normal Pedicure', price: 400 },
-                { id: 25, name: 'Spa Pedicure', price: 500 },
+                { id: 24, name: 'Normal-Pedicure', price: 400 },
+                { id: 25, name: 'Spa-Pedicure', price: 500 },
                 { id: 26, name: 'Maricare', price: 400 },
-                { id: 27, name: 'Normal Manicure', price: 500 },
-                { id: 28, name: 'Spa Manicure', price: 700 },
-                { id: 29, name: 'Golden facial', price: 1500 },
-                { id: 30, name: 'Alovera facial', price: 1000 },
-                { id: 31, name: 'Orange facial', price: 800 },
-                { id: 32, name: 'fruit facial', price: 800 },
-                { id: 33, name: 'Natural facial', price: 500 },
-                { id: 34, name: 'Pearl facial', price: 2000 },
-                { id: 35, name: 'White facial', price: 2500 },
-                { id: 36, name: 'Charcol facial', price: 800 },
-                { id: 37, name: 'Dismond facial', price: 2500 },
-                { id: 38, name: 'D. Tan facial', price: 600 },
-                { id: 39, name: 'Full body WaX', price: 3000 },
-                { id: 40, name: 'Full Hand', price: 600 },
-                { id: 41, name: 'Half Hand', price: 400 },
-                { id: 42, name: 'Full Leg', price: 1000 },
-                { id: 43, name: 'Half Leg', price: 500 },
-                { id: 44, name: 'Under arms', price: 250 }
+                { id: 27, name: 'Normal-Manicure', price: 500 },
+                { id: 28, name: 'Spa-Manicure', price: 700 },
+                { id: 29, name: 'Golden-facial', price: 1500 },
+                { id: 30, name: 'Alovera-facial', price: 1000 },
+                { id: 31, name: 'Orange-facial', price: 800 },
+                { id: 32, name: 'fruit-facial', price: 800 },
+                { id: 33, name: 'Natural-facial', price: 500 },
+                { id: 34, name: 'Pearl-facial', price: 2000 },
+                { id: 35, name: 'White-facial', price: 2500 },
+                { id: 36, name: 'Charcol-facial', price: 800 },
+                { id: 37, name: 'Dismond-facial', price: 2500 },
+                { id: 38, name: 'D.Tan-facial', price: 600 },
+                { id: 39, name: 'Full-body-WaX', price: 3000 },
+                { id: 40, name: 'Full-Hand', price: 600 },
+                { id: 41, name: 'Half-Hand', price: 400 },
+                { id: 42, name: 'Full-Leg', price: 1000 },
+                { id: 43, name: 'Half-Leg', price: 500 },
+                { id: 44, name: 'Under-arms', price: 250 }
                 
             ];
 
@@ -397,7 +397,7 @@
             
 
             cell1.innerHTML = '<input type="text" class="form-control" value=' + service2.id + ' name="serviceId[' + count + ']" required>';
-            cell2.innerHTML = '<input type="text" class="form-control" value=' + service2.name + ' name="serviceName[' + count + ']" required>';
+            cell2.innerHTML = '<input type="text" class="form-control" value=' +  service2.name.replace(/" "/g, '-')+ ' name="serviceName[' + count + ']" required>';
             cell3.innerHTML = '<input type="number" class="form-control" value=' + service2.price + ' name="servicePrice[' + count + ']" onchange="computeTaxandTotal()" step="any" required min="0">';
             cell4.innerHTML = '<input type="number" class="form-control" name="serviceQty[' + count + ']" onchange="computeTaxandTotal()" required min="1" value="1">';
             cell5.innerHTML = '<button type="button" class="btn btn-danger btn-sm" onclick="removeService(this)"><i class="fas fa-trash-alt"></i> Delete</button>';
