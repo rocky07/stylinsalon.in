@@ -258,6 +258,10 @@
           const updatedPhone = $('#updatePhone').val();
           const updatedService = $('#updateService').val();
          
+         const year = 2024;
+         const fullDateString = `${updatedDate} ${year}`;
+         let dt=new Date(fullDateString);
+         let appDateStamp=dt.toISOString();
 
           const updatedInfo = {
             bookingId:bookingId,
@@ -266,7 +270,8 @@
             name: updatedName,
             phone: updatedPhone,
             service: updatedService,
-            status:status
+            status:status,
+            appDateStamp:appDateStamp
           };
           callRPC(updatedInfo)
         }
