@@ -192,10 +192,18 @@
                 // Update table with dynamic data
                 data.Items.forEach(transaction => {
                     const newRow = tableBody.insertRow();
+                    let appointmentTime=parseInt(transaction.appTime);
+                    let formmattedTime="";
+                    if(appointmentTime>12){
+                      formmattedTime=appointmentTime-12 +" PM";
+                    }else{
+                      formmattedTime=appointmentTime+" AM";
+                    }
+
                     newRow.innerHTML = `
                         <td>${transaction.bookingId}</td>
                         <td>${transaction.appDate}</td>
-                        <td>${transaction.appTime}</td>
+                        <td>${formmattedTime}</td>
                         <td>${transaction.phone}</td>
                         <td>${transaction.status}</td>
                         <td>

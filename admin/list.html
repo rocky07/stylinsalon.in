@@ -175,9 +175,13 @@
                 // Update table with dynamic data
                 data.Items.forEach(transaction => {
                     const newRow = tableBody.insertRow();
+                    
+                    const transactionDate=new Date(transaction.date);
+                    const formattedDate = transactionDate.toLocaleString('en-US');
+
                     newRow.innerHTML = `
                         <td>${transaction.billingId}</td>
-                        <td>${transaction.date}</td>
+                        <td>${formattedDate}</td>
                         <td>${transaction.billType}</td>
                         <td>${transaction.billType === 'return' ? -transaction.totals : transaction.totals}</td>
                         <td>
@@ -191,6 +195,21 @@
                 document.getElementById('totalAmount').textContent = totalAmount;
             })
             .catch(error => console.error('Error fetching data:', error));
+
+            function updateTotalAmount() {
+              const table = document.getElementById('transactionTable');
+              const tbody = table.getElementsByTagName('tbody')[0];
+              const rows = tbody.getElementsByTagName('tr');
+              
+              let totalAmount = 0;
+              for (let i = 0; i < rows.length; i++) {
+                  if (rows[i].style.display !== 'none') {
+                      const totalCell = rows[i].getElementsByTagName('td')[3];
+                      totalAmount += parseFloat(totalCell.textContent) || 0;
+                  }
+              }
+              document.getElementById('totalAmount').textContent = `$${totalAmount.toFixed(2)}`;
+          }
 
           function generateRandomBillNumber() {
             // Prefix for the bill number
@@ -302,6 +321,7 @@
                     row.style.display = 'none';
                 }
             });
+            updateTotalAmount();
         }
 
 
