@@ -341,7 +341,7 @@ section {
 }
 
 #banner #logo h1 {
-    font-size: 28px;
+    font-size: 24px;
     margin-right: 10px;
     font-weight: 900;
     padding: 0;
@@ -970,7 +970,7 @@ blockquote {
 }
 
 .testimonial.bigtest q {
-    font-size: 22px;
+    font-size: 18px;
 }
 
 /* --------- 6.4 Gallery ---------- */
