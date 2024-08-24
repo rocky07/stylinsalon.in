@@ -124,7 +124,7 @@ a:hover, #header.nav-solid nav a:hover {
 /* Banner Background and Text Colors */
 
 #banner {
-    background: url("../images/banner-images/ladies-salon-kottayam-hair-dresser.jpg") no-repeat center top;
+    background: url("../images/banner-images/ladies-salon-kottayam-hair-dresser.webp") no-repeat center top;
     background-size:cover;
 }
 
@@ -212,7 +212,7 @@ body {
 h1 {
     font-family: 'Open Sans', sans-serif, Arial, Helvetica;
     font-size: 40px; 
-    font-weight:300;
+    font-weight:700;
     color:#111;
 }
 
