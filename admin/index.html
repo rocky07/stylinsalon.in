@@ -112,6 +112,7 @@
                         <select class="form-control" id="createdBy" name="createdBy" required>
                             <option value="vanitha">Vanitha</option>
                             <option value="swapna">Swapna</option>
+                            <option value="bency">Bency</option>
                             <option value="sudakshina">Sudakshina</option>
                         </select>
                     </div>
@@ -148,6 +149,10 @@
                                     data-placement="bottom" title="Services" id="popoverButton">
                                     Others
                                 </button>
+                              <!--<button type="button" class="btn btn-primary btn-sm mb-2" data-toggle="popoverDiscount"
+                                    data-placement="bottom" title="Services" id="popoverButton">
+                                    Discount
+                                </button>-->  
                                     <!-- Skin Popover content -->
                                 <div id="skinPopoverContent" style="display: none;">
                                     <button type="button" class="btn btn-info" onclick="addService(29)">Goldenfacial</button>
@@ -175,8 +180,15 @@
                                     <button type="button" class="btn btn-info" onclick="addService(9)">Hairs Colouning</button>
                                     <button type="button" class="btn btn-info" onclick="addService(10)">Hair cut</button>
                                     <button type="button" class="btn btn-info" onclick="addService(11)">Dandruff treatment</button>
+                                    <button type="button" class="btn btn-info" onclick="addService(121)">Protein-treatment</button>
+                                    <button type="button" class="btn btn-info" onclick="addService(122)">Permanent-blowdry</button>
+                                    <button type="button" class="btn btn-info" onclick="addService(123)">Layer-cut</button>
+                                    <button type="button" class="btn btn-info" onclick="addService(124)">Butterfly-cut</button>
+                                    <button type="button" class="btn btn-info" onclick="addService(125)">Step Cut</button>
+                                    <button type="button" class="btn btn-info" onclick="addService(126)">Kids Cut</button>
                                 </div>
-                                
+                        
+
                                 <div id="spaPopoverContent" style="display: none;">
                                     <button type="button" class="btn btn-info" onclick="addService(12)">Body Spa</button>
                                     <button type="button" class="btn btn-info" onclick="addService(13)">Body oil Massage</button>
@@ -209,6 +221,10 @@
                                     <button type="button" class="btn btn-info" onclick="addService(42)">Leg Full</button>
                                     <button type="button" class="btn btn-info" onclick="addService(43)">Leg Half</button>
                                     <button type="button" class="btn btn-info" onclick="addService(44)">Under arms</button>
+                                </div>
+                                <div id="discountPopoverContent" style="display: none;">
+                                    <button type="button" class="btn btn-success" onclick="addService(99)">Discount</button>
+                                   
                                 </div>
 
                                 <table class="table">
@@ -330,18 +346,24 @@
         function addService(serviceIdToFind) {
 
             const serviceList = [
-                { id: 1, name: 'Hair-wash', price: 150 },
-                { id: 2, name: 'Straightening', price: 150 },
-                { id: 3, name: 'Snoothing', price: 150 },
-                { id: 4, name: 'Hair-Spa', price: 500 },
+                { id: 1, name: 'Hair-wash', price: 250 },
+                { id: 2, name: 'Straightening', price: 1000 },
+                { id: 3, name: 'Snoothing', price: 1000 },
+                { id: 4, name: 'Hair-Spa', price: 800 },
                 { id: 5, name: 'Oil-Massage (Hairs)', price: 500 },
-                { id: 6, name: 'Henna', price: 500 },
-                { id: 7, name: 'Natural', price: 300 },
+                { id: 6, name: 'Henna-Natural', price: 500 },
+                { id: 7, name: 'Highlights/strip', price: 200 },
                 { id: 8, name: 'Black-Henna-(dye)', price: 500 },
-                { id: 9, name: 'Hairs-Colouning', price: 200 },
-                { id: 10, name: 'Hair-cut', price: 200 },
-                { id: 11, name: 'Dandruff-treatment', price: 600 },
+                { id: 9, name: 'Hairs-Coloring', price: 500 },
+                { id: 10, name: 'Hair-cut', price: 350 },
+                { id: 11, name: 'Dandruff-treatment', price: 1500 },
                 { id: 12, name: 'Body-Spa', price: 5000 },
+                { id: 121, name: 'Protein-treatment', price: 2000 },
+                { id: 122, name: 'Permanent-blowdry', price: 2000 },
+                { id: 123, name: 'Layer-cut', price: 500 },
+                { id: 124, name: 'Butterfly-cut', price: 500 },
+                { id: 125, name: 'Step-cut', price: 500 },
+                { id: 126, name: 'Kids-cut', price: 200 },
                 { id: 13, name: 'Body-oil-Massage', price: 3500 },
                 { id: 14, name: 'Body-Bleaching', price: 5000 },
                 { id: 15, name: 'Face-Bleaching', price: 350 },
@@ -350,7 +372,7 @@
                 { id: 18, name: 'Saree-Drapping', price: 500 },
                 { id: 19, name: 'Normal-Makeup', price: 1000 },
                 { id: 20, name: 'Temporary-Hair-Straightening', price: 500 },
-                { id: 21, name: 'Bridal', price: 20000 },
+                { id: 21, name: 'Bridal', price: 5000 },
                 { id: 22, name: 'Threading', price: 50 },
                 { id: 23, name: 'Pedicure', price: 500 },
                 { id: 24, name: 'Normal-Pedicure', price: 400 },
@@ -373,7 +395,9 @@
                 { id: 41, name: 'Half-Hand', price: 400 },
                 { id: 42, name: 'Full-Leg', price: 1000 },
                 { id: 43, name: 'Half-Leg', price: 500 },
-                { id: 44, name: 'Under-arms', price: 250 }
+                { id: 44, name: 'Under-arms', price: 250 },
+                { id: 99, name: 'Discount', price: 0 }
+                
                 
             ];
 
@@ -595,6 +619,11 @@
                 content: $('#spaPopoverContent').html(),
                 html: true
             });
+            $('[data-toggle="popoverDiscount"]').popover({
+                content: $('#discountPopoverContent').html(),
+                html: true
+            });
+            
             
     
         });
