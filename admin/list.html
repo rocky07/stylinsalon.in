@@ -97,7 +97,9 @@
                 <label for="search">Search:</label>
                 <input type="text" class="form-control" id="search" oninput="filterTable()" placeholder="Enter keyword">
             </div>
-
+            <div class="total-amount">
+              Total Transaction for  <span id="monthYear"></span>  : <span id="totalAmount">$0.00</span>
+            </div>
             <table class="table" id="transactionTable">
                 <thead>
                     <tr>
@@ -113,12 +115,10 @@
                 </tbody>
             </table>
 
-            <div class="total-amount">
-                Total Transaction for  <span id="monthYear"></span>  : <span id="totalAmount">$0.00</span>
-            </div>
-            <div class="total-amount">
+            
+           <!-- <div class="total-amount">
               Trail by : <span id="deficit"></span> (target 40,000) 
-          </div>
+          </div>-->
         </div>
     </div>
     </div>
@@ -221,10 +221,8 @@
             const today = new Date();
               const options = { year: 'numeric', month: 'long' };
               const monthYear = new Intl.DateTimeFormat('en-US', options).format(today);
-
               document.getElementById('monthYear').textContent = monthYear; 
-              document.getElementById('deficit').textContent = 40000-totalAmount; 
-
+         //     document.getElementById('deficit').textContent = 40000-totalAmount; 
           }
 
           function generateRandomBillNumber() {

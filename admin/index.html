@@ -129,99 +129,133 @@
 
 
                                 <!-- Button trigger popover -->
-                                <button type="button" class="btn btn-primary btn-sm mb-2" data-toggle="popoverSkin"
-                                    data-placement="bottom" title="Services" id="popoverButton">
-                                    Skin
-                                </button>
-                                <button type="button" class="btn btn-primary btn-sm mb-2" data-toggle="popoverNail"
-                                    data-placement="bottom" title="Services" id="popoverButton">
-                                    Nails
-                                </button>
                                 <button type="button" class="btn btn-primary btn-sm mb-2" data-toggle="popoverHair"
                                     data-placement="bottom" title="Services" id="popoverButton">
                                     Hair
                                 </button>
+                                <button type="button" class="btn btn-primary btn-sm mb-2" data-toggle="popoverNail"
+                                    data-placement="bottom" title="Services" id="popoverButton">
+                                    Nail
+                                </button>
+                                <button type="button" class="btn btn-primary btn-sm mb-2" data-toggle="popoverFacial"
+                                    data-placement="bottom" title="Services" id="popoverButton">
+                                    Facial
+                                </button>
+                                
+                                <button type="button" class="btn btn-primary btn-sm mb-2" data-toggle="popoverWaxing"
+                                    data-placement="bottom" title="Services" id="popoverButton">
+                                    Waxing
+                                </button>
+                               
                                 <button type="button" class="btn btn-primary btn-sm mb-2" data-toggle="popoverSpa"
                                     data-placement="bottom" title="Services" id="popoverButton">
                                     Spa
                                 </button>
-                                <button type="button" class="btn btn-primary btn-sm mb-2" data-toggle="popoverOther"
+                                <button type="button" class="btn btn-primary btn-sm mb-2" data-toggle="popoverBridal"
                                     data-placement="bottom" title="Services" id="popoverButton">
-                                    Others
+                                    Bridal
+                                </button>
+                                <button type="button" class="btn btn-primary btn-sm mb-2" data-toggle="popoverPiercing"
+                                    data-placement="bottom" title="Services" id="popoverButton">
+                                    Piercing
+                                </button>
+                                <button type="button" class="btn btn-primary btn-sm mb-2" data-toggle="popoverBleaching"
+                                    data-placement="bottom" title="Services" id="popoverButton">
+                                    Bleacing
+                                </button>
+                                <button type="button" class="btn btn-primary btn-sm mb-2" data-toggle="popoverMassage"
+                                    data-placement="bottom" title="Services" id="popoverButton">
+                                    Massage
                                 </button>
                               <!--<button type="button" class="btn btn-primary btn-sm mb-2" data-toggle="popoverDiscount"
                                     data-placement="bottom" title="Services" id="popoverButton">
                                     Discount
                                 </button>-->  
                                     <!-- Skin Popover content -->
-                                <div id="skinPopoverContent" style="display: none;">
-                                    <button type="button" class="btn btn-info" onclick="addService(29)">Goldenfacial</button>
-                                    <button type="button" class="btn btn-info" onclick="addService(30)">Aleoverra facial</button>
-                                    <button type="button" class="btn btn-info" onclick="addService(31)">Orange facial</button>
-                                    <button type="button" class="btn btn-info" onclick="addService(32)">Fruit facial</button>
-                                    <button type="button" class="btn btn-info" onclick="addService(33)">Natural facial</button>
-                                    <button type="button" class="btn btn-info" onclick="addService(34)">Pearl facial</button>
-                                    <button type="button" class="btn btn-info" onclick="addService(35)">White facial</button>
-                                    <button type="button" class="btn btn-info" onclick="addService(36)">Charcoal facial</button>
-                                    <button type="button" class="btn btn-info" onclick="addService(37)">Diamond facial</button>
-                                    <button type="button" class="btn btn-info" onclick="addService(38)">DeTan facial</button>
-                                </div>
+                               
+                                <div id="facialPopoverContent" style="display: none;">
+                                    <button type="button" class="btn btn-info" onclick="addService(24)">Golden Facial</button>
+                                    <button type="button" class="btn btn-info" onclick="addService(25)">Aloe Vera Facial</button>
+                                    <button type="button" class="btn btn-info" onclick="addService(26)">Orange Facial</button>
+                                    <button type="button" class="btn btn-info" onclick="addService(27)">Fruî Facial</button>
+                                    <button type="button" class="btn btn-info" onclick="addService(28)">Natural Facial</button>
+                                    <button type="button" class="btn btn-info" onclick="addService(29)">Pearl Facial</button>
+                                    <button type="button" class="btn btn-info" onclick="addService(30)">Whitining Facial</button>
+                                    <button type="button" class="btn btn-info" onclick="addService(31)">Charcoal Facial</button>
+                                    <button type="button" class="btn btn-info" onclick="addService(32)">Diamond Facial</button>
+                                    <button type="button" class="btn btn-info" onclick="addService(33)">De-tan Facial</button>
+                                  </div>
 
                                 <!-- Hair Popover content -->
                                 <div id="hairPopoverContent" style="display: none;">
-                                    <button type="button" class="btn btn-info" onclick="addService(1)">Hair wash</button>
+                                    <button type="button" class="btn btn-info" onclick="addService(1)">Hair Wash</button>
                                     <button type="button" class="btn btn-info" onclick="addService(2)">Straightening</button>
-                                    <button type="button" class="btn btn-info" onclick="addService(3)">Snoothing</button>
+                                    <button type="button" class="btn btn-info" onclick="addService(3)">Smoothening</button>
                                     <button type="button" class="btn btn-info" onclick="addService(4)">Hair Spa</button>
-                                    <button type="button" class="btn btn-info" onclick="addService(5)">Oil Massage (Hairs)</button>
-                                    <button type="button" class="btn btn-info" onclick="addService(6)">Henna</button>
-                                    <button type="button" class="btn btn-info" onclick="addService(7)">Natural</button>
-                                    <button type="button" class="btn btn-info" onclick="addService(8)">Black Henna (dye)</button>
-                                    <button type="button" class="btn btn-info" onclick="addService(9)">Hairs Colouning</button>
-                                    <button type="button" class="btn btn-info" onclick="addService(10)">Hair cut</button>
-                                    <button type="button" class="btn btn-info" onclick="addService(11)">Dandruff treatment</button>
-                                    <button type="button" class="btn btn-info" onclick="addService(121)">Protein-treatment</button>
-                                    <button type="button" class="btn btn-info" onclick="addService(122)">Permanent-blowdry</button>
-                                    <button type="button" class="btn btn-info" onclick="addService(123)">Layer-cut</button>
-                                    <button type="button" class="btn btn-info" onclick="addService(124)">Butterfly-cut</button>
-                                    <button type="button" class="btn btn-info" onclick="addService(125)">Step Cut</button>
-                                    <button type="button" class="btn btn-info" onclick="addService(126)">Kids Cut</button>
-                                </div>
-                        
+                                    <button type="button" class="btn btn-info" onclick="addService(5)">Oil Massage</button>
+                                    <button type="button" class="btn btn-info" onclick="addService(6)">Henna Natural</button>
+                                    <button type="button" class="btn btn-info" onclick="addService(7)">Black Henna (Dye)</button>
+                                    <button type="button" class="btn btn-info" onclick="addService(8)">Hair Coloring</button>
+                                    <button type="button" class="btn btn-info" onclick="addService(9)">Highlights/Strip</button>
+                                    <button type="button" class="btn btn-info" onclick="addService(10)">Hair Cut (U, V)</button>
+                                    <button type="button" class="btn btn-info" onclick="addService(11)">Dandruff Treatment</button>
+                                    <button type="button" class="btn btn-info" onclick="addService(13)">Threading</button>
+                                    <button type="button" class="btn btn-info" onclick="addService(14)">Protein Treatment</button>
+                                    <button type="button" class="btn btn-info" onclick="addService(15)">Permanent Blowdry</button>
+                                    <button type="button" class="btn btn-info" onclick="addService(16)">Layer Cut</button>
+                                    <button type="button" class="btn btn-info" onclick="addService(17)">Butterfly Cut</button>
+                                    <button type="button" class="btn btn-info" onclick="addService(18)">Step Cut</button>
+                                    <button type="button" class="btn btn-info" onclick="addService(19)">Kids Haircut</button>
+                                    <button type="button" class="btn btn-info" onclick="addService(20)">Dora Cut</button>
+                                  </div>
+                                  <div id="nailPopoverContent" style="display: none;">
+                                     <button type="button" class="btn btn-info" onclick="addService(21)">Pedicure</button>
+                                     <button type="button" class="btn btn-info" onclick="addService(22)">Spa Pedicure</button>
+                                     <button type="button" class="btn btn-info" onclick="addService(23)">Manicure</button>
+                                  </div>
+                                  <div id="waxingPopoverContent" style="display: none;">
+                                    <button type="button" class="btn btn-info" onclick="addService(34)">Full Body Wax</button>
+                                    <button type="button" class="btn btn-info" onclick="addService(35)">Full Hand Wax</button>
+                                    <button type="button" class="btn btn-info" onclick="addService(36)">Half Hand Wax</button>
+                                    <button type="button" class="btn btn-info" onclick="addService(37)">Full Leg Wax</button>
+                                    <button type="button" class="btn btn-info" onclick="addService(38)">Half Leg Wax</button>
+                                    <button type="button" class="btn btn-info" onclick="addService(39)">Underarms Wax</button>
+                                  </div>
 
-                                <div id="spaPopoverContent" style="display: none;">
-                                    <button type="button" class="btn btn-info" onclick="addService(12)">Body Spa</button>
-                                    <button type="button" class="btn btn-info" onclick="addService(13)">Body oil Massage</button>
-                                    <button type="button" class="btn btn-info" onclick="addService(14)">Body Bleaching</button>
-                                    <button type="button" class="btn btn-info" onclick="addService(15)">Face Bleaching</button>
-                                    <button type="button" class="btn btn-info" onclick="addService(16)">Cleanup (Face)</button>
-                                    <button type="button" class="btn btn-info" onclick="addService(17)">Normal Cleanup</button>
-                                    <button type="button" class="btn btn-info" onclick="addService(18)">Saree Drapping</button>
-                                    <button type="button" class="btn btn-info" onclick="addService(19)">Normal Makeup</button>
-                                    <button type="button" class="btn btn-info" onclick="addService(20)">Temporary Hair Straightening</button>
-                                    <button type="button" class="btn btn-info" onclick="addService(21)">Bridal</button>
-                                </div>
-                                
-
-                                <!-- Nail Popover content -->
-                                <div id="nailPopoverContent" style="display: none;">
-                                    <button type="button" class="btn btn-info" onclick="addService(23)">Pedicure</button>
-                                    <button type="button" class="btn btn-info" onclick="addService(24)">Normal Pedicure</button>
-                                    <button type="button" class="btn btn-info" onclick="addService(25)">Spa Pedicure</button>
-                                    <button type="button" class="btn btn-info" onclick="addService(26)">Manicure</button>
-                                    <button type="button" class="btn btn-info" onclick="addService(27)">Normal Manicure</button>
-                                    <button type="button" class="btn btn-info" onclick="addService(28)">Spa Manicure</button>
-                                </div>
-
-                                <!-- Other Popover content -->
-                                <div id="otherPopoverContent" style="display: none;">
-                                    <button type="button" class="btn btn-success" onclick="addService(39)">Fullbody Wax</button>
-                                    <button type="button" class="btn btn-info" onclick="addService(40)">Hand Full</button>
-                                    <button type="button" class="btn btn-info" onclick="addService(41)">Hand Half</button>
-                                    <button type="button" class="btn btn-info" onclick="addService(42)">Leg Full</button>
-                                    <button type="button" class="btn btn-info" onclick="addService(43)">Leg Half</button>
-                                    <button type="button" class="btn btn-info" onclick="addService(44)">Under arms</button>
-                                </div>
+                                  <div id="spaPopoverContent" style="display: none;">
+                                    <button type="button" class="btn btn-info" onclick="addService(40)">Body Spa</button>
+                                    <button type="button" class="btn btn-info" onclick="addService(41)">Body Oil Massage</button>
+                                    <button type="button" class="btn btn-info" onclick="addService(42)">Body Polishing</button>
+                                    <button type="button" class="btn btn-info" onclick="addService(43)">Face Bleaching</button>
+                                    <button type="button" class="btn btn-info" onclick="addService(44)">Cleanup (Face)</button>
+                                    <button type="button" class="btn btn-info" onclick="addService(45)">Normal Cleanup</button>
+                                  </div>
+                                  <div id="bridalPopoverContent" style="display: none;">
+                                    <button type="button" class="btn btn-info" onclick="addService(46)">Saree Draping</button>
+                                    <button type="button" class="btn btn-info" onclick="addService(47)">Normal Makeup</button>
+                                    <button type="button" class="btn btn-info" onclick="addService(48)">Hair Setting</button>
+                                    <button type="button" class="btn btn-info" onclick="addService(49)">Bridal Package</button>
+                                  </div>
+                                  <div id="piercingPopoverContent" style="display: none;">
+                                    <button type="button" class="btn btn-info" onclick="addService(50)">Nose Piercing</button>
+                                    <button type="button" class="btn btn-info" onclick="addService(51)">Ear Piercing</button>
+                                    <button type="button" class="btn btn-info" onclick="addService(52)">Warts Removal (10 warts)</button>
+                                  </div>
+                                  <div id="bleachingPopoverContent" style="display: none;">
+                                    <button type="button" class="btn btn-info" onclick="addService(53)">Body Bleaching (Full Body)</button>
+                                    <button type="button" class="btn btn-info" onclick="addService(54)">Face Bleaching</button>
+                                    <button type="button" class="btn btn-info" onclick="addService(55)">Hand Bleaching</button>
+                                    <button type="button" class="btn btn-info" onclick="addService(56)">Legs Bleaching</button>
+                                  </div>
+                                  
+                                  <div id="massagePopoverContent" style="display: none;">
+                                    <button type="button" class="btn btn-info" onclick="addService(57)">Oil Massage</button>
+                                    <button type="button" class="btn btn-info" onclick="addService(58)">Body Pack</button>
+                                    <button type="button" class="btn btn-info" onclick="addService(59)">Head Massage</button>
+                                    <button type="button" class="btn btn-info" onclick="addService(60)">Facial</button>
+                                    <button type="button" class="btn btn-info" onclick="addService(61)">Hair Pack</button>
+                                  </div>
+                                  
                                 <div id="discountPopoverContent" style="display: none;">
                                     <button type="button" class="btn btn-success" onclick="addService(99)">Discount</button>
                                    
@@ -314,9 +348,9 @@
                             </table>
                                <!-- Subtotal, Tax, and Total -->
                             <div class="bill-summary">
-                                <p>Subtotal: $20.00</p>
+                                <p>Subtotal: Invalid</p>
                                
-                                <p>Total: $22.00</p>
+                                <p>Total: Invalid</p>
                             </div>
                     </div>
                 </div>
@@ -346,59 +380,66 @@
         function addService(serviceIdToFind) {
 
             const serviceList = [
-                { id: 1, name: 'Hair-wash', price: 250 },
+                { id: 1, name: 'Hair-Wash', price: 250 },
                 { id: 2, name: 'Straightening', price: 1000 },
-                { id: 3, name: 'Snoothing', price: 1000 },
+                { id: 3, name: 'Smoothening', price: 1000 },
                 { id: 4, name: 'Hair-Spa', price: 800 },
-                { id: 5, name: 'Oil-Massage (Hairs)', price: 500 },
+                { id: 5, name: 'Oil-Massage', price: 500 },
                 { id: 6, name: 'Henna-Natural', price: 500 },
-                { id: 7, name: 'Highlights/strip', price: 200 },
-                { id: 8, name: 'Black-Henna-(dye)', price: 500 },
-                { id: 9, name: 'Hairs-Coloring', price: 500 },
-                { id: 10, name: 'Hair-cut', price: 350 },
-                { id: 11, name: 'Dandruff-treatment', price: 1500 },
-                { id: 12, name: 'Body-Spa', price: 5000 },
-                { id: 121, name: 'Protein-treatment', price: 2000 },
-                { id: 122, name: 'Permanent-blowdry', price: 2000 },
-                { id: 123, name: 'Layer-cut', price: 500 },
-                { id: 124, name: 'Butterfly-cut', price: 500 },
-                { id: 125, name: 'Step-cut', price: 500 },
-                { id: 126, name: 'Kids-cut', price: 200 },
-                { id: 13, name: 'Body-oil-Massage', price: 3500 },
-                { id: 14, name: 'Body-Bleaching', price: 5000 },
-                { id: 15, name: 'Face-Bleaching', price: 350 },
-                { id: 16, name: 'Cleanup-(Face)', price: 50 },
-                { id: 17, name: 'Normal-Cleanup', price: 350 },
-                { id: 18, name: 'Saree-Drapping', price: 500 },
-                { id: 19, name: 'Normal-Makeup', price: 1000 },
-                { id: 20, name: 'Temporary-Hair-Straightening', price: 500 },
-                { id: 21, name: 'Bridal', price: 5000 },
-                { id: 22, name: 'Threading', price: 50 },
-                { id: 23, name: 'Pedicure', price: 500 },
-                { id: 24, name: 'Normal-Pedicure', price: 400 },
-                { id: 25, name: 'Spa-Pedicure', price: 500 },
-                { id: 26, name: 'Maricare', price: 400 },
-                { id: 27, name: 'Normal-Manicure', price: 500 },
-                { id: 28, name: 'Spa-Manicure', price: 700 },
-                { id: 29, name: 'Golden-facial', price: 1500 },
-                { id: 30, name: 'Alovera-facial', price: 1000 },
-                { id: 31, name: 'Orange-facial', price: 800 },
-                { id: 32, name: 'fruit-facial', price: 800 },
-                { id: 33, name: 'Natural-facial', price: 500 },
-                { id: 34, name: 'Pearl-facial', price: 2000 },
-                { id: 35, name: 'White-facial', price: 2500 },
-                { id: 36, name: 'Charcol-facial', price: 800 },
-                { id: 37, name: 'Dismond-facial', price: 2500 },
-                { id: 38, name: 'D.Tan-facial', price: 600 },
-                { id: 39, name: 'Full-body-WaX', price: 3000 },
-                { id: 40, name: 'Full-Hand', price: 600 },
-                { id: 41, name: 'Half-Hand', price: 400 },
-                { id: 42, name: 'Full-Leg', price: 1000 },
-                { id: 43, name: 'Half-Leg', price: 500 },
-                { id: 44, name: 'Under-arms', price: 250 },
-                { id: 99, name: 'Discount', price: 0 }
-                
-                
+                { id: 7, name: 'Black-Henna-(Dye)', price: 500 },
+                { id: 8, name: 'Hair-Coloring', price: 500 },
+                { id: 9, name: 'Highlights/Strip', price: 200 },
+                { id: 10, name: 'Hair-Cut-(U,V)', price: 360 },
+                { id: 11, name: 'Dandruff-Treatment', price: 1500 },
+                { id: 13, name: 'Threading', price: 50 },
+                { id: 14, name: 'Protein-Treatment', price: 1000 },
+                { id: 15, name: 'Permanent-Blowdry', price: 1000 },
+                { id: 16, name: 'Layer-Cut', price: 500 },
+                { id: 17, name: 'Butterfly-Cut', price: 600 },
+                { id: 18, name: 'Step-Cut', price: 600 },
+                { id: 19, name: 'Kids-Haircut', price: 200 },
+                { id: 20, name: 'Dora-Cut', price: 350 },
+                { id: 21, name: 'Pedicure', price: 800 },
+                { id: 22, name: 'Spa-Pedicure', price: 1000 },
+                { id: 23, name: 'Manicure', price: 500 },
+                { id: 24, name: 'Golden-Facial', price: 1500 },
+                { id: 25, name: 'Aloe-Vera-Facial', price: 1000 },
+                { id: 26, name: 'Orange-Facial', price: 800 },
+                { id: 27, name: 'Fruit-Facial', price: 800 },
+                { id: 28, name: 'Natural-Facial', price: 500 },
+                { id: 29, name: 'Pearl Facial', price: 2000 },
+                { id: 30, name: 'Whitining-Facial', price: 2000 },
+                { id: 31, name: 'Charcoal-Facial', price: 800 },
+                { id: 32, name: 'Diamond-Facial', price: 2500 },
+                { id: 33, name: 'De-tan-Facial', price: 1500 },
+                { id: 34, name: 'Full-Body-Wax', price: 3500 },
+                { id: 35, name: 'Full-Hand-Wax', price: 2600 },
+                { id: 36, name: 'Half-Hand-Wax', price: 400 },
+                { id: 37, name: 'Full-Leg-Wax', price: 1000 },
+                { id: 38, name: 'Half-Leg-Wax', price: 500 },
+                { id: 39, name: 'Underarms-Wax', price: 250 },
+                { id: 40, name: 'Body-Spa', price: 3000 },
+                { id: 41, name: 'Body-Oil-Massage', price: 3500 },
+                { id: 42, name: 'Body-Polishing', price: 4500 },
+                { id: 43, name: 'Face-Bleaching', price: 350 },
+                { id: 44, name: 'Cleanup-(Face)', price: 500 },
+                { id: 45, name: 'Normal-Cleanup', price: 350 },
+                { id: 46, name: 'Saree-Draping', price: 500 },
+                { id: 47, name: 'Normal-Makeup', price: 1000 },
+                { id: 48, name: 'Hair-Setting', price: 500 },
+                { id: 49, name: 'Bridal-Package', price: 5000 },
+                { id: 50, name: 'Nose-Piercing', price: 250 },
+                { id: 51, name: 'Ear-Piercing', price: 500 },
+                { id: 52, name: 'Warts-Removal-(10 warts)', price: 500 },
+                { id: 53, name: 'Body-Bleaching-(Full Body)', price: 2500 },
+                { id: 54, name: 'Face-Bleaching', price: 300 },
+                { id: 55, name: 'Hand-Bleaching', price: 700 },
+                { id: 56, name: 'Legs-Bleaching', price: 1200 },
+                { id: 57, name: 'Oil-Massage', price: 2000 },
+                { id: 58, name: 'Body-Pack', price: 3000 },
+                { id: 59, name: 'Head-Massage', price: 700 },
+                { id: 60, name: 'Facial', price: 2000 },
+                { id: 61, name: 'Hair-Pack', price: 2500 }
             ];
 
             //const serviceIdToFind = 2;
@@ -599,16 +640,25 @@
 
         // Enable popover
         $(function () {
-            $('[data-toggle="popoverSkin"]').popover({
-                content: $('#skinPopoverContent').html(),
+           
+            $('[data-toggle="popoverHair"]').popover({
+                content: $('#hairPopoverContent').html(),
                 html: true
             });
             $('[data-toggle="popoverNail"]').popover({
                 content: $('#nailPopoverContent').html(),
                 html: true
             });
-            $('[data-toggle="popoverHair"]').popover({
-                content: $('#hairPopoverContent').html(),
+            $('[data-toggle="popoverFacial"]').popover({
+                content: $('#facialPopoverContent').html(),
+                html: true
+            });
+            $('[data-toggle="popoverWaxing"]').popover({
+                content: $('#waxingPopoverContent').html(),
+                html: true
+            });
+            $('[data-toggle="popoverSpa"]').popover({
+                content: $('#spaPopoverContent').html(),
                 html: true
             });
             $('[data-toggle="popoverOther"]').popover({
@@ -619,8 +669,20 @@
                 content: $('#spaPopoverContent').html(),
                 html: true
             });
-            $('[data-toggle="popoverDiscount"]').popover({
-                content: $('#discountPopoverContent').html(),
+            $('[data-toggle="popoverBridal"]').popover({
+                content: $('#bridalPopoverContent').html(),
+                html: true
+            });
+            $('[data-toggle="popoverPiercing"]').popover({
+                content: $('#piercingPopoverContent').html(),
+                html: true
+            });
+            $('[data-toggle="popoverBleaching"]').popover({
+                content: $('#bleachingPopoverContent').html(),
+                html: true
+            });
+            $('[data-toggle="popoverMassage"]').popover({
+                content: $('#massagePopoverContent').html(),
                 html: true
             });
             
