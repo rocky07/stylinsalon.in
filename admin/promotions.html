@@ -82,11 +82,11 @@
                 <li class="nav-item">
                   <a class="nav-link" href="list.html">All Bills</a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">All Bookings <span class="sr-only">(current)</span></a>
-                </li>
                 <li class="nav-item active">
-                  <a class="nav-link" href="promotions.html">Promotions</a>
+                    <a class="nav-link" href="bookings.html">All Bookings<span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="#">Promotions<span class="sr-only">(current)</span></a>
               </li>
               </ul>
               
@@ -98,15 +98,19 @@
                 <label for="search">Search:</label>
                 <input type="text" class="form-control" id="search" oninput="filterTable()" placeholder="Enter keyword">
             </div>
+            <button type="button" data-bookingId="" data-phone="" data-name="" data-dnd="" class="btn btn-primary" data-toggle="modal" data-target="#bookingModal">
+              Add New </button>
 
             <table class="table" id="transactionTable">
                 <thead>
                     <tr>
-                        <th>Booking Number</th>
-                        <th>Date</th>
-                        <th>Time</th>
-                        <th>Service</th>
-                        <th>Confirm/Cancel</th>
+                        <th>Id</th>
+                        <th>Phone</th>
+                        <th>Name</th>
+                        <th>Last Contacted</th>
+                        <th>DND</th>
+                        <th>Call</th>
+                        <th>update</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -121,7 +125,7 @@
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="bookingModalLabel">Update / Cancel Booking</h5>
+          <h5 class="modal-title" id="bookingModalLabel">Update Contact</h5>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
@@ -137,22 +141,15 @@
           <!-- Add form fields for updating booking information -->
           <form id="bookingForm">
             <div class="form-group">
-              <label for="updateDate">Date:</label>
-              <input type="text" class="form-control datepicker" id="updateDate" name="updateDate" readonly>
-              <input type="hidden" class="form-control" id="updateBookingId" name="updateBookingId">
-              
-            </div>
-            <div class="form-group">
-              <label for="updateTime">Time:</label>
-              <input type="text" class="form-control timepicker" id="updateTime" name="updateTime" readonly>
+             <input type="hidden" class="form-control" id="updateBookingId" name="updateBookingId">
             </div>
             <div class="form-group">
               <label for="updatePhone">Phone:</label>
               <input type="text" class="form-control" id="updatePhone" name="updatePhone">
             </div>
             <div class="form-group">
-              <label for="updateService">Service:</label>
-              <input type="text" class="form-control" id="updateService" name="updateService" >
+              <label for="updateService">Dnd:</label>
+              <input type="text" class="form-control" id="updateDnd" name="updateDnd" >
             </div>
             <div class="form-group">
               <label for="updateName">Customer Name:</label>
@@ -182,7 +179,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-timepicker/0.5.2/js/bootstrap-timepicker.min.js"></script>
     <script src="../js/login.js"></script>
     <script>
-      const apiUrl="https://uz2br9vus4.execute-api.us-east-2.amazonaws.com/default/booking";
+      const apiUrl="https://r08vbl0sik.execute-api.us-east-2.amazonaws.com/default/promotion";
         // Fetch data from JSON file
         fetch(apiUrl)
             .then(response => response.json())
@@ -195,23 +192,21 @@
                 // Update table with dynamic data
                 data.Items.forEach(transaction => {
                     const newRow = tableBody.insertRow();
-                    let appointmentTime=parseInt(transaction.appTime);
-                    let formmattedTime="";
-                    if(appointmentTime>12){
-                      formmattedTime=appointmentTime-12 +" PM";
-                    }else{
-                      formmattedTime=appointmentTime+" AM";
-                    }
+              
 
                     newRow.innerHTML = `
-                        <td>${transaction.name}</td>
-                        <td>${transaction.appDate}</td>
-                        <td>${formmattedTime}</td>
+                        <td>${transaction.bookingId}</td>
                         <td>${transaction.phone}</td>
-                        <td>${transaction.status}</td>
+                        <td>${transaction.name}</td>
+                        <td>${transaction.dateUpdated}</td>
+                        <td>${transaction.dnd}</td>
+                         <td>
+                            <button type="button" onclick="callCustomer('${transaction.bookingId}','${transaction.phone}','${transaction.name}','${transaction.dnd}')" class="btn btn-primary">
+                            Call</button>
+                        </td>
                         <td>
-                            <button type="button" data-bookingId="${transaction.bookingId}" data-service="${transaction.service}" data-date="${transaction.appDate}" data-time="${transaction.appTime}" data-phone="${transaction.phone}" data-name="${transaction.name}" class="btn btn-primary" data-toggle="modal" data-target="#bookingModal">
-                            Update/Cancel</button>
+                            <button type="button" data-bookingId="${transaction.bookingId}" data-phone="${transaction.phone}" data-name="${transaction.name}" data-dnd="${transaction.dnd}" class="btn btn-primary" data-toggle="modal" data-target="#bookingModal">
+                            Update</button>
                         </td>
                     `;
                 });
@@ -236,67 +231,61 @@
                 }
             });
         }
-        function populateModalData(bookingId, date, time, phone, service, name) {
-          document.getElementById('updateBookingId').value = bookingId;
-            document.getElementById('updateDate').value = date;
-            document.getElementById('updateTime').value = time;
+        function populateModalData(bookingId, phone, name, dnd) {
+            if(bookingId==""){
+              bookingId=generateNumericBookingId();
+            }
+            document.getElementById('updateBookingId').value = bookingId;
             document.getElementById('updatePhone').value = phone;
-            document.getElementById('updateService').value = service;
             document.getElementById('updateName').value = name;
+            document.getElementById('updateDnd').value = dnd;
             }
         // Assuming you have a function to handle modal show event
         $('#bookingModal').on('show.bs.modal', function (event) {
         // Extract data from the trigger button (assuming you have the data stored in data attributes)
         const button = $(event.relatedTarget);
         const bookingId=button.data('bookingid');
-        const date = button.data('date');
-        const time = button.data('time');
         const phone = button.data('phone');
-        const service = button.data('service');
         const name = button.data('name');
-
+        const dnd = button.data('dnd');
         // Call populateModalData to update the modal content
-        populateModalData(bookingId,date, time, phone, service, name);
+        populateModalData(bookingId,phone, name, dnd);
         });
 
-        
-
         function updateBooking(status){
+
           const bookingId=parseInt($('#updateBookingId').val());
-          const updatedDate = $('#updateDate').val();
-          const updatedTime = $('#updateTime').val();
-          const updatedName = $('#updateName').val();
           const updatedPhone = $('#updatePhone').val();
-          const updatedService = $('#updateService').val();
+          const updatedName = $('#updateName').val();
+          const updatedDnd = $('#updateDnd').val();
          
-         const year = 2024;
-         const fullDateString = `${updatedDate} ${year}`;
-         let dt=new Date(fullDateString);
+         let dt=new Date();
          let appDateStamp=dt.toISOString();
 
           const updatedInfo = {
             bookingId:bookingId,
-            appDate: updatedDate,
-            appTime: updatedTime,
-            name: updatedName,
             phone: updatedPhone,
-            service: updatedService,
-            status:status,
-            appDateStamp:appDateStamp
+            name: updatedName,
+            dnd: updatedDnd,
+            dateCreated:appDateStamp,
+            promoCode:4,
+            dateUpdated:appDateStamp
           };
-          callRPC(updatedInfo)
+          
+          callRPC(updatedInfo,"POST")
         }
 
-        function callRPC(updatedInfo){
-                
+        function callRPC(updatedInfo,method){
+
           const postData={
-                TableName:'booking',
+                TableName:'promotion',
                 Item:updatedInfo
             };
+
           $.ajax({
-                type: "POST",
+                type: method,
                 url: apiUrl,
-               contentType: "application/json",  // Set the content type to JSON
+                contentType: "application/json",  // Set the content type to JSON
                 data: JSON.stringify(postData),
                 success: function(response) {
                     console.log("Response:", response);
@@ -310,23 +299,31 @@
                 }
             });
         }
-  /*     
-        $(document).ready(function(){
-        // Date Picker
-        // Initialize Datepicker and Timepicker
-        $('.datepicker').datepicker({
-        format: 'M dd',
-        autoclose: false,
-        });
+  
+      function generateNumericBookingId(length = 8) {
+        const min = Math.pow(10, length - 1); // Minimum value for the desired length
+        const max = Math.pow(10, length) - 1; // Maximum value for the desired length
+        return Math.floor(Math.random() * (max - min + 1)) + min;
+      }
 
-        $('.timepicker').timepicker({
-        showMeridian: true,
-        defaultTime: true,
-        interval: 60, // Set interval to 60 minutes (1 hour)
-        minTime: '2:00am', // Minimum time allowed
-        maxTime: '5:00pm'  // Maximum time allowed
-        });
-      });*/
+      function callCustomer(bookingId,phone,name,dnd){
+       
+        let dt=new Date();
+         let appDateStamp=dt.toISOString();
+
+          const updatedInfo = {
+            bookingId:bookingId,
+            phone: phone,
+            name: name,
+            dnd: false,
+            dateCreated:appDateStamp,
+            promoCode:4,
+            dateUpdated:appDateStamp
+          };
+
+        callRPC(updatedInfo,"PUT");
+        window.location='tel:'+phone;
+      }
 
     </script>
 </body>
