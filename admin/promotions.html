@@ -83,7 +83,7 @@
                   <a class="nav-link" href="list.html">All Bills</a>
                 </li>
                 <li class="nav-item active">
-                    <a class="nav-link" href="bookings.html">All Bookings<span class="sr-only">(current)</span></a>
+                    <a class="nav-link" href="bookings.html">All Bookings</a>
                 </li>
                 <li class="nav-item">
                   <a class="nav-link" href="#">Promotions<span class="sr-only">(current)</span></a>
@@ -147,9 +147,9 @@
               <label for="updatePhone">Phone:</label>
               <input type="text" class="form-control" id="updatePhone" name="updatePhone">
             </div>
-            <div class="form-group">
-              <label for="updateService">Dnd:</label>
-              <input type="text" class="form-control" id="updateDnd" name="updateDnd" >
+            <div class="form-check form-switch">
+              <input class="form-check-input" type="checkbox" role="switch" id="updateDnd">
+              <label class="form-check-label" for="updateDnd">DND</label>
             </div>
             <div class="form-group">
               <label for="updateName">Customer Name:</label>
@@ -160,7 +160,6 @@
         <div class="modal-footer">
           <!-- Add buttons to update and cancel booking -->
           <button type="button" class="btn btn-primary" onclick="updateBooking('CONFIRMED')">Update</button>
-          <button type="button" class="btn btn-danger" onclick="updateBooking('CANCELLED')">Cancel Booking</button>
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
         </div>
       </div>
@@ -238,7 +237,7 @@
             document.getElementById('updateBookingId').value = bookingId;
             document.getElementById('updatePhone').value = phone;
             document.getElementById('updateName').value = name;
-            document.getElementById('updateDnd').value = dnd;
+            document.getElementById('updateDnd').checked = dnd?true:false;
             }
         // Assuming you have a function to handle modal show event
         $('#bookingModal').on('show.bs.modal', function (event) {
@@ -257,7 +256,7 @@
           const bookingId=parseInt($('#updateBookingId').val());
           const updatedPhone = $('#updatePhone').val();
           const updatedName = $('#updateName').val();
-          const updatedDnd = $('#updateDnd').val();
+          const updatedDnd = $('#updateDnd').is(":checked")?true:false;
          
          let dt=new Date();
          let appDateStamp=dt.toISOString();
@@ -321,7 +320,7 @@
             dateUpdated:appDateStamp
           };
 
-        callRPC(updatedInfo,"PUT");
+        callRPC(updatedInfo,"POST");
         window.location='tel:'+phone;
       }
 
