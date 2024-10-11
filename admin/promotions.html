@@ -82,10 +82,10 @@
                 <li class="nav-item">
                   <a class="nav-link" href="list.html">All Bills</a>
                 </li>
-                <li class="nav-item active">
+                <li class="nav-item">
                     <a class="nav-link" href="bookings.html">All Bookings</a>
                 </li>
-                <li class="nav-item">
+                <li class="nav-item active">
                   <a class="nav-link" href="#">Promotions<span class="sr-only">(current)</span></a>
               </li>
               </ul>
@@ -100,7 +100,8 @@
             </div>
             <button type="button" data-bookingId="" data-phone="" data-name="" data-dnd="" class="btn btn-primary" data-toggle="modal" data-target="#bookingModal">
               Add New </button>
-
+              <button type="button" id="filterButton" onclick="filterTableByDate()" class="btn btn-primary">
+               Filter:Call To Make </button>
             <table class="table" id="transactionTable">
                 <thead>
                     <tr>
@@ -191,7 +192,9 @@
                 // Update table with dynamic data
                 data.Items.forEach(transaction => {
                     const newRow = tableBody.insertRow();
-              
+                    const isOld = isOlderThan7Days(transaction.dateUpdated);
+                    const callButtonClass = isOld ? 'btn btn-success' : 'btn btn-primary';
+
 
                     newRow.innerHTML = `
                         <td>${transaction.bookingId}</td>
@@ -200,7 +203,7 @@
                         <td>${transaction.dateUpdated}</td>
                         <td>${transaction.dnd}</td>
                          <td>
-                            <button type="button" ${transaction.dnd==true?'disabled':''} onclick="callCustomer('${transaction.bookingId}','${transaction.phone}','${transaction.name}','${transaction.dnd}')" class="btn btn-primary">
+                            <button type="button" ${transaction.dnd==true?'disabled':''} onclick="callCustomer('${transaction.bookingId}','${transaction.phone}','${transaction.name}','${transaction.dnd}')" class="${callButtonClass}">
                             Call</button>
                         </td>
                         <td>
@@ -220,17 +223,57 @@
             const rows = document.querySelectorAll('#transactionTable tbody tr');
 
             rows.forEach(row => {
+                const billNumber = row.cells[0].textContent.toLowerCase();
                 const phone = row.cells[1].textContent.toLowerCase();
-                const name = row.cells[2].textContent.toLowerCase();
-                const date = row.cells[3].textContent.toLowerCase();
 
-                if (date.includes(input) || name.includes(input) || phone.includes(input)) {
+                if (billNumber.includes(input) || phone.includes(input)) {
                     row.style.display = '';
                 } else {
                     row.style.display = 'none';
                 }
             });
         }
+        //filter default
+        let isFilterApplied = false;
+        function filterTableByDate() {
+            //const input = document.getElementById('search').value.toLowerCase();
+            const rows = document.querySelectorAll('#transactionTable tbody tr');
+             // Convert the given date string to a Date object
+            const now = new Date();  // Get the current date
+            // Subtract 7 days (in milliseconds)
+            const sevenDaysBefore = new Date(now.getTime() - (7 * 24 * 60 * 60 * 1000));
+           // isFilterApplied
+           
+            rows.forEach(row => {
+                //const billNumber = row.cells[0].textContent.toLowerCase();
+                let lastContacted = row.cells[3].textContent.toLowerCase();
+                lastContacted = lastContacted.replace('t', 'T').replace('z', 'Z');
+                const targetDate = new Date(lastContacted);
+                if (!isFilterApplied && sevenDaysBefore > targetDate){
+                    row.style.display = '';
+                } else {
+                    row.style.display = isFilterApplied?'':'none';
+                }
+            });
+            isFilterApplied?$('#filterButton').removeClass().addClass("btn btn-primary"):$('#filterButton').removeClass().addClass("btn btn-outline-danger");
+            
+            isFilterApplied = !isFilterApplied;
+        }
+
+        function isOlderThan7Days(dateUpdated) {
+            const now = new Date(); // Get the current date
+            const updatedDate = new Date(dateUpdated); // Convert transaction date to Date object
+            
+            // Calculate the difference in time (in milliseconds)
+            const timeDiff = now - updatedDate;
+
+            // Convert milliseconds to days (1 day = 24 * 60 * 60 * 1000 ms)
+            const diffInDays = timeDiff / (1000 * 60 * 60 * 24);
+
+            // Return true if the date is more than 7 days old
+            return diffInDays > 7;
+        }
+
         function populateModalData(bookingId, phone, name, dnd) {
             if(bookingId==""){
               bookingId=generateNumericBookingId();
@@ -322,7 +365,11 @@
           };
 
         callRPC(updatedInfo,"POST");
-        window.location='tel:'+phone;
+        if (window.cordova && cordova.InAppBrowser) {
+            cordova.InAppBrowser.open('tel:' + phone, '_system');
+        } else {
+            window.location.href = 'tel:' + phone; // Fallback for non-Cordova environments
+        }
       }
 
     </script>

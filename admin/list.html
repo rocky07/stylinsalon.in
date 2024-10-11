@@ -429,8 +429,9 @@
             rows.forEach(row => {
                 const billNumber = row.cells[0].textContent.toLowerCase();
                 const date = row.cells[1].textContent.toLowerCase();
+                const billType = row.cells[2].textContent.toLowerCase();
 
-                if (billNumber.includes(input) || date.includes(input)) {
+                if (billNumber.includes(input) || date.includes(input) || billType.includes(input)) {
                     row.style.display = '';
                 } else {
                     row.style.display = 'none';
