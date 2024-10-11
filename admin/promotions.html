@@ -220,10 +220,11 @@
             const rows = document.querySelectorAll('#transactionTable tbody tr');
 
             rows.forEach(row => {
-                const billNumber = row.cells[0].textContent.toLowerCase();
-                const date = row.cells[1].textContent.toLowerCase();
+                const phone = row.cells[1].textContent.toLowerCase();
+                const name = row.cells[2].textContent.toLowerCase();
+                const date = row.cells[3].textContent.toLowerCase();
 
-                if (billNumber.includes(input) || date.includes(input)) {
+                if (date.includes(input) || name.includes(input) || phone.includes(input)) {
                     row.style.display = '';
                 } else {
                     row.style.display = 'none';

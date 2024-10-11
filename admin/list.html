@@ -74,6 +74,13 @@
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo03" aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
               <span class="navbar-toggler-icon"></span>
             </button>
+            <!--<button  type="button" id="printerConnectBtn" class="btn btn-outline-danger">
+              <svg xmlns="http://www.w3.org/2000/svg" onclick="" width="20" height="20" fill="currentColor" class="bi bi-printer-fill" viewBox="0 0 16 16">
+                  <path d="M5 1a2 2 0 0 0-2 2v1h10V3a2 2 0 0 0-2-2zm6 8H5a1 1 0 0 0-1 1v3a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1v-3a1 1 0 0 0-1-1"/>
+                  <path d="M0 7a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v3a2 2 0 0 1-2 2h-1v-2a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v2H2a2 2 0 0 1-2-2zm2.5 1a.5.5 0 1 0 0-1 .5.5 0 0 0 0 1"/>
+                </svg>
+              </button>
+                &nbsp;&nbsp;-->
             <a class="navbar-brand" href="#">Stylin Salon</a>
           
             <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
@@ -101,8 +108,13 @@
                 <input type="text" class="form-control" id="search" oninput="filterTable()" placeholder="Enter keyword">
             </div>
             <div class="total-amount">
-              Total Transaction for  <span id="monthYear"></span>  : <span id="totalAmount">$0.00</span>
+              Total Revenue for  <span id="monthYear"></span>  : <span id="totalAmount">$0.00</span>
+              |  Cash In  <span id="monthYear"></span>  : <span id="cashIn">$0.00</span>
+              |  Cash Out  <span id="monthYear"></span>  : <span id="cashOut">$0.00</span>
+              <br>
             </div>
+            <button type="button"  data-toggle="modal" data-target="#expenseModal" class="btn btn-success">Submit Expense</button>
+            <br>
             <table class="table" id="transactionTable">
                 <thead>
                     <tr>
@@ -110,6 +122,7 @@
                         <th>Date</th>
                         <th>BillType</th>
                         <th>Total Amount</th>
+                        <th>Reprint</th>
                         <th>Issue Refund</th>
                     </tr>
                 </thead>
@@ -129,6 +142,45 @@
   <!-- print modal -->
    
 
+  <!-- Expense Modal -->
+  <div class="modal fade" id="expenseModal" tabindex="-1" role="dialog" aria-labelledby="expenseModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="expenseModalLabel">Submit Expense</h5>
+           <!-- Success alert -->
+           <div class="alert alert-success alert-dismissible fade show" role="alert" style="display: none;">
+            Update successful!
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+        </div>
+        <div class="modal-body">
+          <!-- Refund Form -->
+          <form id="expenseForm">
+            <div class="form-group">
+              <label for="expenseReason">Reason:</label>
+              <input type="text" class="form-control" id="expenseReason" required />
+              <label for="createdBy">Created By:</label>
+              <select class="form-control" id="expenseCreatedBy" name="createdBy" required>
+                  <option value="vanitha">Vanitha</option>
+                  <option value="swapna">Swapna</option>
+                  <option value="bency">Bency</option>
+                  <option value="sudakshina">Sudakshina</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="refundAmount">Amount:</label>
+              <input type="number" class="form-control" min="0" max="1" id="expenseAmount" step="any" required />
+            </div>
+            <button type="button" id="issueRefundBtn" onclick="submitExpense()"  class="btn btn-primary">Submit Refund</button>
+           
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
   
   <!-- Refund Modal -->
   <div class="modal fade" id="refundModal" tabindex="-1" role="dialog" aria-labelledby="refundModalLabel" aria-hidden="true">
@@ -136,9 +188,13 @@
       <div class="modal-content">
         <div class="modal-header">
           <h5 class="modal-title" id="refundModalLabel">Issue Refund</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
+           <!-- Success alert -->
+           <div class="alert alert-success alert-dismissible fade show" role="alert" style="display: none;">
+            Update successful!
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
         </div>
         <div class="modal-body">
           <!-- Refund Form -->
@@ -154,7 +210,8 @@
               <label for="refundAmount">Amount:</label>
               <input type="number" class="form-control" min="0" max="1" id="refundAmount" step="any" required />
             </div>
-            <button type="button" onclick="issueRefund()" class="btn btn-primary">Submit Refund</button>
+            <button type="button" id="issueRefundBtn" onclick="issueRefund()"  data-toggle="modal" data-target="#refundModal" class="btn btn-primary">Submit Refund</button>
+           
           </form>
         </div>
       </div>
@@ -167,7 +224,7 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <!-- Add Font Awesome JS -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/js/all.min.js"></script>
-    <script src="../js/login.js"></script>
+   
     <script>
         // Fetch data from JSON file
         fetch('https://u7krhtdqde.execute-api.us-east-2.amazonaws.com/default/billing')
@@ -189,16 +246,33 @@
                         <td>${transaction.billingId}</td>
                         <td>${formattedDate}</td>
                         <td>${transaction.billType}</td>
-                        <td>${transaction.billType === 'return' ? -transaction.totals : transaction.totals}</td>
+                        <td>${(transaction.billType === 'return' || transaction.billType ==='expense') ? -transaction.totals : transaction.totals}</td>
+                       <td>
+                            <button id="reprintbtn" class="btn btn-primary reprintbtn" data-billdate="${formattedDate}" data-billingid="${transaction.billingId}" date-billType="${transaction.billType}" data-totals="${transaction.totals}" >Reprint</button>
+                        </td>
                         <td>
-                            <button class="btn btn-danger" ${transaction.billType==='return'?'disabled':''} data-totals="${transaction.totals}" data-billingid="${transaction.billingId}" date-billType="${transaction.billType}" data-totals="${transaction.totals}" data-toggle="modal" data-target="#refundModal"  >Issue Refund</button>
+                            <button class="btn btn-danger" ${transaction.billType==='return'|| transaction.billType==='expense'?'disabled':''} data-totals="${transaction.totals}" data-billingid="${transaction.billingId}" date-billType="${transaction.billType}" data-totals="${transaction.totals}" data-toggle="modal" data-target="#refundModal">Refund</button>
                         </td>`;
                 });
 
                 // Update total amount
-                const totalAmount = data.Items.reduce((sum, transaction) => sum + parseFloat(transaction.totals), 0);
+               // const totalAmount = data.Items.reduce((sum, transaction) => sum + parseFloat(transaction.totals), 0);
+                const totalAmount = data.Items.filter(transaction=>transaction.billType==='cash').reduce((sum, transaction) => {
+                  const amount = parseFloat(transaction.totals);
+                  return sum + amount; // Add for other types
+                }, 0);
+
+                const totalExpense = data.Items.filter(transaction=>transaction.billType!=='cash').reduce((sum, transaction) => {
+                  const amount = parseFloat(transaction.totals);
+                  return sum + amount; // Add for other types
+                }, 0);
+
+
+
               //  let totalAmt=parseInt(totalAmount);
-                document.getElementById('totalAmount').textContent = totalAmount;
+                document.getElementById('totalAmount').textContent = totalAmount-totalExpense;
+                document.getElementById('cashIn').textContent = totalAmount.toFixed(2);
+                document.getElementById('cashOut').textContent = totalExpense.toFixed(2);
                 showMonthYear(totalAmount);
             })
             .catch(error => console.error('Error fetching data:', error));
@@ -209,41 +283,60 @@
               const rows = tbody.getElementsByTagName('tr');
               
               let totalAmount = 0;
+              let totalExpense=0;
               for (let i = 0; i < rows.length; i++) {
                   if (rows[i].style.display !== 'none') {
                       const totalCell = rows[i].getElementsByTagName('td')[3];
-                      totalAmount += parseFloat(totalCell.textContent) || 0;
+                      const billType = rows[i].getElementsByTagName('td')[2];
+                      if(billType==='expense' || billType==='return'){
+                        totalExpense+=parseFloat(totalCell.textContent) || 0;
+                      }else{
+                        totalAmount += parseFloat(totalCell.textContent) || 0;
+                      }
                   }
               }
               document.getElementById('totalAmount').textContent = `$${totalAmount.toFixed(2)}`;
+              document.getElementById('cashIn').textContent = `$${(totalAmount+totalExpense).toFixed(2)}`;
+              document.getElementById('cashOut').textContent = `$${totalExpense.toFixed(2)}`;
+
               showMonthYear(totalAmount);
           }
 
           function showMonthYear(totalAmount){
             //show current month
             const today = new Date();
-              const options = { year: 'numeric', month: 'long' };
-              const monthYear = new Intl.DateTimeFormat('en-US', options).format(today);
-              document.getElementById('monthYear').textContent = monthYear; 
-         //     document.getElementById('deficit').textContent = 40000-totalAmount; 
+            const options = { year: 'numeric', month: 'long' };
+            const monthYear = new Intl.DateTimeFormat('en-US', options).format(today);
+            document.getElementById('monthYear').textContent = monthYear; 
+         // document.getElementById('deficit').textContent = 40000-totalAmount; 
           }
 
-          function generateRandomBillNumber() {
-            // Prefix for the bill number
-            const prefix = '';
+          function generateRandomBillNumber(length = 8) {
+            const min = Math.pow(10, length - 1); // Minimum value for the desired length
+            const max = Math.pow(10, length) - 1; // Maximum value for the desired length
+            return Math.floor(Math.random() * (max - min + 1)) + min;
+          }
 
-            // Generate a random number (you can adjust the range as needed)
-            const randomNumber = Math.floor(Math.random() * 10000);
-
-            // Suffix for the bill number
-            const suffix = '2024'; // You can use the current year or any other identifier
-
-            // Combine the parts to create the final bill number
-            const billNumber = `${randomNumber}${suffix}`;
-
-            return parseInt(billNumber);
+        function submitExpense(){
+          const data = { services: [] };
+            let id=generateRandomBillNumber();
+            data.date=new Date();
+            data.billDate=new Date().toISOString().split('T')[0];
+            data.billingId=id; // create random billing id.
+            data.services={
+                id:id,
+                name:$('#expenseReason').val(),
+                price: $('#expenseAmount').val(),
+                quantity: 1
             }
-        
+            data.tax=0.0;
+            data.billType='expense';
+            data.totals= $('#expenseAmount').val();
+            data.createdBy=$('#expenseCreatedBy').val();
+            postData(data);
+
+        }
+
         function issueRefund() {
             //get the values 
             
@@ -261,10 +354,12 @@
             data.billType='return';
             data.totals= $('#refundAmount').val();
             data.createdBy='user A';
+            postData(data);
+        }
 
-          
+        function postData(data){ // make api post call to submit information 
 
-            const postData={
+          const postData={
                 TableName:'billing',
                 Item:data
             };
@@ -280,16 +375,19 @@
             data: JSON.stringify(postData),
             success: function(response) {
                 console.log("Response:", response);
-                printFunction();
+                $('.alert-success').html('Updated Succesfully!');
+                $(".alert-success").fadeIn().delay(2000).fadeOut(); 
+             //   printFunction();
             },
             error: function(error) {
                 console.error("Error:", error);
+                $('.alert-success').html('Failed to update');
+                $(".alert-success").fadeIn().delay(2000).fadeOut();  
             }
             });
             // print functions 
-          
-
         }
+
         function printFunction(data){
             /*const section = $("section");
             const content = $(".content").detach();
@@ -322,8 +420,8 @@
         $('#refundBillingId').val(billingId);
         $('#refundAmount').attr('max',button.data('totals'));
         $('#refundTotal').val(button.data('totals'));
-
         });
+
         function filterTable() {
             const input = document.getElementById('search').value.toLowerCase();
             const rows = document.querySelectorAll('#transactionTable tbody tr');
@@ -341,9 +439,9 @@
             updateTotalAmount();
         }
 
-
-        
-        
     </script>
+    <script src="cordova.js"></script>
+    <script src="js/index.js"></script>
+    
 </body>
 </html>
