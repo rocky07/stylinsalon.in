@@ -98,7 +98,7 @@
                 <label for="search">Search:</label>
                 <input type="text" class="form-control" id="search" oninput="filterTable()" placeholder="Enter keyword">
             </div>
-            <button type="button" data-bookingId="" data-phone="" data-name="" data-dnd="" class="btn btn-primary" data-toggle="modal" data-target="#bookingModal">
+            <button type="button" data-bookingId="" data-phone="" data-name="" data-dnd="" data-notes="" class="btn btn-primary" data-toggle="modal" data-target="#bookingModal">
               Add New </button>
               <button type="button" id="filterButton" onclick="filterTableByDate()" class="btn btn-primary">
                Filter:Call To Make </button>
@@ -112,6 +112,7 @@
                         <th>DND</th>
                         <th>Call</th>
                         <th>update</th>
+                        <th>Coupon</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -156,6 +157,10 @@
               <label for="updateName">Customer Name:</label>
               <input type="text" class="form-control" id="updateName" name="updateName">
             </div>
+            <div class="form-group">
+              <label for="updateNotes">Notes:</label>
+              <textarea  class="form-control" id="updateNotes" name="updateNotes" rows="3"></textarea>
+            </div>
           </form>
         </div>
         <div class="modal-footer">
@@ -167,7 +172,56 @@
     </div>
   </div>
   
-  
+<!-- Coupon Modal -->
+  <div class="modal fade" id="couponModal" tabindex="-1" role="dialog" aria-labelledby="couponModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="couponModalLabel">Send Coupons</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <!-- Success alert -->
+          <div class="alert alert-success alert-dismissible fade show" role="alert" style="display: none;">
+            Send successful!
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <!-- Add form fields for updating booking information -->
+          <form id="bookingForm">
+            <div class="form-group">
+              <input type="hidden" class="form-control" id="updateCBookingId" name="updateCBookingId">
+            </div>
+            <div class="form-group">
+              <label for="updatePhone">Phone:</label>
+              <input type="text" class="form-control" id="updateCPhone" name="updateCPhone">
+            </div>
+            <div class="form-group">
+              <label for="updateName">Customer Name:</label>
+              <input type="text" class="form-control" id="updateCName" name="updateCName">
+            </div>
+            <!--<div class="form-group">
+              <label for="updateDate">Date:</label>
+              <input type="date" class="form-control" id="updateCDate" name="updateCDate">
+            </div>-->
+            <div class="form-group">
+              <label for="updateNotes">Notes:</label>
+              <textarea class="form-control" id="updateCNotes" name="updateNotes" rows="3"></textarea>
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <!-- Add buttons to update and cancel booking -->
+          <button type="button" class="btn btn-primary" onclick="sendCoupons()">Send</button>
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
 
     <!-- Add Bootstrap JS and Popper.js -->
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
@@ -177,7 +231,6 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/js/all.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-timepicker/0.5.2/js/bootstrap-timepicker.min.js"></script>
-    <script src="../js/login.js"></script>
     <script>
       const apiUrl="https://r08vbl0sik.execute-api.us-east-2.amazonaws.com/default/promotion";
         // Fetch data from JSON file
@@ -203,12 +256,17 @@
                         <td>${transaction.dateUpdated}</td>
                         <td>${transaction.dnd}</td>
                          <td>
-                            <button type="button" ${transaction.dnd==true?'disabled':''} onclick="callCustomer('${transaction.bookingId}','${transaction.phone}','${transaction.name}','${transaction.dnd}')" class="${callButtonClass}">
+                            <button type="button" ${transaction.dnd==true?'disabled':''} onclick="callCustomer('${transaction.bookingId}','${transaction.phone}','${transaction.name}','${transaction.dnd}','${transaction.notes}')" class="${callButtonClass}">
                             Call</button>
                         </td>
                         <td>
-                            <button type="button" data-bookingId="${transaction.bookingId}" data-phone="${transaction.phone}" data-name="${transaction.name}" data-dnd="${transaction.dnd}" class="btn btn-primary" data-toggle="modal" data-target="#bookingModal">
+                            <button type="button" data-bookingId="${transaction.bookingId}" data-phone="${transaction.phone}" data-name="${transaction.name}" data-dnd="${transaction.dnd}" data-notes="${transaction.notes}" class="btn btn-primary" data-toggle="modal" data-target="#bookingModal">
                             Update</button>
+                        </td>
+                         <td>
+                            <button type="button" data-bookingId="${transaction.bookingId}" data-phone="${transaction.phone}" data-name="${transaction.name}" data-dnd="${transaction.dnd}"
+                             class="btn btn-primary" data-toggle="modal" data-target="#couponModal">
+                            Offer</button>
                         </td>
                     `;
                 });
@@ -216,7 +274,92 @@
             })
             .catch(error => console.error('Error fetching data:', error));
 
-      
+        $('#couponModal').on('show.bs.modal', function (event) {
+            // Extract data from the trigger button (assuming you have the data stored in data attributes)
+            const button = $(event.relatedTarget);
+            const phone = button.data('phone');
+            const name = button.data('name');
+            //update the modal fields
+            document.getElementById('updateCPhone').value = phone;
+            document.getElementById('updateCName').value = name;
+            document.getElementById('updateCNotes').value = "you have won Rs.200 towards your next service, from StylinSalon, Nagampadam.";
+            });
+
+      function sendCoupons(){
+                const bookingId=parseInt($('#updateBookingId').val());
+                let updatedPhone = $('#updateCPhone').val().length==10?'91'+$('#updateCPhone').val():$('#updateCPhone').val();
+                let phoneNumber = updatedPhone.replace(/^\+/, "");
+                const updatedName = $('#updateCName').val();
+                const updatedNotes=$('#updateCNotes').val();
+                const updatedDate=$('#updateCDate').val();
+
+                const now = new Date();  // Get the current date
+                // Subtract 7 days (in milliseconds)
+                const sevenDaysAfter = new Date(now.getTime() + (7 * 24 * 60 * 60 * 1000));
+                const shortDate = sevenDaysAfter.toLocaleDateString('en-US')
+                let postData={"messaging_product": "whatsapp",
+                        "recipient_type": "individual",
+                        "to": phoneNumber,
+                        "type": "template",
+                        "template": {
+                          "name": "promotion1",
+                          "language": {
+                            "code": "en"
+                          },
+                          "components": [
+                           {
+                              "type": "header",
+                              "parameters": [
+                                {
+                                  "type": "image",
+                                  "image": {
+                                    "link": "https://www.stylinsalon.in/images/promo/gen-offer.png"
+                                  }
+                                }
+                              ]
+                            },
+                            {
+                              "type": "body",
+                              "parameters": [
+                                {
+                                  "type": "text",
+                                  "text": updatedName
+                                },
+                                {
+                                  "type": "text",
+                                  "text": updatedNotes
+                                },
+                                {
+                                  "type": "text",
+                                  "text": shortDate
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      }
+
+                $.ajax({
+                      type: 'POST',
+                      url: 'https://graph.facebook.com/v21.0/346631231857431/messages',
+                      contentType: "application/json",  // Set the content type to JSON
+                      data: JSON.stringify(postData),
+                      headers: {
+                          "Authorization": "Bearer EAAELgd7HTVABO5ZCx04cxVJ5FHMlrBIqX12KyGRzRGJQ3XtwZCIiXKcjJfTwvVopzR7Po5ysRqpY2kZCZByzarzrZCpHpPWQpqgFVyrZCZBGbAW4oEHsqZA5xMHOE3ZBXa4bijWDHfEime91UWnqABr9SsrzmGTvQXP6FigbuHwZAZCJC0WjnKf4kvoJ76x8ZB8cbaPdZAQZDZD"  // Add the Bearer token here
+                      },
+                      success: function(response) {
+                          console.log("Response:", response);
+                          $('.alert-success').html('Updated Succesfully!');
+                          $(".alert-success").fadeIn().delay(2000).fadeOut(); 
+                      },
+                      error: function(error) {
+                          console.error("Error:", error);
+                          $('.alert-success').html('Failed to update');
+                          $(".alert-success").fadeIn().delay(2000).fadeOut(); 
+                      }
+                  });
+
+                }
 
         function filterTable() {
             const input = document.getElementById('search').value.toLowerCase();
@@ -225,8 +368,10 @@
             rows.forEach(row => {
                 const billNumber = row.cells[0].textContent.toLowerCase();
                 const phone = row.cells[1].textContent.toLowerCase();
+                const name = row.cells[2].textContent.toLowerCase();
 
-                if (billNumber.includes(input) || phone.includes(input)) {
+
+                if (billNumber.includes(input) || phone.includes(input) || name.includes(input) ) {
                     row.style.display = '';
                 } else {
                     row.style.display = 'none';
@@ -274,13 +419,14 @@
             return diffInDays > 7;
         }
 
-        function populateModalData(bookingId, phone, name, dnd) {
+        function populateModalData(bookingId, phone, name, dnd,notes) {
             if(bookingId==""){
               bookingId=generateNumericBookingId();
             }
             document.getElementById('updateBookingId').value = bookingId;
             document.getElementById('updatePhone').value = phone;
             document.getElementById('updateName').value = name;
+            document.getElementById('updateNotes').value = notes;
             document.getElementById('updateDnd').checked = dnd?true:false;
             }
         // Assuming you have a function to handle modal show event
@@ -291,8 +437,9 @@
         const phone = button.data('phone');
         const name = button.data('name');
         const dnd = button.data('dnd');
+        const notes = button.data('notes');
         // Call populateModalData to update the modal content
-        populateModalData(bookingId,phone, name, dnd);
+        populateModalData(bookingId,phone, name, dnd, notes);
         });
 
         function updateBooking(status){
@@ -301,18 +448,19 @@
           const updatedPhone = $('#updatePhone').val();
           const updatedName = $('#updateName').val();
           const updatedDnd = $('#updateDnd').is(":checked")?true:false;
-         
-         let dt=new Date();
-         let appDateStamp=dt.toISOString();
+          const updatedNotes=$('#updateNotes').val();
+          let dt=new Date();
+          let appDateStamp=dt.toISOString();
 
           const updatedInfo = {
             bookingId:bookingId,
             phone: updatedPhone,
             name: updatedName,
             dnd: updatedDnd,
+            notes:updatedNotes,
             dateCreated:appDateStamp,
             promoCode:4,
-            dateUpdated:appDateStamp
+            dateUpdated:appDateStamp,
           };
           
           callRPC(updatedInfo,"POST")
@@ -349,7 +497,7 @@
         return Math.floor(Math.random() * (max - min + 1)) + min;
       }
 
-      function callCustomer(bookingId,phone,name,dnd){
+      function callCustomer(bookingId,phone,name,dnd,notes){
        
         let dt=new Date();
          let appDateStamp=dt.toISOString();
@@ -359,6 +507,7 @@
             phone: phone,
             name: name,
             dnd: false,
+            notes:notes,
             dateCreated:appDateStamp,
             promoCode:4,
             dateUpdated:appDateStamp
