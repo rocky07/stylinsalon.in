@@ -109,7 +109,6 @@
                         <th>Phone</th>
                         <th>Name</th>
                         <th>Last Contacted</th>
-                        <th>DND</th>
                         <th>Call</th>
                         <th>update</th>
                     </tr>
@@ -224,7 +223,6 @@
                         <td>${transaction.phone}</td>
                         <td>${transaction.name}</td>
                         <td>${transaction.dateUpdated}</td>
-                        <td>${transaction.dnd}</td>
                          <td>
                             <button type="button" ${transaction.dnd==true?'disabled':''} onclick="callCustomer('${transaction.bookingId}','${transaction.phone}','${transaction.name}','${transaction.dnd}','${transaction.notes}')" class="${callButtonClass}">
                             Call</button>
