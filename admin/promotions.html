@@ -203,10 +203,11 @@
               <label for="updateName">Customer Name:</label>
               <input type="text" class="form-control" id="updateCName" name="updateCName">
             </div>
-            <!--<div class="form-group">
-              <label for="updateDate">Date:</label>
-              <input type="date" class="form-control" id="updateCDate" name="updateCDate">
-            </div>-->
+           <!-- <select class="form-select form-select-lg mb-3" id="updateCOffer" aria-label=".form-select-lg example">
+              <option selected value="1">100 Off next service</option>
+              <option value="2">Free Haircut with any other service</option>
+              <option value="3">Bring a Friend and you both get 50% off on haitcut</option>
+            </select>-->
             <div class="form-group">
               <label for="updateNotes">Notes:</label>
               <textarea class="form-control" id="updateCNotes" name="updateNotes" rows="3"></textarea>
@@ -276,13 +277,20 @@
 
         $('#couponModal').on('show.bs.modal', function (event) {
             // Extract data from the trigger button (assuming you have the data stored in data attributes)
+            const offerList=[
+              {id:1,offer:"you have won Rs.100 towards your next service, from StylinSalon, Nagampadam."},
+              {id:2,offer:"Bring a Friend and you both get 50% off on your next hair service"},
+              {id:3,offer:"You have won a free Haircut from StylinSalon, Nagampadam."}
+            ];
+
             const button = $(event.relatedTarget);
             const phone = button.data('phone');
             const name = button.data('name');
             //update the modal fields
             document.getElementById('updateCPhone').value = phone;
             document.getElementById('updateCName').value = name;
-            document.getElementById('updateCNotes').value = "you have won Rs.200 towards your next service, from StylinSalon, Nagampadam.";
+            let randomOffer=Math.floor(Math.random() * 3) + 1;
+            document.getElementById('updateCNotes').value =offerList.find(offers=>offers.id===randomOffer).offer;
             });
 
       function sendCoupons(){
