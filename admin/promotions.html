@@ -163,6 +163,24 @@
                   <option value="2">Bring a Friend</option>
                   <option value="3">Free Hair cut</option>
                   <option value="4">Rs.600 Hair spa</option>
+                  <!-- Adult Offers -->
+                  <option value="5">Hair Bliss ₹699</option>
+                  <option value="6">Total Groom ₹999 </option>
+                  <option value="7">Lux Hand&Foot ₹1299</option>
+                  <option value="8">Wax All Over ₹1299</option>
+                  <option value="9">Glow Up ₹799</option>
+                  <option value="10">Oil & Steam ₹599</option>
+                  <option value="11">Relax Duo ₹499</option>
+                  <option value="12">Polish ₹499</option>
+                  <option value="13">Radiant Care ₹1799</option>
+                  <option value="14">Dandruff Fix ₹799</option>
+                  <option value="15">Herbal Hair ₹899</option>
+
+                  <!-- Kids Offers -->
+                  <option value="16">Kids Cut ₹299 </option>
+                  <option value="17">Kids Trim Duo ₹299 </option>
+                  <option value="18">Ayur Kids ₹299 </option>
+                  <option value="19">Mummy & Me Offer ₹300</option>
                 </select>
                 <button type="button" class="btn btn-primary" onclick="sendCoupons()">Send</button>
               </div>
@@ -195,12 +213,30 @@
     <script>
       const apiUrl="https://r08vbl0sik.execute-api.us-east-2.amazonaws.com/default/promotion";
 
-      const offerList=[
-                {id:1,offer:"you have won Rs.100 towards your next service, from StylinSalon, Nagampadam."},
-                {id:2,offer:"Bring a Friend and you both get 50% off on your next hair service"},
-                {id:3,offer:"You have won a free Haircut from StylinSalon, Nagampadam."},
-                {id:4,offer:"You have won a Special offer , Hair spa for only Rs.600"}
-              ];
+      const offerList = [
+            {id: 1, offer: "You have won Rs.100 towards your next service, from StylinSalon, Nagampadam."},
+            {id: 2, offer: "Bring a Friend and you both get 50% off on your next hair service"},
+            {id: 3, offer: "You have won a free Haircut from StylinSalon, Nagampadam."},
+            {id: 4, offer: "You have won a Special offer, Hair spa for only Rs.600"},
+            
+            // New combo offers added
+            {id: 5, offer: "You have won a combo offer: Hair Bliss ₹699 - Hair Spa with 15-min massage, steam, wash"},
+            {id: 6, offer: "You have won a combo offer: Total Groom ₹999 - Adult hair wash, haircut, nail cut, massage"},
+            {id: 7, offer: "You have won a combo offer: Lux Hand&Foot ₹1299 - Spa manicure, pedicure, and massage"},
+            {id: 8, offer: "You have won a combo offer: Wax All Over ₹1299 - Full hand, leg, and underarms wax"},
+            {id: 9, offer: "You have won a combo offer: Glow Up ₹799 - Bleach, deep facial cleanse, threading"},
+            {id: 10, offer: "You have won a combo offer: Oil & Steam ₹599 - Hot oil massage, steam, and hair wash"},
+            {id: 11, offer: "You have won a combo offer: Relax Duo ₹499 - Head and shoulder massage"},
+            {id: 12, offer: "You have won a combo offer: Polish ₹499 - Hand and foot polish"},
+            {id: 13, offer: "You have won a combo offer: Radiant Care ₹1799 - Whitening facial, polish, mani-pedi, threading"},
+            {id: 14, offer: "You have won a combo offer: Dandruff Fix ₹799 - Dandruff treatment with face mask"},
+            {id: 15, offer: "You have won a combo offer: Herbal Hair ₹899 - Natural hair pack, steam, wash"},
+            {id: 16, offer: "You have won a combo offer: Kids Cut ₹299 - Haircut and wash"},
+            {id: 17, offer: "You have won a combo offer: Kids Trim Duo ₹299 - Hair and nail trimming"},
+            {id: 18, offer: "You have won a combo offer: Ayur Kids ₹299 - Ayurvedic dandruff treatment"},
+            {id: 19, offer: "You have won a combo offer: Mummy & Me Offer - Save up to ₹300 when you book with kids' services"}           
+        ];
+
 
         // Fetch data from JSON file
         fetch(apiUrl)
