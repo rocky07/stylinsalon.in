@@ -32,9 +32,9 @@ $("#loginBtn").click(function(){
             }
         });*/
 
-        if(userCode==="1234"){
+        if(userCode==="5483"){
                  const expirationTime = Date.now() + (1 * 60 * 1000); // 5 minutes in milliseconds
-                localStorage.setItem('apiKey', "1234");
+                localStorage.setItem('apiKey', "5483");
                 localStorage.setItem('expirationTime', expirationTime);
                 console.log('Login successful. API key saved to local storage.');
                 $("#loginModal").modal('hide');
