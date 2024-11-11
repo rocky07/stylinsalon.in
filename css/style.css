@@ -2327,6 +2327,26 @@ blockquote {
 
 }
 
+/* Set a base height for the map */
+#map {
+    width: 100%;
+    height: 400px; /* Default height for desktop */
+  }
+  
+  /* Adjust height for mobile screens */
+  @media (max-width: 768px) {
+    #map {
+      height: 250px; /* Smaller height for mobile */
+    }
+  }
+  
+  /* Optionally, set a larger height for bigger screens */
+  @media (min-width: 1200px) {
+    #map {
+      height: 500px; /* Larger height for large screens */
+    }
+  }
+  
 
 
 
