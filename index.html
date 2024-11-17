@@ -367,12 +367,21 @@
 
         <!--google maps location for salon in kottayam-->
         <aside id="location" class="scrollto text-center" data-enllax-ratio=".2">
-            <!--The div element for the map -->
-            <div class="row clearfix" id="map">location for stylin ladies hair salon and beauty parlor in kottayam.</div>
+            <address>
+                Stylin Ladies Salon<br>
+                HGWF+97P SH 1, MC Road, opp. Tonico Cafe, Nagampadam, Kottayam, Kerala 686001<br>
+                Phone: +91-7736417677
+            </address>
+            <a href="https://www.google.com/maps/dir/?api=1&destination=Stylin+Ladies+Salon,+Kottayam,+Kerala" target="_blank">
+                Get Directions
+            </a><br/><br/>
+            <!--The div element for the map 
+            <div class="row clearfix" id="map">location for stylin ladies hair salon and beauty parlor in kottayam.</div>-->
+            <img src="https://maps.googleapis.com/maps/api/staticmap?center=9.595995546771615, 76.52326053703162&zoom=21&size=600x300&maptype=roadmap&markers=color:red%7Clabel:S%7C9.5880,76.5241&key=AIzaSyC4m7c1OFkayOjSimB0BNd8gw_hcXm-ARE" alt="Stylin Ladies Salon Location">
 
-            <!-- prettier-ignore -->
+            <!-- prettier-ignore
             <script>(g=>{var h,a,k,p="The Google Maps JavaScript API",c="google",l="importLibrary",q="__ib__",m=document,b=window;b=b[c]||(b[c]={});var d=b.maps||(b.maps={}),r=new Set,e=new URLSearchParams,u=()=>h||(h=new Promise(async(f,n)=>{await (a=m.createElement("script"));e.set("libraries",[...r]+"");for(k in g)e.set(k.replace(/[A-Z]/g,t=>"_"+t[0].toLowerCase()),g[k]);e.set("callback",c+".maps."+q);a.src=`https://maps.${c}apis.com/maps/api/js?`+e;d[q]=f;a.onerror=()=>h=n(Error(p+" could not load."));a.nonce=m.querySelector("script[nonce]")?.nonce||"";m.head.append(a)}));d[l]?console.warn(p+" only loads once. Ignoring:",g):d[l]=(f,...n)=>r.add(f)&&u().then(()=>d[l](f,...n))})
-                ({key: "AIzaSyB41DRUbKWJHPxaFjMAwdrzWzbVKartNGg", v: "weekly"});</script>
+                ({key: "AIzaSyB41DRUbKWJHPxaFjMAwdrzWzbVKartNGg", v: "weekly"});</script> -->
         </aside>
         <!--google map cod ends-->
     </main>
@@ -441,7 +450,7 @@
 <!--<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC4m7c1OFkayOjSimB0BNd8gw_hcXm-ARE&libraries=maps,marker&v=beta" defer></script>
 <script src="js/map.js" defer></script>-->
 <!-- Deffered loading for google maps for seo and page perfomance-->>
-<script>
+<!--<script>
     async function initializeMap() {
     // The location of Uluru, 
     const position = { lat: 9.595973444653955, lng: 76.52323985736338 };
@@ -488,7 +497,30 @@
         });
     });
     observer.observe(mapElement);
-</script>
+</script>-->
+<script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "LocalBusiness",
+        "name": "Stylin Ladies Salon",
+        "address": {
+            "@type": "PostalAddress",
+            "streetAddress": "HGWF+97P SH 1, MC Road, opp. Tonico Cafe, Nagampadam",
+            "addressLocality": "Kottayam",
+            "addressRegion": "KL",
+            "postalCode": "686001",
+            "addressCountry": "IN"
+        },
+        "geo": {
+            "@type": "GeoCoordinates",
+            "latitude": 9.595995546771615, 
+            "longitude": 76.52326053703162
+        },
+        "url": "https://www.stylinsalon.in",
+        "telephone": "+91-7736417677"
+    }
+    </script>
+    
 
 </body>
 </html>
