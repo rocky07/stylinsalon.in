@@ -378,7 +378,6 @@
     </main>
     <!--End Main Content Area-->
 
-
     <!--Footer-->
     <footer id="landing-footer" class="clearfix">
         <div class="row clearfix">
@@ -439,7 +438,57 @@
 <script src="js/images-loaded.min.js"></script>
 <script src="js/lightbox.min.js"></script>
 <script src="js/site.js"></script>
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC4m7c1OFkayOjSimB0BNd8gw_hcXm-ARE&libraries=maps,marker&v=beta" defer></script>
-<script src="js/map.js" defer></script>
+<!--<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC4m7c1OFkayOjSimB0BNd8gw_hcXm-ARE&libraries=maps,marker&v=beta" defer></script>
+<script src="js/map.js" defer></script>-->
+<!-- Deffered loading for google maps for seo and page perfomance-->>
+<script>
+    async function initializeMap() {
+    // The location of Uluru, 
+    const position = { lat: 9.595973444653955, lng: 76.52323985736338 };
+    // Request needed libraries.
+    //@ts-ignore
+    const { Map } = await google.maps.importLibrary("maps");
+    const { AdvancedMarkerElement } = await google.maps.importLibrary("marker");
+
+    // The map, centered at Uluru
+    map = new Map(document.getElementById("map"), {
+        zoom: 18,
+        center: position,
+        mapId: "Stylin-salon-kottayam",
+    });
+
+    // The marker, positioned at Uluru
+    const marker = new AdvancedMarkerElement({
+        map: map,
+        position: position,
+        title: "Stylin Ladies Salon , Kottayam",
+    });
+    }
+
+
+    function loadGoogleMaps() {
+    if (!window.google) {
+        const script = document.createElement('script');
+        script.src = "https://maps.googleapis.com/maps/api/js?key=AIzaSyC4m7c1OFkayOjSimB0BNd8gw_hcXm-ARE";
+        script.async = true;
+        script.defer = true;
+        script.onload = initializeMap; // Callback after the script loads
+        document.head.appendChild(script);
+        } else {
+                initializeMap(); // If already loaded
+        }
+    }
+    const mapElement = document.getElementById('map');
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                loadGoogleMaps(); // Load when map is in view
+                observer.disconnect(); // Stop observing after load
+            }
+        });
+    });
+    observer.observe(mapElement);
+</script>
+
 </body>
 </html>
