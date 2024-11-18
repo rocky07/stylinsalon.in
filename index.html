@@ -2,7 +2,7 @@
 <html lang="en">
 <head lang="en">
    <!-- Google tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-F2CNT37VV6"></script>
+   <!--<script async src="https://www.googletagmanager.com/gtag/js?id=G-F2CNT37VV6"></script>
     <script>
         window.addEventListener('load', function() {
           window.dataLayer = window.dataLayer || [];
@@ -10,7 +10,7 @@
           gtag('js', new Date());
           gtag('config', 'G-F2CNT37VV6');
         });
-      </script>
+      </script>--> 
     <meta charset="UTF-8" name="description" content="Experience the best at Stylin Ladies Salon in Kottayam. MC Road, Nagampadam, YWCA, and Tonico Cafe. Services: haircuts, Ayurvedic massages, hair treatments, facials, waxing, bridal makeup, pedicures, and manicures. Book now!">
 
 
@@ -41,8 +41,8 @@
     <link href="css/animate.css" rel="stylesheet" type="text/css">
 
     <!--Google Webfonts-->
-    <link rel="preload" href="https://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700,800" as="style" onload="this.rel='stylesheet'">
-    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700,800"></noscript>
+    <link rel="preload" href="https://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700,800&display=swap" as="style" onload="this.rel='stylesheet'"/>
+    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700,800&display=swap"/></noscript>
     
 </head>
 <body>
@@ -439,31 +439,25 @@
     <!--End of Footer-->
 
 </div>
+
+<!-- Include JavaScript resources-->
 <script defer src="js/jquery.1.8.3.min.js"></script>
-<script defer src="js/jquery.waypoints.min.js"></script>
+<script defer src="js/wow.min.js"></script>
+<script defer src="js/featherlight.min.js"></script>
+<script defer src="js/featherlight.gallery.min.js"></script>
 <script defer src="js/jquery.enllax.min.js"></script>
 <script defer src="js/jquery.scrollUp.min.js"></script>
 <script defer src="js/jquery.easing.min.js"></script>
 <script defer src="js/jquery.stickyNavbar.min.js"></script>
+<script defer src="js/jquery.waypoints.min.js"></script>
+<script defer src="js/images-loaded.min.js"></script>
+<script defer src="js/lightbox.min.js"></script>
 <script defer src="js/site.js"></script>
-<!-- Include JavaScript resources
-
-<script src="js/wow.min.js"></script>
-<script src="js/featherlight.min.js"></script>
-<script src="js/featherlight.gallery.min.js"></script>
-
-
-<script src="js/images-loaded.min.js"></script>
-<script src="js/lightbox.min.js"></script>
- -->
+<!--
 <script>
 document.addEventListener("DOMContentLoaded", function() {
     const scripts = [
-        "js/wow.min.js",
-        "js/featherlight.min.js",
-        "js/featherlight.gallery.min.js",
-        "js/images-loaded.min.js",
-        "js/lightbox.min.js"
+        "js/wow.min.js"
     ];
 
     scripts.forEach(src => {
@@ -473,59 +467,6 @@ document.addEventListener("DOMContentLoaded", function() {
         document.body.appendChild(script);
     });
 });
-
-
-</script>
-<!--<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC4m7c1OFkayOjSimB0BNd8gw_hcXm-ARE&libraries=maps,marker&v=beta" defer></script>
-<script src="js/map.js" defer></script>-->
-<!-- Deffered loading for google maps for seo and page perfomance-->>
-<!--<script>
-    async function initializeMap() {
-    // The location of Uluru, 
-    const position = { lat: 9.595973444653955, lng: 76.52323985736338 };
-    // Request needed libraries.
-    //@ts-ignore
-    const { Map } = await google.maps.importLibrary("maps");
-    const { AdvancedMarkerElement } = await google.maps.importLibrary("marker");
-
-    // The map, centered at Uluru
-    map = new Map(document.getElementById("map"), {
-        zoom: 18,
-        center: position,
-        mapId: "Stylin-salon-kottayam",
-    });
-
-    // The marker, positioned at Uluru
-    const marker = new AdvancedMarkerElement({
-        map: map,
-        position: position,
-        title: "Stylin Ladies Salon , Kottayam",
-    });
-    }
-
-
-    function loadGoogleMaps() {
-    if (!window.google) {
-        const script = document.createElement('script');
-        script.src = "https://maps.googleapis.com/maps/api/js?key=AIzaSyC4m7c1OFkayOjSimB0BNd8gw_hcXm-ARE";
-        script.async = true;
-        script.defer = true;
-        script.onload = initializeMap; // Callback after the script loads
-        document.head.appendChild(script);
-        } else {
-                initializeMap(); // If already loaded
-        }
-    }
-    const mapElement = document.getElementById('map');
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                loadGoogleMaps(); // Load when map is in view
-                observer.disconnect(); // Stop observing after load
-            }
-        });
-    });
-    observer.observe(mapElement);
 </script>-->
 <script type="application/ld+json">
     {
