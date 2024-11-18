@@ -440,7 +440,7 @@
 
 </div>
 
-<!-- Include JavaScript resources -->
+<!-- Include JavaScript resources
 <script src="js/jquery.1.8.3.min.js"></script>
 <script src="js/wow.min.js"></script>
 <script src="js/featherlight.min.js"></script>
@@ -452,8 +452,37 @@
 <script src="js/jquery.waypoints.min.js"></script>
 <script src="js/images-loaded.min.js"></script>
 <script src="js/lightbox.min.js"></script>
-<script src="js/site.js"></script>
+<script src="js/site.js"></script> -->
 
+
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+    const scripts = [
+        "js/jquery.1.8.3.min.js",
+        "js/wow.min.js",
+        "js/featherlight.min.js",
+        "js/featherlight.gallery.min.js",
+        "js/jquery.enllax.min.js",
+        "js/jquery.scrollUp.min.js",
+        "js/jquery.easing.min.js",
+        "js/jquery.stickyNavbar.min.js",
+        "js/jquery.waypoints.min.js",
+        "js/images-loaded.min.js",
+        "js/lightbox.min.js",
+        "js/site.js"
+    ];
+
+    scripts.forEach(src => {
+        setInterval(100);
+        const script = document.createElement("script");
+        script.src = src;
+        script.async = true;
+        document.body.appendChild(script);
+    });
+});
+
+
+</script>
 <!--<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC4m7c1OFkayOjSimB0BNd8gw_hcXm-ARE&libraries=maps,marker&v=beta" defer></script>
 <script src="js/map.js" defer></script>-->
 <!-- Deffered loading for google maps for seo and page perfomance-->>
