@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Payroll</title>
+    <!-- Add Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Add Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
+    <link rel="import" href="index.html">
+    
+
+   <style>
+        .menu-bar {
+            background-color: #f8f9fa;
+            padding: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .menu-bar button {
+            margin-right: 10px;
+        }
+
+        .table-container {
+            margin-top: 20px;
+        }
+
+        .total-amount {
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+
+
+    <!-- Modal -->
+<div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="loginModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="loginModalLabel">Login</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <!-- Form to input user code -->
+        <form id="loginForm">
+          <div class="form-group">
+            <label for="userCode">User Code:</label>
+            <input type="password" class="form-control" id="userCode" placeholder="Enter code">
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <!-- Login button -->
+        <button type="button" class="btn btn-primary" id="loginBtn">Login</button>
+        <!-- Cancel button -->
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<section>
+    <div class="content">
+    <div class="container">
+        <template is="import" content-selector=".page-content"></template>
+        <nav class="navbar fixed-top navbar-expand-lg navbar-light bg-light page-content">
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo03" aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+            </button>
+            <!--<button  type="button" id="printerConnectBtn" class="btn btn-outline-danger">
+              <svg xmlns="http://www.w3.org/2000/svg" onclick="" width="20" height="20" fill="currentColor" class="bi bi-printer-fill" viewBox="0 0 16 16">
+                  <path d="M5 1a2 2 0 0 0-2 2v1h10V3a2 2 0 0 0-2-2zm6 8H5a1 1 0 0 0-1 1v3a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1v-3a1 1 0 0 0-1-1"/>
+                  <path d="M0 7a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v3a2 2 0 0 1-2 2h-1v-2a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v2H2a2 2 0 0 1-2-2zm2.5 1a.5.5 0 1 0 0-1 .5.5 0 0 0 0 1"/>
+                </svg>
+              </button>
+                &nbsp;&nbsp;-->
+            <a class="navbar-brand" href="#">Stylin Salon</a>
+          
+            <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
+              <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+                <li class="nav-item ">
+                  <a class="nav-link" href="index.html">Home</a>
+                </li>
+                <li class="nav-item active">
+                  <a class="nav-link" href="#">All Bills</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="bookings.html">All Bookings <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="promotions.html">Promotions</a>
+              </li>
+              </ul>
+              
+            </div>
+          </nav>
+          <div><br/><br/></div>
+        <div class="table-container">
+            <div class="form-group">
+                <label for="search">Search:</label>
+                <input type="text" class="form-control" id="search" oninput="filterTable()" placeholder="Enter keyword">
+            </div>
+            <button type="button"  data-toggle="modal" data-target="#payrollModal" class="btn btn-success">New Payroll</button>
+            <br>
+            <table class="table" id="transactionTable">
+                <thead>
+                    <tr>
+                        <th>Payroll Id</th>
+                        <th>Date</th>
+                        <th>Name</th>
+                        <th>Paid</th>
+                        <th>Edit</th>
+                        <th>Print</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Dynamic rows will be inserted here -->
+                </tbody>
+            </table>
+
+            
+           <!-- <div class="total-amount">
+              Trail by : <span id="deficit"></span> (target 40,000) 
+          </div>-->
+        </div>
+    </div>
+    </div>
+    </section>
+  <!-- print modal -->
+   
+
+  <!-- Expense Modal -->
+  <div class="modal fade" id="payrollModal" tabindex="-1" role="dialog" aria-labelledby="payrollModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="expenseModalLabel">Payroll</h5>
+           <!-- Success alert -->
+           <div class="alert alert-success alert-dismissible fade show" role="alert" style="display: none;">
+            Update successful!
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+        </div>
+        <div class="modal-body">
+          <!-- Refund Form -->
+          <form id="expenseForm">
+            <div class="form-group">
+              <label for="createdBy">Employee:</label>
+              <select class="form-control" id="expenseCreatedBy" name="createdBy" required>
+                  <option value="vanitha">Vanitha</option>
+                  <option value="swapna">Swapna</option>
+                  <option value="bency">Bency</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="basePay">Base Pay:</label>
+              <input type="number" class="form-control" min="0" id="basePay" step="any" required />
+            </div>
+            <div class="form-group">
+              <label for="basePay">Working Days:</label>
+              <input type="number" class="form-control" min="0" id="workingDays" step="any" required />
+            </div>
+            <div class="form-group">
+              <label for="basePay">Leaves:</label>
+              <input type="number" class="form-control" min="0" id="leaves" step="any" required />
+            </div>
+            <div class="form-group">
+              <label for="basePay">Deductions:</label>
+              <input type="number" class="form-control" min="0" id="deductions" step="any" required />
+            </div>
+            <div class="form-group">
+              <label for="refundAmount">Holidays Worked:</label>
+              <input type="number" class="form-control" min="0"  id="holidaysWorked" step="any" required />
+            </div>
+            <button type="button" id="issueRefundBtn" onclick="submitPayroll()"  class="btn btn-primary">Submit Pay</button>
+           
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Refund Modal -->
+  <div class="modal fade" id="refundModal" tabindex="-1" role="dialog" aria-labelledby="refundModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="refundModalLabel">Issue Refund</h5>
+           <!-- Success alert -->
+           <div class="alert alert-success alert-dismissible fade show" role="alert" style="display: none;">
+            Update successful!
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+        </div>
+        <div class="modal-body">
+          <!-- Refund Form -->
+          <form id="refundForm">
+            <div class="form-group">
+              <label for="refundReason">Reason:</label>
+              <input type="text" class="form-control" id="refundReason" required />
+              <input type="hidden" class="form-control" id="refundBillingId"/>
+              <label for="refundReason">Total Transaction Amount</label>
+              <input type="text" readonly class="form-control" id="refundTotal"/>
+            </div>
+            <div class="form-group">
+              <label for="refundAmount">Amount:</label>
+              <input type="number" class="form-control" min="0" max="1" id="refundAmount" step="any" required />
+            </div>
+            <button type="button" id="issueRefundBtn" onclick="issueRefund()"  data-toggle="modal" data-target="#refundModal" class="btn btn-primary">Submit Refund</button>
+           
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+    <!-- Add Bootstrap JS and Popper.js -->
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <!-- Add Font Awesome JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/js/all.min.js"></script>
+   <script src="../js/loginadmin.js"></script>
+    <script>
+        // Fetch data from JSON file
+        fetch('https://st731dr6q7.execute-api.us-east-2.amazonaws.com/default/payroll')
+            .then(response => response.json())
+            .then(data => {
+                const tableBody = document.getElementById('transactionTable').getElementsByTagName('tbody')[0];
+
+                // Clear existing rows
+                tableBody.innerHTML = '';
+
+                // Update table with dynamic data
+                data.Items.forEach(transaction => {
+                    const newRow = tableBody.insertRow();
+                    const transactionDate=new Date(transaction.date);
+                    const formattedDate = transactionDate.toLocaleString('en-US');
+
+                    newRow.innerHTML = `
+                        <td>${transaction.payrollid}</td>
+                        <td>${formattedDate}</td>
+                        <td>${transaction.name}</td>
+                        <td>${transaction.basePay}</td>
+                       <td>
+                            <button id="reprintbtn" class="btn btn-primary reprintbtn" data-billdate="${formattedDate}" data-billingid="${transaction.billingId}" date-billType="${transaction.billType}" data-totals="${transaction.totals}" >Reprint</button>
+                        </td>
+                        <td>
+                            <button class="btn btn-danger" ${transaction.billType==='return'|| transaction.billType==='expense'?'disabled':''} data-totals="${transaction.totals}" data-billingid="${transaction.billingId}" date-billType="${transaction.billType}" data-totals="${transaction.totals}" data-toggle="modal" data-target="#refundModal">Refund</button>
+                        </td>`;
+                });
+            })
+            .catch(error => console.error('Error fetching data:', error));
+
+
+          function generateRandomBillNumber(length = 8) {
+            const min = Math.pow(10, length - 1); // Minimum value for the desired length
+            const max = Math.pow(10, length) - 1; // Maximum value for the desired length
+            return Math.floor(Math.random() * (max - min + 1)) + min;
+          }
+
+        function submitPayroll(){
+          const data = {};
+            data.billDate=new Date().toISOString().split('T')[0];
+            data.payrollid=GenerateRandomBillNumber();; // create random billing id.
+            data.name=$('#name').val();
+            data.basePay=$('#basePay').val();
+            data.workingDays=$('#workingDays').val();
+            data.leaves=$('#leaves').val();
+            data.deductions=$('deductions').val();
+            data.ceatedBy='admin';
+            postData(data);
+        }
+
+       
+
+        function postData(data){ // make api post call to submit information 
+
+          const postData={
+                TableName:'payroll',
+                Item:data
+            };
+
+            //make api calls to billing
+            var apiUrl = 'https://st731dr6q7.execute-api.us-east-2.amazonaws.com/default/payroll';
+            $.ajax({
+            type: "POST",
+            url: apiUrl,
+            // crossDomain: true, 
+            //   dataType:'jsonp',
+            contentType: "application/json",  // Set the content type to JSON
+            data: JSON.stringify(postData),
+            success: function(response) {
+                console.log("Response:", response);
+                $('.alert-success').html('Updated Succesfully!');
+                $(".alert-success").fadeIn().delay(2000).fadeOut(); 
+             //   printFunction();
+            },
+            error: function(error) {
+                console.error("Error:", error);
+                $('.alert-success').html('Failed to update');
+                $(".alert-success").fadeIn().delay(2000).fadeOut();  
+            }
+            });
+            // print functions 
+        }
+
+
+        $('#refundModal').on('show.bs.modal', function (event) {
+        // Extract data from the trigger button (assuming you have the data stored in data attributes)
+        const button = $(event.relatedTarget);
+        const billingId=button.data('billingid');
+        const total=button.data('total');
+        // copy the values to hidden elements in modal 
+        $('#refundBillingId').val(billingId);
+        $('#refundAmount').attr('max',button.data('totals'));
+        $('#refundTotal').val(button.data('totals'));
+        });
+
+        function filterTable() {
+            const input = document.getElementById('search').value.toLowerCase();
+            const rows = document.querySelectorAll('#transactionTable tbody tr');
+
+            rows.forEach(row => {
+                const billNumber = row.cells[0].textContent.toLowerCase();
+                const date = row.cells[1].textContent.toLowerCase();
+                const billType = row.cells[2].textContent.toLowerCase();
+
+                if (billNumber.includes(input) || date.includes(input) || billType.includes(input)) {
+                    row.style.display = '';
+                } else {
+                    row.style.display = 'none';
+                }
+            });
+            updateTotalAmount();
+        }
+
+    </script>
+    <script src="cordova.js"></script>
+    <script src="js/indexadmin.js"></script>
+    
+</body>
+</html>
