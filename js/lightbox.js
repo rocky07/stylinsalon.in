@@ -30,7 +30,7 @@
                                     width="640" 
                                     height="480" 
                                     style="border:0;" 
-                                    allow="autoplay;">
+                                    allow="autoplay;encrypted-media; picture-in-picture">
                                 </iframe>
                             </div>
                         </div>
@@ -64,7 +64,16 @@
                     });
                 };
 
-                $("#slvj-close-icon, #slvj-background-close").click(closeLightbox);
+                $("#slvj-close-icon").click(closeLightbox);
+                
+                $("#slvj-background-close").click(function(e) {
+                    if (!a(e.target).closest("#slvj-video-embed").length) { 
+                        $("#slvj-window").fadeOut(a.simpleLightboxVideo.vars.delayAnimation, function() {
+                            $(this).remove()
+                        });
+                    }
+                });
+                
 
                 $(document).on("keyup.slvj", function (e) {
                     if (e.keyCode === settings.keyCodeClose) {
