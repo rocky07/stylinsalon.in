@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
+<head>  
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Payroll</title>
@@ -155,7 +155,7 @@
           <form id="expenseForm">
             <div class="form-group">
               <label for="createdBy">Employee:</label>
-              <select class="form-control" id="expenseCreatedBy" name="createdBy" required>
+              <select class="form-control" id="name" name="name" required>
                   <option value="vanitha">Vanitha</option>
                   <option value="swapna">Swapna</option>
                   <option value="bency">Bency</option>
@@ -231,7 +231,7 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <!-- Add Font Awesome JS -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/js/all.min.js"></script>
-   <script src="../js/loginadmin.js"></script>
+   <!--<script src="../js/loginadmin.js"></script>-->
     <script>
         // Fetch data from JSON file
         fetch('https://st731dr6q7.execute-api.us-east-2.amazonaws.com/default/payroll')
@@ -273,48 +273,45 @@
         function submitPayroll(){
           const data = {};
             data.billDate=new Date().toISOString().split('T')[0];
-            data.payrollid=GenerateRandomBillNumber();; // create random billing id.
+            data.payid=generateRandomBillNumber(); // create random billing id.
             data.name=$('#name').val();
             data.basePay=$('#basePay').val();
             data.workingDays=$('#workingDays').val();
             data.leaves=$('#leaves').val();
-            data.deductions=$('deductions').val();
+            data.deductions=$('#deductions').val();
             data.ceatedBy='admin';
-            postData(data);
+            callRPC(data,'POST');
         }
 
-       
 
-        function postData(data){ // make api post call to submit information 
+
+
+        function callRPC(updatedInfo,method){
 
           const postData={
                 TableName:'payroll',
-                Item:data
+                Item:updatedInfo
             };
 
-            //make api calls to billing
-            var apiUrl = 'https://st731dr6q7.execute-api.us-east-2.amazonaws.com/default/payroll';
-            $.ajax({
-            type: "POST",
-            url: apiUrl,
-            // crossDomain: true, 
-            //   dataType:'jsonp',
-            contentType: "application/json",  // Set the content type to JSON
-            data: JSON.stringify(postData),
-            success: function(response) {
-                console.log("Response:", response);
-                $('.alert-success').html('Updated Succesfully!');
-                $(".alert-success").fadeIn().delay(2000).fadeOut(); 
-             //   printFunction();
-            },
-            error: function(error) {
-                console.error("Error:", error);
-                $('.alert-success').html('Failed to update');
-                $(".alert-success").fadeIn().delay(2000).fadeOut();  
-            }
+          $.ajax({
+                type: method,
+                url: 'https://pmc4du3hu3.execute-api.us-east-2.amazonaws.com/default/payroll/',
+                contentType: "application/json",  // Set the content type to JSON
+                data: JSON.stringify(postData),
+                success: function(response) {
+                    console.log("Response:", response);
+                    $('.alert-success').html('Updated Succesfully!');
+                    $(".alert-success").fadeIn().delay(2000).fadeOut(); 
+                },
+                error: function(error) {
+                    console.log("Error:", error);
+
+                    $('.alert-success').html('Failed to update');
+                    $(".alert-success").fadeIn().delay(2000).fadeOut(); 
+                }
             });
-            // print functions 
         }
+       
 
 
         $('#refundModal').on('show.bs.modal', function (event) {
@@ -347,8 +344,8 @@
         }
 
     </script>
-    <script src="cordova.js"></script>
-    <script src="js/indexadmin.js"></script>
+  <!-- <script src="cordova.js"></script>
+    <script src="js/indexadmin.js"></script>--> 
     
 </body>
 </html>
