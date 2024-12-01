@@ -2,4 +2,4 @@ User-agent: *
 Disallow: /admin/
 
 Allow: /images/
-Sitemap: https://stylinsalon.in/sitemap.xml
+Sitemap: https://www.stylinsalon.in/sitemap.xml
