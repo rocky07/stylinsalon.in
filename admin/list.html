@@ -33,6 +33,17 @@
             font-weight: bold;
         }
     </style>
+    
+    <script>
+        function formatData(services){
+        //  const services = button.data('services');
+        console.log(services);
+        services= Array.isArray(services)?services.map(service => service && service.name ? service.name : "none"):services.name;
+        
+          return services;
+        }
+      </script>
+
 </head>
 <body>
 
@@ -217,6 +228,34 @@
       </div>
     </div>
   </div>
+
+  <!-- Reprint Modal -->
+  <div class="modal fade" id="reprintModal" tabindex="-1" role="dialog" aria-labelledby="reprintModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="reprintModalLabel"> Reprint</h5>
+           <!-- Success alert -->
+           <div class="alert alert-success alert-dismissible fade show" role="alert" style="display: none;">
+            Update successful!
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+        </div>
+        <div class="modal-body">
+          All Services
+          <form id="refundForm">
+            <div class="form-group">
+              <input type="hidden" class="form-control" id="refundBillingId"/>
+              <textarea  class="form-control"  id="reprintServices" placeholder="Services"></textarea>
+              <input type="text" readonly class="form-control" id="reprintTotal"/>
+            </div>
+          </form> 
+        </div>
+      </div>
+    </div>
+  </div>
   
     <!-- Add Bootstrap JS and Popper.js -->
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
@@ -248,7 +287,7 @@
                         <td>${transaction.billType}</td>
                         <td>${(transaction.billType === 'return' || transaction.billType ==='expense') ? -transaction.totals : transaction.totals}</td>
                        <td>
-                            <button id="reprintbtn" class="btn btn-primary reprintbtn" data-billdate="${formattedDate}" data-billingid="${transaction.billingId}" date-billType="${transaction.billType}" data-totals="${transaction.totals}" >Reprint</button>
+                            <button id="reprintbtn"  class="btn btn-primary reprintbtn" data-billdate="${formattedDate}" data-billingid="${transaction.billingId}" date-billType="${transaction.billType}" data-services="${formatData(transaction.services)}" data-totals="${transaction.totals}" data-toggle="modal" data-target="#reprintModal">Reprint</button>
                         </td>
                         <td>
                             <button class="btn btn-danger" ${transaction.billType==='return'|| transaction.billType==='expense'?'disabled':''} data-totals="${transaction.totals}" data-billingid="${transaction.billingId}" date-billType="${transaction.billType}" data-totals="${transaction.totals}" data-toggle="modal" data-target="#refundModal">Refund</button>
@@ -257,16 +296,16 @@
 
                 // Update total amount
                // const totalAmount = data.Items.reduce((sum, transaction) => sum + parseFloat(transaction.totals), 0);
-                const totalAmount = data.Items.filter(transaction=>transaction.billType==='cash').reduce((sum, transaction) => {
+                const totalAmount = data.Items.filter(transaction=>transaction.billType!=='expense').reduce((sum, transaction) => {
                   const amount = parseFloat(transaction.totals);
                   return sum + amount; // Add for other types
                 }, 0);
 
-                const totalExpense = data.Items.filter(transaction=>transaction.billType!=='cash').reduce((sum, transaction) => {
+                const totalExpense = data.Items.filter(transaction=>transaction.billType==='expense').reduce((sum, transaction) => {
                   const amount = parseFloat(transaction.totals);
                   return sum + amount; // Add for other types
                 }, 0);
-
+               console.log(totalExpense);
 
 
               //  let totalAmt=parseInt(totalAmount);
@@ -288,17 +327,18 @@
                   if (rows[i].style.display !== 'none') {
                       const totalCell = rows[i].getElementsByTagName('td')[3];
                       const billType = rows[i].getElementsByTagName('td')[2];
-                      if(billType==='expense' || billType==='return'){
+                      if(billType.textContent==='expense' || billType.textContent==='return'){
                         totalExpense+=parseFloat(totalCell.textContent) || 0;
+                        console.log(totalCell.textContent);
                       }else{
                         totalAmount += parseFloat(totalCell.textContent) || 0;
                       }
                   }
               }
-              document.getElementById('totalAmount').textContent = `$${totalAmount.toFixed(2)}`;
-              document.getElementById('cashIn').textContent = `$${(totalAmount+totalExpense).toFixed(2)}`;
-              document.getElementById('cashOut').textContent = `$${totalExpense.toFixed(2)}`;
-
+              document.getElementById('totalAmount').textContent = `$${(totalAmount+totalExpense).toFixed(2)}`;
+              document.getElementById('cashIn').textContent = `$${totalAmount.toFixed(2)}`;
+              document.getElementById('cashOut').textContent = `$${totalExpense}`;
+              console.log(totalExpense);
               showMonthYear(totalAmount);
           }
 
@@ -420,6 +460,20 @@
         $('#refundBillingId').val(billingId);
         $('#refundAmount').attr('max',button.data('totals'));
         $('#refundTotal').val(button.data('totals'));
+        });
+
+        $('#reprintModal').on('show.bs.modal', function (event) {
+        // Extract data from the trigger button (assuming you have the data stored in data attributes)
+        const button = $(event.relatedTarget);
+        const billingId=button.data('billingid');
+        const total=button.data('total');
+        const services = button.data('services');
+          console.log(services);
+        // copy the values to hidden elements in modal 
+        $('#reprintBillingId').val(billingId);
+        //$('#refundAmount').attr('max',button.data('totals'));
+        $('#reprintTotal').val(button.data('totals'));
+        $('#reprintServices').val(services);
         });
 
         function filterTable() {
