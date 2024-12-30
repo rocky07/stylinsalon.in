@@ -698,75 +698,11 @@
 
 <!-- Include JavaScript resources-->
 <script defer src="js/jquery.1.8.3.min.js"></script>
-<script defer src="js/wow.min.js"></script>
-<script defer src="js/featherlight.min.js"></script>
-<script defer src="js/featherlight.gallery.min.js"></script>
-<script defer src="js/jquery.enllax.min.js"></script>
 <script defer src="js/jquery.scrollUp.min.js"></script>
 <script defer src="js/jquery.easing.min.js"></script>
 <script defer src="js/jquery.stickyNavbar.min.js"></script>
 <script defer src="js/jquery.waypoints.min.js"></script>
-<script defer src="js/images-loaded.min.js"></script>
-<script defer src="js/lightbox.min.js"></script>
 <script defer src="js/site.js"></script>
-<!--
-<script>
-document.addEventListener("DOMContentLoaded", function() {
-    const scripts = [
-        "js/wow.min.js"
-    ];
-
-    scripts.forEach(src => {
-        const script = document.createElement("script");
-        script.src = src;
-        script.async = true;
-        document.body.appendChild(script);
-    });
-});
-</script>-->
-<script>
- function loadGTM() {
-        var gtmScript = document.createElement('script');
-        gtmScript.src = "https://www.googletagmanager.com/gtag/js?id=G-F2CNT37VV6";
-        gtmScript.async = true;
-        document.head.appendChild(gtmScript);
-
-        gtmScript.onload = function () {
-            window.dataLayer = window.dataLayer || [];
-            function gtag() { dataLayer.push(arguments); }
-            gtag('js', new Date());
-            gtag('config', 'G-F2CNT37VV6');
-        };
-    }
-
-    // Load GTM after a delay or user interaction
-    window.addEventListener('load', () => {
-        setTimeout(loadGTM, 3000); // Adjust delay as necessary
-    });
-</script>
-<script type="application/ld+json">
-    {
-        "@context": "https://schema.org",
-        "@type": "LocalBusiness",
-        "name": "Stylin' Ladies Salon",
-        "address": {
-            "@type": "PostalAddress",
-            "streetAddress": "MC Road, opp. Tonico Cafe, Nagampadam",
-            "addressLocality": "Kottayam",
-            "addressRegion": "KL",
-            "postalCode": "686001",
-            "addressCountry": "IN"
-        },
-        "geo": {
-            "@type": "GeoCoordinates",
-            "latitude": 9.595995546771615, 
-            "longitude": 76.52326053703162
-        },
-        "url": "https://www.stylinsalon.in",
-        "telephone": "+91-7736417677"
-    }
-    </script>
-    
 
 </body>
 </html>
