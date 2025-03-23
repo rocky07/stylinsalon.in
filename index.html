@@ -32,6 +32,7 @@
     <!-- Main CSS Files -->
    <!--<link rel="stylesheet" href="css/style.css">-->
     <link rel="stylesheet" href="css/style.min.css">
+    <link rel="stylesheet" href="css/coupons.min.css">
 
     <!-- Namari Color CSS -->
     <link rel="stylesheet" href="css/namari-color.min.css">
@@ -145,6 +146,9 @@
                             </li>
                             <li>
                                 <a href="#testimonials">Testimonials</a>
+                            </li>
+                            <li>
+                                <a href="#coupons">Coupons</a>
                             </li>
                             <li>
                                 <a href="#pricing">Pricing</a>
@@ -311,8 +315,123 @@
 
         </aside>
         <!--End of Testimonials-->
-
-
+        <!--Coupon sectin begins-->
+            <section id="coupons" class="secondary-color text-center scrollto clearfix ">
+                <div class="section-heading">
+                    <b>COUPONS</b>
+                    <h2 class="section-title">get coupons for your next visit</h2>
+                </div>
+                <div class="row">
+                    <article class="card fl-left">
+                        <section class="date">
+                            <time id="date-time" datetime="23th mar">
+                                <span id="day"></span><span id="month"></span>
+                            </time>
+                        </section>
+                        <section class="card-cont">
+                            <small>Stylin Ladies Salon</small>
+                            <h3>Glow Boost Facial</h3>
+                            <div class="even-date">
+                                <i class="fa fa-calendar"></i>
+                                <time>
+                                    <span id="valid-until"></span>
+                                    <span>By appointment only</span>
+                                </time>
+                            </div>
+                            <div class="even-info">
+                                <i class="fa fa-map-marker"></i>
+                                <p>
+                                    Stylin Ladies Salon, Kottayam
+                                </p>
+                            </div>
+                            <a href="https://wa.me/917736417677?text=coupons"><i class="fa fa-whatsapp fa-2x"></i><span> Claim Offer</span></a>
+                        </section>
+                    </article>
+                
+                    <article class="card fl-left">
+                        <section class="date">
+                            <time id="date-time" datetime="10th apr">
+                                <span>10</span><span>apr</span>
+                            </time>
+                        </section>
+                        <section class="card-cont">
+                            <small>Stylin Ladies Salon</small>
+                            <h3>Hydrating Facial Special</h3>
+                            <div class="even-date">
+                                <i class="fa fa-calendar"></i>
+                                <time>
+                                    <span id="valid-until"></span>
+                                    <span>Enjoy 20% Off</span>
+                                </time>
+                            </div>
+                            <div class="even-info">
+                                <i class="fa fa-map-marker"></i>
+                                <p>
+                                    Stylin Ladies Salon, Kottayam
+                                </p>
+                            </div>
+                            <a href="https://wa.me/917736417677?text=coupons"><i class="fa fa-whatsapp fa-2x"></i><span> Claim Offer</span></a>
+                        </section>
+                    </article>
+                
+                </div>
+                <div class="row">
+                    <article class="card fl-left">
+                        <section class="date">
+                            <time id="date-time" datetime="25th apr">
+                                <span>25</span><span>apr</span>
+                            </time>
+                        </section>
+                        <section class="card-cont">
+                            <small>Stylin Ladies Salon</small>
+                            <h3>Pampering Pedicure Offer</h3>
+                            <div class="even-date">
+                                <i class="fa fa-calendar"></i>
+                                <time>
+                                    <span id="valid-until"></span>
+                                    <span>Get ₹150 Off</span>
+                                </time>
+                            </div>
+                            <div class="even-info">
+                                <i class="fa fa-map-marker"></i>
+                                <p>
+                                    Stylin Ladies Salon, Kottayam
+                                </p>
+                            </div>
+                            <a href="https://wa.me/917736417677?text=coupons"><i class="fa fa-whatsapp fa-2x"></i><span> Claim Offer</span></a>
+                        </section>
+                    </article>
+                
+                    <article class="card fl-left">
+                        <section class="date">
+                            <time id="date-time" datetime="15th apr">
+                                <span>15</span><span>apr</span>
+                            </time>
+                        </section>
+                        <section class="card-cont">
+                            <small>Stylin Ladies Salon</small>
+                            <h3>Exclusive Haircut Offer</h3>
+                            <div class="even-date">
+                                <i class="fa fa-calendar"></i>
+                                <time>
+                                    <span id="valid-until"></span>
+                                    <span>Flat ₹100 Off</span>
+                                </time>
+                            </div>
+                            <div class="even-info">
+                                <i class="fa fa-map-marker"></i>
+                                <p>
+                                    Stylin Ladies Salon, Kottayam
+                                </p>
+                            </div>
+                            <a href="https://wa.me/917736417677?text=coupons"><i class="fa fa-whatsapp fa-2x"></i><span> Claim Offer</span></a>
+                        </section>
+                    </article>
+                </div>
+                  
+                </section>                
+          
+        <!--coupon Section ends-->
         <!--Pricing Tables-->
         <section id="pricing" class="secondary-color text-center scrollto clearfix ">
             <div class="row clearfix">
@@ -464,6 +583,23 @@ document.addEventListener("DOMContentLoaded", function() {
 });
 </script>-->
 <script>
+     // Get the current date and add 7 days
+     let dt = new Date();
+    dt.setDate(dt.getDate() + 7);
+
+    // Get the day and month
+    let day = dt.getDate();
+    let month = dt.toLocaleString('default', { month: 'long' });
+
+    // Inject using template literals
+   document.querySelectorAll("#date-time").forEach(el => {
+        el.innerHTML = `<span>${day}</span><span>${month}</span>`;
+    });
+    document.querySelectorAll("#valid-until").forEach(el => {
+        el.innerHTML = ` Valid until ${day} ${month} 2025`;
+    });
+   
+
  function loadGTM() {
         var gtmScript = document.createElement('script');
         gtmScript.src = "https://www.googletagmanager.com/gtag/js?id=G-F2CNT37VV6";
