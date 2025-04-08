@@ -41,6 +41,32 @@
     <noscript><link rel="stylesheet" href="css/font-awesome.min.css"></noscript>
     <!-- Animate CSS-->
     <link href="css/animate.min.css" rel="stylesheet" type="text/css">
+
+    <!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=AW-16988352106"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'AW-16988352106');
+
+
+
+    function gtag_report_conversion(url) {
+        var callback = function () {
+            if (typeof(url) != 'undefined') {
+            window.location = url;
+            }
+        };
+        gtag('event', 'conversion', {
+            'send_to': 'AW-16988352106/U-bbCOmbuLUaEOrc1qQ_',
+            'event_callback': callback
+        });
+        return false;
+    }
+</script>
+
 </head>
 <body>
 <!-- Preloader -->
@@ -118,7 +144,7 @@
 
                     <div id="nav-trigger">
                        
-                        <a target="_blank" title="Find on maps" href="https://www.google.com/maps/dir/?api=1&destination=Stylin+Ladies+Salon,+Kottayam,+Kerala">
+                        <a href="#" target="_blank" title="Find on maps" onclick='gtag_report_conversion("https://www.google.com/maps/dir/?api=1&destination=Stylin+Ladies+Salon,+Kottayam,+Kerala")'>
                             <i class="fa fa-map-marker fa-2x"> | </i>
                         </a>
                         <a href="tel:7736417677"><i class="fa fa-phone fa-2x">7736417677</i></a>
@@ -595,7 +621,6 @@ document.addEventListener("DOMContentLoaded", function() {
             });
         };
     }
-
 
     // Load GTM after a delay or user interaction
     window.addEventListener('click', () => {
