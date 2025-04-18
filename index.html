@@ -607,28 +607,27 @@ document.addEventListener("DOMContentLoaded", function() {
     });
     <!-- Google tag (gtag.js) -->
 
- function loadGTM() {
-        var gtmScript = document.createElement('script');
-        gtmScript.src = "https://www.googletagmanager.com/gtag/js?id=G-F2CNT37VV6";
-        gtmScript.async = true;
-        document.head.appendChild(gtmScript);
+//  function loadGTM() {
+//         var gtmScript = document.createElement('script');
+//         gtmScript.src = "https://www.googletagmanager.com/gtag/js?id=G-F2CNT37VV6";
+//         gtmScript.async = true;
+//         document.head.appendChild(gtmScript);
 
-        gtmScript.onload = function () {
-            window.dataLayer = window.dataLayer || [];
-            function gtag() { dataLayer.push(arguments); }
-            gtag('js', new Date());
-            gtag('config', 'G-F2CNT37VV6');
+//         gtmScript.onload = function () {
+//             window.dataLayer = window.dataLayer || [];
+//             function gtag() { dataLayer.push(arguments); }
+//             gtag('js', new Date());
+//             gtag('config', 'G-F2CNT37VV6');
             
-            gtag('event', 'conversion', {
-            'send_to': 'AW-16644472909/YYx0CKfpqcoZEM2A2oA-'
-            });
-        };
-    }
+//             gtag('event', 'conversion', {
+//             'send_to': 'AW-16644472909/YYx0CKfpqcoZEM2A2oA-'
+//             });
+//         };
+//     }
 
-    // Load GTM after a delay or user interaction
-    window.addEventListener('click', () => {
-        setTimeout(loadGTM, 3000); // Adjust delay as necessary
-    },{once:true});
+//     window.addEventListener('click', () => {
+//         setTimeout(loadGTM, 3000);
+//     },{once:true});
 </script>
 <script type="application/ld+json">
     {
