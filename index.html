@@ -208,7 +208,18 @@
                             <li>Hair treatment</li> 
                            
                         </ul>-->
-                        <a href="https://wa.me/917736417677?text=hi" class="button"><i class="fa fa-whatsapp fa-1x"></i><span> Claim Offer</span></a>
+                        <div id="responseMessage-promo1"></div>
+                        <div class="d-flex align-items-center gap-2 flex-wrap" style="margin-top: 5px;">
+                            <!-- Phone input field -->
+                            <input type="text" id="whatsappNumber" class="form-control" placeholder="Enter WhatsApp Number"
+                              style="max-width: 250px;" />
+                          
+                            <!-- WhatsApp button -->
+                            <a href="#" id="sendCouponLink" data-message-type="promo1" class="sendCouponLink button d-inline-flex align-items-center" style="white-space: nowrap;">
+                              <i class="fa fa-whatsapp fa-1x me-1"></i>
+                              <span>Send Offer</span>
+                            </a>
+                          </div>
                         <a href="https://www.google.com/maps/dir/?api=1&destination=Stylin+Ladies+Salon,+Kottayam,+Kerala" class="button" target="_blank">
                             <i class="fa fa-map-marker"> Get Directions</i>
                         </a>
@@ -233,7 +244,18 @@
                             <li>De-tan Facial</li>
                             <li>Pearl Facial</li>
                         </ul> -->
-                        <a href="https://wa.me/917736417677?text=hi" class="button"><i class="fa fa-whatsapp fa-1x"></i><span> Claim Offer</span></a>
+                        <div id="responseMessage-promo2"></div>
+                        <div class="d-flex align-items-center gap-2 flex-wrap" style="margin-top: 5px;">
+                            <!-- Phone input field -->
+                            <input type="text" id="whatsappNumber" class="form-control" placeholder="Enter WhatsApp Number"
+                              style="max-width: 250px;" />
+                          
+                            <!-- WhatsApp button -->
+                            <a href="#" id="sendCouponLink" data-message-type="promo2" class="sendCouponLink button d-inline-flex align-items-center" style="white-space: nowrap;">
+                              <i class="fa fa-whatsapp fa-1x me-1"></i>
+                              <span>Send Offer</span>
+                            </a>
+                          </div>
                         <a href="https://www.google.com/maps/dir/?api=1&destination=Stylin+Ladies+Salon,+Kottayam,+Kerala" class="button" target="_blank">
                             <i class="fa fa-map-marker"> Get Directions</i>
                         </a>
@@ -258,7 +280,18 @@
                             <li>Pedicure,Manicure</li>
                             <li>Waxing,Facials</li>
                         </ul> -->
-                        <a href="https://wa.me/917736417677?text=Coupons" class="button"><i class="fa fa-whatsapp fa-1x"></i><span> Claim Offer</span></a>
+                        <div id="responseMessage-promo3"></div>
+                        <div class="d-flex align-items-center gap-2 flex-wrap" style="margin-top: 5px;">
+                            <!-- Phone input field -->
+                            <input type="text" id="whatsappNumber" class="form-control" placeholder="Enter WhatsApp Number"
+                              style="max-width: 250px;" />
+                          
+                            <!-- WhatsApp button -->
+                            <a href="#" id="sendCouponLink" data-message-type="promo3" class="sendCouponLink button d-inline-flex align-items-center" style="white-space: nowrap;">
+                              <i class="fa fa-whatsapp fa-1x me-1"></i>
+                              <span>Send Offer</span>
+                            </a>
+                          </div>
                         <a href="https://www.google.com/maps/dir/?api=1&destination=Stylin+Ladies+Salon,+Kottayam,+Kerala" class="button" target="_blank">
                             <i class="fa fa-map-marker"> Get Directions</i>
                         </a>
@@ -629,6 +662,46 @@ document.addEventListener("DOMContentLoaded", function() {
 //     window.addEventListener('click', () => {
 //         setTimeout(loadGTM, 3000);
 //     },{once:true});
+
+  $('.sendCouponLink').on('click', function (e) {
+    e.preventDefault();
+
+    const number = $('#whatsappNumber').val().trim();
+    const messageType = $(this).data('message-type');
+    const responseDiv = $('#responseMessage-'+messageType);
+
+    if (!number||number.length<10) {
+      responseDiv.html('<div class="alert alert-warning">Please enter a WhatsApp number.</div>');
+      return;
+    }
+
+    responseDiv.html("Sending...");
+    fetch('https://6kb005dtgd.execute-api.us-east-2.amazonaws.com/default/sendCoupons', {
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/json'
+                            },
+                            body: JSON.stringify({
+                            toNumber: number,
+                            messageType: messageType
+                          }),
+                            mode:'no-cors'
+                            // Removed 'mode: no-cors' to allow seeing response (optional)
+                        })
+                        .then(res => res.text())
+                        .then(data => {
+                            //console.log(data);
+                          //  alert('Message sent successfully!');
+                          responseDiv.html('<div class="alert alert-success">Coupon sent successfully!</div>');
+                            
+                        })
+                        .catch(err => {
+                          responseDiv.html('<div class="alert alert-danger">Error: ' + err.responseText + '</div>');
+                        });
+
+
+  });
+
 </script>
 <script type="application/ld+json">
     {
