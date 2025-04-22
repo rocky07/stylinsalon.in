@@ -363,9 +363,6 @@ section {
 }
 
 .nav-solid #logo #banner-logo {
-    aspect-ratio: 12 / 11;
-    width: 120px;
-    height: auto;
     display: none;
 }
 
