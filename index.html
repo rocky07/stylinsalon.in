@@ -610,7 +610,7 @@
 </div>
 
 <!-- Include JavaScript resources-->
-<script defer src="js/jquery.1.8.3.min.js"></script>
+<script src="js/jquery.1.8.3.min.js"></script>
 <!-- <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script> -->
 <script defer src="js/wow.min.js"></script>
 <script defer src="js/featherlight.min.js"></script>
@@ -679,44 +679,44 @@ document.addEventListener("DOMContentLoaded", function() {
 //         setTimeout(loadGTM, 3000);
 //     },{once:true});
 
-//   $('.sendCouponLink').on('click', function (e) {
-//     e.preventDefault();
+  $('.sendCouponLink').on('click', function (e) {
+    e.preventDefault();
 
-//     const number = $('#whatsappNumber').val().trim();
-//     const messageType = $(this).data('message-type');
-//     const responseDiv = $('#responseMessage-'+messageType);
+    const number = $('#whatsappNumber').val().trim();
+    const messageType = $(this).data('message-type');
+    const responseDiv = $('#responseMessage-'+messageType);
 
-//     if (!number||number.length<10) {
-//       responseDiv.html('<div class="alert alert-warning">Please enter a WhatsApp number.</div>');
-//       return;
-//     }
+    if (!number||number.length<10) {
+      responseDiv.html('<div class="alert alert-warning">Please enter a WhatsApp number.</div>');
+      return;
+    }
 
-//     responseDiv.html("Sending...");
-//     fetch('https://6kb005dtgd.execute-api.us-east-2.amazonaws.com/default/sendCoupons', {
-//                             method: 'POST',
-//                             headers: {
-//                                 'Content-Type': 'application/json'
-//                             },
-//                             body: JSON.stringify({
-//                             toNumber: number,
-//                             messageType: messageType
-//                           }),
-//                             mode:'no-cors'
-//                             // Removed 'mode: no-cors' to allow seeing response (optional)
-//                         })
-//                         .then(res => res.text())
-//                         .then(data => {
-//                             //console.log(data);
-//                           //  alert('Message sent successfully!');
-//                           responseDiv.html('<div class="alert alert-success">Coupon sent successfully!</div>');
+    responseDiv.html("Sending...");
+    fetch('https://6kb005dtgd.execute-api.us-east-2.amazonaws.com/default/sendCoupons', {
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/json'
+                            },
+                            body: JSON.stringify({
+                            toNumber: number,
+                            messageType: messageType
+                          }),
+                            mode:'no-cors'
+                            // Removed 'mode: no-cors' to allow seeing response (optional)
+                        })
+                        .then(res => res.text())
+                        .then(data => {
+                            //console.log(data);
+                          //  alert('Message sent successfully!');
+                          responseDiv.html('<div class="alert alert-success">Coupon sent successfully!</div>');
                             
-//                         })
-//                         .catch(err => {
-//                           responseDiv.html('<div class="alert alert-danger">Error: ' + err.responseText + '</div>');
-//                         });
+                        })
+                        .catch(err => {
+                          responseDiv.html('<div class="alert alert-danger">Error: ' + err.responseText + '</div>');
+                        });
 
 
-//   });
+  });
 
 </script>
 <script type="application/ld+json">
