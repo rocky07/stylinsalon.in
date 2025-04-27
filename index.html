@@ -683,7 +683,8 @@ document.addEventListener("DOMContentLoaded", function() {
     e.preventDefault();
 
     const container = $(this).closest('.coupon-container'); // Adjust this class to match your div wrapper
-    const number = container.find('.whatsappNumber').val().trim();
+    let number = container.find('.whatsappNumber').val().trim();
+    
 
   //  const number = $('#whatsappNumber').val().trim();
     const messageType = $(this).data('message-type');
@@ -692,6 +693,8 @@ document.addEventListener("DOMContentLoaded", function() {
     if (!number||number.length<10) {
       responseDiv.html('<div class="alert alert-warning">Please enter a WhatsApp number.</div>');
       return;
+    }else {
+        number.startsWith('91')?number:number='91'+number;
     }
 
     responseDiv.html("Sending...");
