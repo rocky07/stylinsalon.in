@@ -82,10 +82,10 @@
                 <li class="nav-item">
                   <a class="nav-link" href="list.html">All Bills</a>
                 </li>
-                <li class="nav-item">
+                <li class="nav-item active">
                     <a class="nav-link" href="#">All Bookings <span class="sr-only">(current)</span></a>
                 </li>
-                <li class="nav-item active">
+                <li class="nav-item ">
                   <a class="nav-link" href="promotions.html">Promotions</a>
               </li>
               </ul>
@@ -102,11 +102,12 @@
             <table class="table" id="transactionTable">
                 <thead>
                     <tr>
-                        <th>Booking Number</th>
+                        <th>Name</th>
                         <th>Date</th>
                         <th>Time</th>
-                        <th>Service</th>
-                        <th>Confirm/Cancel</th>
+                        <th>phone</th>
+                        <th>Staff</th>
+                        <th>Comments</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -205,10 +206,11 @@
 
                     newRow.innerHTML = `
                         <td>${transaction.name}</td>
-                        <td>${transaction.appDate}</td>
-                        <td>${formmattedTime}</td>
+                        <td>${transaction.date}</td>
+                        <td>${transaction.time}</td>
                         <td>${transaction.phone}</td>
-                        <td>${transaction.status}</td>
+                        <td>${transaction.location}</td>
+                         <td>${transaction.more_details}</td>
                         <td>
                             <button type="button" data-bookingId="${transaction.bookingId}" data-service="${transaction.service}" data-date="${transaction.appDate}" data-time="${transaction.appTime}" data-phone="${transaction.phone}" data-name="${transaction.name}" class="btn btn-primary" data-toggle="modal" data-target="#bookingModal">
                             Update/Cancel</button>
