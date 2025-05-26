@@ -139,7 +139,8 @@
           <form id="bookingForm">
             <div class="form-group">
               <label for="updateDate">Date:</label>
-              <input type="text" class="form-control datepicker" id="updateDate" name="updateDate" readonly>
+              <input type="text" class="form-control datepicker" id="updateDateText" name="updateDateText" readonly>
+              <input type="hidden" class="form-control" id="updateDate" name="updateDate">
               <input type="hidden" class="form-control" id="updateBookingId" name="updateBookingId">
               
             </div>
@@ -154,6 +155,10 @@
             <div class="form-group">
               <label for="updateService">Service:</label>
               <input type="text" class="form-control" id="updateService" name="updateService" >
+            </div>
+            <div class="form-group">
+              <label for="updateService">Staff:</label>
+              <input type="text" class="form-control" id="updateStaff" name="updateStaff" >
             </div>
             <div class="form-group">
               <label for="updateName">Customer Name:</label>
@@ -212,7 +217,7 @@
                         <td>${transaction.location}</td>
                          <td>${transaction.more_details}</td>
                         <td>
-                            <button type="button" data-bookingId="${transaction.bookingId}" data-service="${transaction.service}" data-date="${transaction.appDate}" data-time="${transaction.appTime}" data-phone="${transaction.phone}" data-name="${transaction.name}" class="btn btn-primary" data-toggle="modal" data-target="#bookingModal">
+                            <button type="button" data-staff="${transaction.location}" data-bookingId="${transaction.bookingId}" data-service="${transaction.department}" data-date="${transaction.date}" data-time="${transaction.time}" data-phone="${transaction.phone}" data-name="${transaction.name}" class="btn btn-primary" data-toggle="modal" data-target="#bookingModal">
                             Update/Cancel</button>
                         </td>
                     `;
@@ -238,12 +243,15 @@
                 }
             });
         }
-        function populateModalData(bookingId, date, time, phone, service, name) {
+        function populateModalData(bookingId, date, time, phone, service, name,staff) {
+          const dateString = new Date(date).toLocaleDateString('en-US',{ year: 'numeric', month: 'long', day: 'numeric' })
           document.getElementById('updateBookingId').value = bookingId;
             document.getElementById('updateDate').value = date;
+            document.getElementById('updateDateText').value = dateString;
             document.getElementById('updateTime').value = time;
             document.getElementById('updatePhone').value = phone;
             document.getElementById('updateService').value = service;
+            document.getElementById('updateStaff').value = staff;
             document.getElementById('updateName').value = name;
             }
         // Assuming you have a function to handle modal show event
@@ -256,9 +264,11 @@
         const phone = button.data('phone');
         const service = button.data('service');
         const name = button.data('name');
+        const staff = button.data('staff');
+
 
         // Call populateModalData to update the modal content
-        populateModalData(bookingId,date, time, phone, service, name);
+        populateModalData(bookingId,date, time, phone, service, name,staff);
         });
 
         
@@ -270,21 +280,17 @@
           const updatedName = $('#updateName').val();
           const updatedPhone = $('#updatePhone').val();
           const updatedService = $('#updateService').val();
-         
-         const year = 2024;
-         const fullDateString = `${updatedDate} ${year}`;
-         let dt=new Date(fullDateString);
-         let appDateStamp=dt.toISOString();
-
+          const updatedStaff = $('#updateStaff').val();
+        
           const updatedInfo = {
             bookingId:bookingId,
-            appDate: updatedDate,
-            appTime: updatedTime,
+            date: updatedDate,
+            time: updatedTime,
             name: updatedName,
             phone: updatedPhone,
-            service: updatedService,
-            status:status,
-            appDateStamp:appDateStamp
+            department: updatedService,
+            location:updatedStaff,
+            status:status
           };
           callRPC(updatedInfo)
         }
@@ -312,23 +318,6 @@
                 }
             });
         }
-  /*     
-        $(document).ready(function(){
-        // Date Picker
-        // Initialize Datepicker and Timepicker
-        $('.datepicker').datepicker({
-        format: 'M dd',
-        autoclose: false,
-        });
-
-        $('.timepicker').timepicker({
-        showMeridian: true,
-        defaultTime: true,
-        interval: 60, // Set interval to 60 minutes (1 hour)
-        minTime: '2:00am', // Minimum time allowed
-        maxTime: '5:00pm'  // Maximum time allowed
-        });
-      });*/
 
     </script>
 </body>
