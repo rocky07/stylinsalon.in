@@ -32,6 +32,9 @@
 
     <!-- Main CSS Files -->
     <!--<link rel="stylesheet" href="css/style.css">-->
+    <link rel="preload" href="/fonts/open-sans-v40-latin-700.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="/fonts/open-sans-v40-latin-regular.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="/fonts/open-sans-v40-latin-300.woff2" as="font" type="font/woff2" crossorigin>
     <link rel="preload" href="/fonts/fontawesome-webfont.woff2?v=4.7.0" as="font" type="font/woff2" crossorigin="anonymous">
     <link rel="stylesheet" href="/css/style.min.css" media="print" onload="this.media='all'">
 
@@ -45,7 +48,7 @@
     <link rel="preload" href="css/font-awesome.min.css" as="style" onload="this.rel='stylesheet'">
     <noscript><link rel="stylesheet" href="css/font-awesome.min.css"></noscript>
     <!-- Animate CSS-->
-    <link href="css/animate.min.css" rel="stylesheet" type="text/css">
+    <link defer href="css/animate.min.css" rel="stylesheet" type="text/css">
 
     <!-- Google tag (gtag.js) -->
     <script>
@@ -616,7 +619,7 @@
 </div>
 
 <!-- Include JavaScript resources-->
-<script src="js/jquery.1.8.3.min.js"></script>
+<script defer src="js/jquery.1.8.3.min.js"></script>
 <!-- <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script> -->
 <script defer src="js/wow.min.js"></script>
 <script defer src="js/featherlight.min.js"></script>
