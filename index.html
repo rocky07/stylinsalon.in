@@ -688,6 +688,9 @@ document.addEventListener("DOMContentLoaded", function() {
 //         setTimeout(loadGTM, 3000);
 //     },{once:true});
 
+// load only after jquery is loaded
+document.addEventListener("DOMContentLoaded", function() {
+
   $('.sendCouponLink').on('click', function (e) {
     e.preventDefault();
 
@@ -732,6 +735,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
 
   });
+   });
 
 </script>
 <script type="application/ld+json">
