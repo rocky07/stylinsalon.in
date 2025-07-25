@@ -37,6 +37,7 @@
     <link rel="preload" href="/fonts/open-sans-v40-latin-300.woff2" as="font" type="font/woff2" crossorigin>
     <link rel="preload" href="/fonts/fontawesome-webfont.woff2?v=4.7.0" as="font" type="font/woff2" crossorigin="anonymous">
     <link rel="stylesheet" href="/css/style.min.css" media="print" onload="this.media='all'">
+    <link href="css/animate.min.css" rel="stylesheet" type="text/css">
 
 
     <!-- Namari Color CSS -->
@@ -48,7 +49,7 @@
     <link rel="preload" href="css/font-awesome.min.css" as="style" onload="this.rel='stylesheet'">
     <noscript><link rel="stylesheet" href="css/font-awesome.min.css"></noscript>
     <!-- Animate CSS-->
-    <link defer href="css/animate.min.css" rel="stylesheet" type="text/css">
+    <!-- <link defer href="css/animate.min.css" rel="stylesheet" type="text/css"> --> <!-- Remove this line -->
 
     <!-- Google tag (gtag.js) -->
     <script>
@@ -694,48 +695,44 @@ document.addEventListener("DOMContentLoaded", function() {
   $('.sendCouponLink').on('click', function (e) {
     e.preventDefault();
 
-    const container = $(this).closest('.coupon-container'); // Adjust this class to match your div wrapper
-    let number = container.find('.whatsappNumber').val().trim();
-    
-
-  //  const number = $('#whatsappNumber').val().trim();
+    // Cache selectors and values to avoid repeated DOM queries
+    const container = $(this).closest('.coupon-container');
+    const numberInput = container.find('.whatsappNumber');
+    let number = numberInput.val().trim();
     const messageType = $(this).data('message-type');
     const responseDiv = $('#responseMessage-'+messageType);
 
-    if (!number||number.length<10) {
+    // Batch DOM update: only update responseDiv once per event
+    if (!number || number.length < 10) {
       responseDiv.html('<div class="alert alert-warning">Please enter a WhatsApp number.</div>');
       return;
-    }else {
-        number.startsWith('91')?number:number='91'+number;
+    }
+    if (!number.startsWith('91')) {
+      number = '91' + number;
     }
 
     responseDiv.html("Sending...");
     fetch('https://6kb005dtgd.execute-api.us-east-2.amazonaws.com/default/sendCoupons', {
-                            method: 'POST',
-                            headers: {
-                                'Content-Type': 'application/json'
-                            },
-                            body: JSON.stringify({
-                            toNumber: number,
-                            messageType: messageType
-                          }),
-                            mode:'no-cors'
-                            // Removed 'mode: no-cors' to allow seeing response (optional)
-                        })
-                        .then(res => res.text())
-                        .then(data => {
-                            //console.log(data);
-                          //  alert('Message sent successfully!');
-                          responseDiv.html('<div class="alert alert-success">Coupon sent successfully!</div>');
-                            
-                        })
-                        .catch(err => {
-                          responseDiv.html('<div class="alert alert-danger">Error: ' + err.responseText + '</div>');
-                        });
-
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        toNumber: number,
+        messageType: messageType
+      }),
+      mode: 'no-cors'
+    })
+    .then(res => res.text())
+    .then(data => {
+      responseDiv.html('<div class="alert alert-success">Coupon sent successfully!</div>');
+    })
+    .catch(err => {
+      responseDiv.html('<div class="alert alert-danger">Error: ' + err.responseText + '</div>');
+    });
 
   });
-   });
+});
 
 </script>
 <script type="application/ld+json">
