@@ -98,6 +98,17 @@
                 <label for="search">Search:</label>
                 <input type="text" class="form-control" id="search" oninput="filterTable()" placeholder="Enter keyword">
             </div>
+            <div class="form-group">
+                <label>Sort Last Contacted:</label>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="sortOrder" id="sortDesc" value="desc" checked onchange="sortTableByLastContacted()">
+                    <label class="form-check-label" for="sortDesc">Newest First</label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="sortOrder" id="sortAsc" value="asc" onchange="sortTableByLastContacted()">
+                    <label class="form-check-label" for="sortAsc">Oldest First</label>
+                </div>
+            </div>
             <button type="button" data-bookingId="" data-phone="" data-name="" data-dnd="" data-notes="" class="btn btn-primary" data-toggle="modal" data-target="#bookingModal">
               Add New </button>
               <button type="button" id="filterButton" onclick="filterTableByDate()" class="btn btn-primary">
@@ -105,10 +116,11 @@
             <table class="table" id="transactionTable">
                 <thead>
                     <tr>
-                        <!-- <th>Id</th> -->
+                        <th>Id</th> 
                         <th>Phone</th>
                         <th>Name</th>
                         <th>Last Contacted</th>
+                        <th>First Contacted</th>
                         <th>Call</th>
                         <th>update</th>
                     </tr>
@@ -148,6 +160,7 @@
               <input type="text" class="form-control" id="updatePhone" name="updatePhone">
             </div>
             <div class="form-check form-switch">
+              <input type="hidden" id="dateCreated" name="dateCreated" value=""/>
               <input class="form-check-input" type="checkbox" role="switch" id="updateDnd">
               <label class="form-check-label" for="updateDnd">DND</label>
             </div>
@@ -253,18 +266,19 @@
                     const isOld = isOlderThan7Days(transaction.dateUpdated);
                     const callButtonClass = isOld ? 'btn btn-success' : 'btn btn-primary';
 
-
+               //   console.log("trancation - ",JSON.stringify(transaction));
                     newRow.innerHTML = `
                         <td>${transaction.bookingId}</td>
                         <td>${transaction.phone}</td>
                         <td>${transaction.name}</td>
                         <td>${transaction.dateUpdated}</td>
+                        <td>${transaction.dateCreated}</td>
                          <td>
-                            <button type="button" ${transaction.dnd===true?'disabled':''} onclick="callCustomer('${transaction.bookingId}','${transaction.phone}','${transaction.name}','${transaction.dnd}','${transaction.notes}')" class="${callButtonClass}">
+                            <button type="button" ${transaction.dnd===true?'disabled':''} onclick="callCustomer('${transaction.bookingId}','${transaction.phone}','${transaction.name}','${transaction.dnd}','${transaction.notes}','${transaction.dateCreated}')" class="${callButtonClass}">
                             Call</button>
                         </td>
                         <td>
-                            <button type="button" data-bookingId="${transaction.bookingId}" data-phone="${transaction.phone}" data-name="${transaction.name}" data-dnd="${transaction.dnd}" data-notes="${transaction.notes}" class="btn btn-primary" data-toggle="modal" data-target="#bookingModal">
+                            <button type="button" data-bookingId="${transaction.bookingId}" data-phone="${transaction.phone}" data-name="${transaction.name}" data-dnd="${transaction.dnd}" data-notes="${transaction.notes}" data-datecreated="${transaction.dateCreated}" class="btn btn-primary" data-toggle="modal" data-target="#bookingModal">
                             Update</button>
                         </td>
                     `;
@@ -421,7 +435,7 @@
             return diffInDays > 7;
         }
 
-        function populateModalData(bookingId, phone, name, dnd,notes) {
+        function populateModalData(bookingId, phone, name, dnd, notes, dateCreated) {
             if(bookingId==""){
               bookingId=generateNumericBookingId();
             }
@@ -430,6 +444,7 @@
             document.getElementById('updateName').value = name;
             document.getElementById('updateNotes').value = notes;
             document.getElementById('updateDnd').checked = dnd?true:false;
+            document.getElementById('dateCreated').value = dateCreated || "";
             }
         // Assuming you have a function to handle modal show event
         $('#bookingModal').on('show.bs.modal', function (event) {
@@ -440,8 +455,8 @@
         const name = button.data('name');
         const dnd = button.data('dnd');
         const notes = button.data('notes');
-        // Call populateModalData to update the modal content
-        populateModalData(bookingId,phone, name, dnd, notes);
+        const dateCreated = button.data('datecreated');
+        populateModalData(bookingId,phone, name, dnd, notes, dateCreated);
         });
 
         function updateBooking(status){
@@ -451,6 +466,8 @@
           const updatedName = $('#updateName').val();
           const updatedDnd = $('#updateDnd').is(":checked")?true:false;
           const updatedNotes=$('#updateNotes').val();
+          const dateCreated=$('#dateCreated').val();
+
           let dt=new Date();
           let appDateStamp=dt.toISOString();
 
@@ -460,7 +477,7 @@
             name: updatedName,
             dnd: updatedDnd,
             notes:updatedNotes,
-            dateCreated:appDateStamp,
+            dateCreated: dateCreated || appDateStamp,
             promoCode:4,
             dateUpdated:appDateStamp,
           };
@@ -522,6 +539,21 @@
             window.location.href = 'tel:' + phone; // Fallback for non-Cordova environments
         }
       }
+
+      function sortTableByLastContacted() {
+    const order = document.querySelector('input[name="sortOrder"]:checked').value;
+    const table = document.getElementById('transactionTable');
+    const tbody = table.tBodies[0];
+    const rows = Array.from(tbody.rows);
+
+    rows.sort((a, b) => {
+        const dateA = new Date(a.cells[3].textContent);
+        const dateB = new Date(b.cells[3].textContent);
+        return order === 'desc' ? dateB - dateA : dateA - dateB;
+    });
+
+    rows.forEach(row => tbody.appendChild(row));
+}
 
     </script>
     <script src="../js/login.js"></script>
