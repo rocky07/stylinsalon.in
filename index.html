@@ -41,6 +41,32 @@
     <link rel="preload" href="/fonts/open-sans-v40-latin-700.woff2" as="font" type="font/woff2" crossorigin>
     <link rel="preload" href="/fonts/open-sans-v40-latin-regular.woff2" as="font" type="font/woff2" crossorigin>
     <link rel="preload" href="/fonts/open-sans-v40-latin-300.woff2" as="font" type="font/woff2" crossorigin>
+        <!-- Ensure fonts render quickly and avoid layout shift: use font-display:swap -->
+        <style>
+        @font-face {
+            font-family: 'Open Sans Custom';
+            src: url('/fonts/open-sans-v40-latin-regular.woff2') format('woff2');
+            font-weight: 400;
+            font-style: normal;
+            font-display: swap;
+        }
+        @font-face {
+            font-family: 'Open Sans Custom';
+            src: url('/fonts/open-sans-v40-latin-700.woff2') format('woff2');
+            font-weight: 700;
+            font-style: bold;
+            font-display: swap;
+        }
+        @font-face {
+            font-family: 'Open Sans Custom';
+            src: url('/fonts/open-sans-v40-latin-300.woff2') format('woff2');
+            font-weight: 300;
+            font-style: normal;
+            font-display: swap;
+        }
+        /* Apply the custom font family as a fallback to reduce layout shift while the site's normal font loads */
+        html { font-family: 'Open Sans Custom', sans-serif; }
+        </style>
     <link rel="preload" href="/fonts/fontawesome-webfont.woff2?v=4.7.0" as="font" type="font/woff2" crossorigin="anonymous">
     <link rel="stylesheet" href="/css/style.min.css" media="print" onload="this.media='all'">
     <link rel="preload" href="css/animate.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
@@ -126,16 +152,15 @@
                     <!--Logo-->
                     <div id="logo">
 
-                        <!--Logo that is shown on the banner-->
-                        <img src="images/stylin-salon-and-parlour-logo.webp" id="banner-logo" width="158px" height="120px" max-height="158px" max-width="168px" max-walt="Landing Page" alt="home page | stylin ladies salon and beauty salon kottayam "/>
-                        <!--End of Banner Logo-->
+                                                <!--Logo that is shown on the banner-->
+                                                <img src="images/stylin-salon-and-parlour-logo.webp" id="banner-logo" width="158" height="120" alt="home page | stylin ladies salon and beauty salon kottayam" />
+                                                <!--End of Banner Logo-->
 
-                        <!--T                        cwebp -q 80 images/stylin-salon-and-parlour-logo.webp -resize 158 0 -o images/stylin-salon-and-parlour-logo-158w.webp
-                        cwebp -q 78 images/stylin-salon-and-parlour-logo.webp -resize 120 0 -o images/stylin-salon-and-parlour-logo-120w.webp
-                        cwebp -q 76 images/stylin-salon-and-parlour-logo.webp -resize 80 0 -o images/stylin-salon-and-parlour-logo-80w.webp
-                        cwebp -q 75 images/stylin-salon-and-parlour-logo.webp -resize 40 0 -o images/stylin-salon-and-parlour-logo-40w.webphe Logo that is shown on the sticky Navigation Bar-->
-                        <a href="#banner" aria-label="Skip to banner"><img src="images/stylin-salon-and-parlour-logo.webp" id="navigation-logo" width=79px; height="84px"; max-height="79px" max-width="84px" alt="go to home | Stylin Ladies Beauty Salon in kottayam "/></a>
-                        <!--End of Navigation Logo-->
+                                                <!--The Logo that is shown on the sticky Navigation Bar-->
+                                                <a href="#banner" aria-label="Skip to banner">
+                                                    <img src="images/stylin-salon-and-parlour-logo.webp" id="navigation-logo" width="79" height="84" alt="go to home | Stylin Ladies Beauty Salon in kottayam" />
+                                                </a>
+                                                <!--End of Navigation Logo-->
 
                     </div>
                     <!--End of Logo-->
@@ -518,7 +543,7 @@
 
                 <!--User Testimonial-->
                 <blockquote class="col-3 testimonial classic">
-                    <img src="images/user-images/user-1.webp" loading="lazy" alt="Stylin_ladies_salon_parlour_user_review"  max-height="120px" max-width="120px"/>
+                    <img src="images/user-images/user-1.webp" loading="lazy" alt="Stylin_ladies_salon_parlour_user_review" width="120" height="120" />
                     <q>Absolutely loved the attention to detail and professionalism of the staff at this hair salon - my go-to for a flawless haircut every time!</q>
                     <footer>Anitha - Kumaranalloor, Kottayam</footer>
                 </blockquote>
@@ -526,7 +551,7 @@
 
                 <!--User Testimonial-->
                 <blockquote class="col-3 testimonial classic">
-                    <img src="images/user-images/user-2.webp" loading="lazy" alt="Stylin_ladies_salon_parlour_user_review"  max-height="120px" max-width="120px"/>
+                    <img src="images/user-images/user-2.webp" loading="lazy" alt="Stylin_ladies_salon_parlour_user_review" width="120" height="120" />
                     <q>Highly recommend this salon for its fantastic ambiance and top-notch services, especially for kids - my daughter had a blast during her pampering session</q>
                     <footer>Roslyn - Nagampadom, Kottayam</footer>
                 </blockquote>
@@ -534,7 +559,7 @@
 
                 <!--User Testimonial-->
                 <blockquote class="col-3 testimonial classic">
-                    <img src="images/user-images/user-3.webp" loading="lazy" alt="Stylin_ladies_salon_parlour_user_review"  max-height="120px" max-width="120px"/>
+                    <img src="images/user-images/user-3.webp" loading="lazy" alt="Stylin_ladies_salon_parlour_user_review" width="120" height="120" />
                     <q>A hidden gem in Kottayam! The hair dressers here are true artists - I always leave the hair parlour feeling like a million bucks.</q>
                     <footer>Perl - Kanjikuzhi, Kottayam</footer>
                 </blockquote>
