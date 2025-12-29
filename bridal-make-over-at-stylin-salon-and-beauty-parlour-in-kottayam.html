@@ -26,6 +26,56 @@
     <meta name="twitter:image" content="https://www.stylinsalon.in/images/stylin-salon-profile-picture.webp" />
     <meta name="twitter:site" content="@stylinsalonktm" />
 
+
+    <!-- ADD THIS BRIDAL SERVICE SCHEMA -->
+    <script type="application/ld+json">
+    {
+    "@context": "https://schema.org",
+    "@graph": [
+        {
+        "@type": "BeautySalon",
+        "@id": "https://www.stylinsalon.in/#salon",
+        "name": "Stylin' Ladies Salon",
+        "url": "https://www.stylinsalon.in/"
+        },
+        {
+        "@type": "Service",
+        "serviceType": "Bridal Makeover",
+        "provider": {"@id": "https://www.stylinsalon.in/#salon"},
+        "description": "Professional bridal makeup, hair styling, and skincare treatments for wedding day",
+        "offers": {
+            "@type": "Offer",
+            "price": "5000",
+            "priceCurrency": "INR",
+            "duration": "PT4H"
+        },
+        "areaServed": ["Kottayam", "Nagampadam"]
+        },
+        {
+        "@type": "Service",
+        "serviceType": "Bridal Hair Styling",
+        "provider": {"@id": "https://www.stylinsalon.in/#salon"},
+        "offers": {
+            "@type": "Offer",
+            "price": "2000",
+            "priceCurrency": "INR",
+            "duration": "PT2H"
+        }
+        },
+        {
+        "@type": "Service",
+        "serviceType": "Bridal Skincare",
+        "provider": {"@id": "https://www.stylinsalon.in/#salon"},
+        "offers": {
+            "@type": "Offer",
+            "price": "1500",
+            "priceCurrency": "INR",
+            "duration": "PT75M"
+        }
+        }
+    ]
+    }
+    </script>
     <!--Favicon-->
     <link rel="shortcut icon" href="images/favicon.ico" title="Favicon"/>
 

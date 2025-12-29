@@ -25,7 +25,47 @@
     <meta name="twitter:description" content="Check out various offers. From manicures and pedicures to bridal makeup and facials, we’re your go-to beauty parlour near you!" />
     <meta name="twitter:image" content="https://www.stylinsalon.in/images/stylin-salon-profile-picture.webp" />
     <meta name="twitter:site" content="@stylinsalonktm" />
-    
+    <!-- ADD THIS MANICURE SERVICE SCHEMA -->
+    <script type="application/ld+json">
+    {
+    "@context": "https://schema.org",
+    "@graph": [
+        {
+        "@type": "BeautySalon",
+        "@id": "https://www.stylinsalon.in/#salon",
+        "name": "Stylin' Ladies Salon",
+        "url": "https://www.stylinsalon.in/"
+        },
+        {
+        "@type": "Service",
+        "serviceType": "Classic Manicure",
+        "provider": {"@id": "https://www.stylinsalon.in/#salon"},
+        "description": "Premium classic manicure service with nail shaping, cuticle care, and polish",
+        "offers": {
+            "@type": "Offer",
+            "price": "500",
+            "priceCurrency": "INR",
+            "duration": "PT60M"
+        },
+        "areaServed": ["Kottayam", "Nagampadam"]
+        },
+        {
+        "@type": "Service",
+        "serviceType": "Classic Pedicure",
+        "provider": {"@id": "https://www.stylinsalon.in/#salon"},
+        "description": "Complete pedicure with foot soak, exfoliation, massage, and polish",
+        "offers": {
+            "@type": "Offer",
+            "price": "800",
+            "priceCurrency": "INR",
+            "duration": "PT90M"
+        },
+        "areaServed": ["Kottayam Town"]
+        }
+    ]
+    }
+    </script>
+
     <!--Favicon-->
     <link rel="shortcut icon" href="images/favicon.ico" title="Favicon"/>
 
