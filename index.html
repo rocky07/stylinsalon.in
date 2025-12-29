@@ -121,51 +121,131 @@
           return false;
         }
       </script>
-      
-    <script type="application/ld+json">
+      <script type="application/ld+json">
         {
         "@context": "https://schema.org",
-        "@type": "BeautySalon",
-        "name": "Stylin' Ladies Salon",
-        "image": "https://www.stylinsalon.in/images/stylin-salon-profile-picture.webp",
-        "url": "https://www.stylinsalon.in",
-        "telephone": "+91-7736417677",
-        "priceRange": "₹₹",
-        "address": {
-            "@type": "PostalAddress",
-            "streetAddress": "MC Road, opp. Tonico Cafe, Nagampadam",
-            "addressLocality": "Kottayam",
-            "addressRegion": "KL",
-            "postalCode": "686001",
-            "addressCountry": "IN"
-        },
-        "geo": {
-            "@type": "GeoCoordinates",
-            "latitude": 9.595995546771615,
-            "longitude": 76.52326053703162
-        },
-        "openingHoursSpecification": [
+        "@graph": [
             {
-            "@type": "OpeningHoursSpecification",
-            "dayOfWeek": [
+            "@type": "BeautySalon",
+            "@id": "https://www.stylinsalon.in/#salon",
+            "name": "Stylin' Ladies Salon",
+            "image": "https://www.stylinsalon.in/images/stylin-salon-profile-picture.webp",
+            "url": "https://www.stylinsalon.in",
+            "telephone": "+91-7736417677",
+            "priceRange": "₹₹",
+            "address": {
+                "@type": "PostalAddress",
+                "streetAddress": "MC Road, opp. Tonico Cafe, Nagampadam",
+                "addressLocality": "Kottayam",
+                "addressRegion": "KL",
+                "postalCode": "686001",
+                "addressCountry": "IN"
+            },
+            "geo": {
+                "@type": "GeoCoordinates",
+                "latitude": 9.595995546771615,
+                "longitude": 76.52326053703162
+            },
+            "openingHoursSpecification": {
+                "@type": "OpeningHoursSpecification",
+                "dayOfWeek": [
                 "Monday",
                 "Tuesday",
                 "Wednesday",
                 "Thursday",
                 "Friday",
                 "Saturday"
-            ],
-            "opens": "10:00",
-            "closes": "18:30"
+                ],
+                "opens": "10:00",
+                "closes": "18:30"
+            },
+            "sameAs": [
+                "https://www.instagram.com/_stylin_salon/",
+                "https://www.facebook.com/p/Stylin-Ladies-Salon-61563887785205/",
+                "https://about.me/stylinsalon"
+            ]
+            },
+
+            {
+            "@type": "Service",
+            "name": "Haircut with Free Hair Wash",
+            "provider": { "@id": "https://www.stylinsalon.in/#salon" },
+            "offers": {
+                "@type": "Offer",
+                "price": "250",
+                "priceCurrency": "INR",
+                "description": "Complimentary hair wash included with every haircut",
+                "availability": "https://schema.org/InStock",
+                "validThrough": "2027-01-31"
+            },
+            "areaServed": {
+                "@type": "Place",
+                "name": "Kottayam"
             }
-        ],
-        "sameAs": [
-            "https://www.instagram.com/_stylin_salon/",
-            "https://www.facebook.com/p/Stylin-Ladies-Salon-61563887785205/",
-            "https://about.me/stylinsalon"
+            },
+
+            {
+            "@type": "Service",
+            "name": "New Customer Special",
+            "provider": { "@id": "https://www.stylinsalon.in/#salon" },
+            "offers": {
+                "@type": "Offer",
+                "price": "0",
+                "priceCurrency": "INR",
+                "description": "₹100 OFF for first-time customers on any service",
+                "validThrough": "2027-01-31"
+            }
+            },
+
+            {
+            "@type": "Service",
+            "name": "Bring a Friend Deal",
+            "provider": { "@id": "https://www.stylinsalon.in/#salon" },
+            "offers": {
+                "@type": "Offer",
+                "price": "0",
+                "priceCurrency": "INR",
+                "description": "Refer a friend and both get up to ₹500 OFF",
+                "validThrough": "2027-01-31"
+            }
+            },
+
+            {
+            "@type": "Service",
+            "name": "Classic Manicure",
+            "provider": { "@id": "https://www.stylinsalon.in/#salon" },
+            "offers": {
+                "@type": "Offer",
+                "price": "500",
+                "priceCurrency": "INR"
+            }
+            },
+
+            {
+            "@type": "Service",
+            "name": "Classic Pedicure",
+            "provider": { "@id": "https://www.stylinsalon.in/#salon" },
+            "offers": {
+                "@type": "Offer",
+                "price": "800",
+                "priceCurrency": "INR"
+            }
+            },
+
+            {
+            "@type": "Service",
+            "name": "Bridal Makeover",
+            "provider": { "@id": "https://www.stylinsalon.in/#salon" },
+            "offers": {
+                "@type": "Offer",
+                "price": "5000",
+                "priceCurrency": "INR"
+            }
+            }
         ]
         }
     </script>
+
 </head>
 <body>
 <!-- Preloader -->
