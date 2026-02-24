@@ -113,6 +113,8 @@
               Add New </button>
               <button type="button" id="filterButton" onclick="filterTableByDate()" class="btn btn-primary">
                Filter:Call To Make </button>
+              <button type="button" data-bookingId="" data-phone="" data-name="" data-dnd="" data-notes="" class="btn btn-primary" data-toggle="modal" data-target="#broadcastModal">
+              Broadcast</button>
             <table class="table" id="transactionTable">
                 <thead>
                     <tr>
@@ -213,6 +215,28 @@
       </div>
     </div>
   </div>
+
+  <!-- Broadcast Modal -->
+   <div class="modal fade" id="broadcastModal" tabindex="-1" role="dialog" aria-labelledby="broadcastModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="broadcastModalLabel">Broadcast Message</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <!-- Form fields for broadcast message -->
+          <form id="broadcastForm">
+            <div class="form-group">
+              <label for="broadcastMessage">Message:</label>
+              <textarea class="form-control" id="broadcastMessage" name="broadcastMessage" rows="4" placeholder="Enter your broadcast message here..."></textarea>
+            
+              <!-- Add buttons to update and cancel booking -->
+          <button type="button" class="btn btn-primary" onclick="broadCastMessage()">Send Broadcast</button>
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+   </div>
   
 
     <!-- Add Bootstrap JS and Popper.js -->
@@ -225,7 +249,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-timepicker/0.5.2/js/bootstrap-timepicker.min.js"></script>
     <script>
       const apiUrl="https://r08vbl0sik.execute-api.us-east-2.amazonaws.com/default/promotion";
-
+      let userList;
       const offerList = [
             {id: 1, offer: "You have won Rs.100 towards your next service, from StylinSalon, Nagampadam."},
             {id: 2, offer: "Bring a Friend and you both get 50% off on your next hair service"},
@@ -259,7 +283,7 @@
 
                 // Clear existing rows
                 tableBody.innerHTML = '';
-
+                userList=data.Items;  
                 // Update table with dynamic data
                 data.Items.forEach(transaction => {
                     const newRow = tableBody.insertRow();
@@ -554,6 +578,86 @@
 
     rows.forEach(row => tbody.appendChild(row));
 }
+
+
+    function broadCastMessage(){
+      const message = $('#broadcastMessage').val();
+      if(message.trim()===""){
+        alert("Please enter a message to broadcast.");
+        return;
+      }
+      let count=0;
+       userList.forEach(user=>{
+        if (user.dnd) return; // Skip users with DND enabled
+        if (count++>=20) return; // Limit to 10 messages per broadcast to avoid spamming
+        let toNumber = user.phone.replace(/^\+/, "");
+          if(toNumber.length==10){
+            toNumber='91'+toNumber;
+          }
+          if(toNumber.length<10 || toNumber.length>12){
+            console.warn("Invalid phone number for user ",user.name, user.phone);
+            return;
+          }
+        
+        const postData = JSON.stringify({
+            messaging_product: "whatsapp",
+            to: toNumber,
+            type: "text",
+            text: { body: message }
+          });
+
+          let bookingTemplate = {
+            "messaging_product": "whatsapp",
+            "to": toNumber,
+            "recipient_type": "individual",
+            "type": "interactive",
+            "mode": "published",
+            "interactive": {
+              "type": "flow",
+              "header": {
+                "type": "text",
+                "text": "Congratulations! You have won a promotional offer!"
+              },
+              "body": {
+                "text": message,
+              },
+              "footer": {
+                "text": "show this message to your stylist to redeem offer"
+              },
+              "action": {
+                "name": "flow",
+                "parameters": {
+                  "flow_message_version": "3",
+                  "flow_action": "data_exchange",
+                  "flow_token": "flows-builder-80d0772f",
+                  "flow_id": "584438097331123",
+                  "flow_cta": "Book Now!"
+                }
+              }
+            }
+          }
+
+
+                  console.log("Broadcasting to ",user.name,toNumber);
+                  console.log("post data", bookingTemplate);
+            $.ajax({  
+                      type: 'POST',
+                      url: 'https://graph.facebook.com/v21.0/346631231857431/messages',
+                      contentType: "application/json",  // Set the content type to JSON
+                      data: JSON.stringify(bookingTemplate),
+                      headers: {
+                          "Authorization": "Bearer EAAELgd7HTVABO5ZCx04cxVJ5FHMlrBIqX12KyGRzRGJQ3XtwZCIiXKcjJfTwvVopzR7Po5ysRqpY2kZCZByzarzrZCpHpPWQpqgFVyrZCZBGbAW4oEHsqZA5xMHOE3ZBXa4bijWDHfEime91UWnqABr9SsrzmGTvQXP6FigbuHwZAZCJC0WjnKf4kvoJ76x8ZB8cbaPdZAQZDZD"  // Add the Bearer token here
+                      },
+                      success: function(response) {
+                          console.log("Response:", response);
+                      },
+                      error: function(error) {
+                          console.error("Error:", error);
+                      }
+                  });
+                });
+
+    }
 
     </script>
     <script src="../js/login.js"></script>
